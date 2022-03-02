@@ -20,6 +20,7 @@ public class RecipeBook_script : MonoBehaviour
     private Button recipe1Button;
 
     private Button proceedButton;
+    private Button returnToRecipesButton;
     
 
     //Recipe text references
@@ -27,7 +28,9 @@ public class RecipeBook_script : MonoBehaviour
     private Text recipeIng, recipeMethod, recipeMiniGames;
 
 
+    //Misc Variables
     public bool inMiniGame = false;
+    private int recipeNumberSel;
 
 
     // Start is called before the first frame update
@@ -59,7 +62,10 @@ public class RecipeBook_script : MonoBehaviour
         rep1Btn.onClick.AddListener(showFirstRecipe);
 
         proceedButton = GameObject.Find("Proceed Button").GetComponent<Button>();
-        proceedButton.onClick.AddListener(miniGame1Test);
+        proceedButton.onClick.AddListener(selectRecipeMethod);
+        
+        returnToRecipesButton = GameObject.Find("Return to Recipes Button").GetComponent<Button>();
+        returnToRecipesButton.onClick.AddListener(returnToRecipesMethod);
 
 
         recipeBook.enabled = false;
@@ -125,39 +131,64 @@ public class RecipeBook_script : MonoBehaviour
         recipeIng = GameObject.Find("Recipe Ingredients").GetComponent<Text>();
         recipeMethod = GameObject.Find("Recipe Method").GetComponent<Text>();
         recipeMiniGames = GameObject.Find("Minigames Involved").GetComponent<Text>();
+    }
 
-        
+    void returnToRecipesMethod()
+    {
+        if (recipePanel.activeInHierarchy == true)
+            recipePanel.SetActive(false);
+
+        //Debug.Log("Return to recipe books ");
     }
 
     void showFirstRecipe()
     {
+        recipeNumberSel = 1;        //used for the switch statement on the proceed button (avoids loads of button finds)
+
         if (recipePanel.activeInHierarchy == false)
             recipePanel.SetActive(true);
 
         textSetup();
 
 
-        recipeIng.text = "Recipe Ingredients";
+        recipeIng.text = "Ingedients: Potato";
 
-        recipeMethod.text = "Recipe Method";
+        recipeMethod.text = "Cut the potato";
 
-        recipeMiniGames.text = "Recipe Minigames";
-
+        recipeMiniGames.text = "Cutting Potato";
 
     }
 
-    void miniGame1Test()
+    void firstRecipeTest()
     {
         if (recipeBook.enabled == true)
         {
             recipeBook.enabled = false;
         }
 
-        inMiniGame = true;
+        
 
-        Debug.Log("This button works ");
+        Debug.Log("Do first recipe ");
 
         Instantiate(prefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
+    }
+
+    void selectRecipeMethod()
+    {
+        inMiniGame = true;
+
+        switch (recipeNumberSel)
+        {
+            case 1:
+                firstRecipeTest();
+                break;
+
+            //case 2:
+                //Second recipe method call(); (pseudocode)
+                //break;
+
+
+        }
     }
 
     //End of code written by Blair McCartan

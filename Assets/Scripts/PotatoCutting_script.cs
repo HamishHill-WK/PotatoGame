@@ -13,16 +13,6 @@ public class PotatoCutting_script : MonoBehaviour
     int noOfCuts = 1;
 
     public Sprite[] potatoSprites;
-    //var potato2Sprite : Sprite;
-    //var potato3Sprite : Sprite;
-    //var potato4Sprite : Sprite;
-    //var potato5Sprite : Sprite;
-    //var potato6Sprite : Sprite;
-    //var potato7Sprite : Sprite;
-    //var potato8Sprite : Sprite;
-    //var potato9Sprite : Sprite;
-    //var potato10Sprite : Sprite;
-    //var potato11Sprite : Sprite;
 
     // Start is called before the first frame update
     void Start()

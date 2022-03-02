@@ -150,12 +150,12 @@ public class RecipeBook_script : MonoBehaviour
 
         textSetup();
 
+        //vb filling in the data for wedges
+        recipeIng.text = "Ingedients: 3 Baking Potatoes, olive oil, salt";
+        
+        recipeMethod.text = "Simple Potato Wedges enjoyable as a snack or as a side dish";
 
-        recipeIng.text = "Ingedients: Potato";
-
-        recipeMethod.text = "Cut the potato";
-
-        recipeMiniGames.text = "Cutting Potato";
+        recipeMiniGames.text = "Boil - Slice - add - drain - add - add - Roast";
 
     }
 

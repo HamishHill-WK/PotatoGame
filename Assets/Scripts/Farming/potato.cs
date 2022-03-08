@@ -14,6 +14,8 @@ public class potato : MonoBehaviour
     public void addStock(int add)
     {
         stock += add;
+
+        SaveSystem.SavePlayer(this);
     }
 
     // Start is called before the first frame update
@@ -30,7 +32,5 @@ public class potato : MonoBehaviour
     void Update()
     {
         txt.text = stock.ToString();
-
-        SaveSystem.SavePlayer(this);
     }
 }

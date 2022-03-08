@@ -3180,7 +3180,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 950726569}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: enterGame
+        m_MethodName: openCooking
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

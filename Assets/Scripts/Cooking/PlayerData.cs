@@ -11,9 +11,11 @@ public class PlayerData
     public int health;
     public float[] position;
 
-    public PlayerData(RecipeBookObject_script player)
+    public int totalPotatos;
+
+    public PlayerData(potato playerPotatos)
     {
-        score = player.totalScore;
+        totalPotatos = playerPotatos.stock;
 
         //level = player.level;
         //health = player.health;

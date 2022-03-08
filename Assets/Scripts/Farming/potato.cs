@@ -20,11 +20,17 @@ public class potato : MonoBehaviour
     void Start()
     {
         //txt = GameObject.Find("Text");
+
+        PlayerData data = SaveSystem.LoadPlayer();      // Loading the saved number of potatoes - BM
+
+        stock = data.totalPotatos;      //Setting the number of potatoes from the stock saved value - BM
     }
 
     // Update is called once per frame
     void Update()
     {
         txt.text = stock.ToString();
+
+        SaveSystem.SavePlayer(this);
     }
 }

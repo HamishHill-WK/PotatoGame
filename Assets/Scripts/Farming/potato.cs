@@ -14,12 +14,18 @@ public class potato : MonoBehaviour
     public void addStock(int add)
     {
         stock += add;
+
+        SaveSystem.SavePlayer(this);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         //txt = GameObject.Find("Text");
+
+        PlayerData data = SaveSystem.LoadPlayer();      // Loading the saved number of potatoes - BM
+
+        stock = data.totalPotatos;      //Setting the number of potatoes from the stock saved value - BM
     }
 
     // Update is called once per frame

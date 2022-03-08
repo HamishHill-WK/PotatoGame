@@ -115,6 +115,13 @@ public class PotatoCutting_script : MonoBehaviour
 
     public void updatePotato()
     {
+        //if (Input.GetKeyDown("space"))
+        //{
+        //    print("space key was pressed - setting cuts to final");
+
+        //    noOfCuts = 10;
+        //}
+
         switch (noOfCuts)
         {
             case 1:
@@ -161,6 +168,20 @@ public class PotatoCutting_script : MonoBehaviour
                 this.GetComponent<SpriteRenderer>().sprite = potatoSprites[10];
                 break;
         }
+
+        if (noOfCuts >= 12)
+        {
+            this.transform.position += new Vector3(0, 0.005f, 0.005f);
+        }
+
+        if (this.transform.position.y > 2.5f)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = null;
+
+            Destroy(this.gameObject);
+        }
+
+        //Debug.Log("" + noOfCuts);
     }
 
 

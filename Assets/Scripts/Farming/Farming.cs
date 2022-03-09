@@ -145,7 +145,8 @@ public class Farming : MonoBehaviour
 
     private void Harvest(float yield)
     {
-        harvest += (int)Mathf.CeilToInt(yield/10.0f);
+        yield /= 10.0f;
+        harvest = (int)Mathf.Round(yield);
         potato.GetComponent<potato>().addStock(harvest);
     }
 

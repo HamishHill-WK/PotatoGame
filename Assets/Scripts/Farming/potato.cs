@@ -16,13 +16,6 @@ public class potato : MonoBehaviour
         stock += add;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //txt = GameObject.Find("Text");
-    }
-
-    // Update is called once per frame
     void Update()
     {
         txt.text = stock.ToString();

@@ -478,7 +478,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantable: 0
   planted: 0
+  monthPlanted: 0
+  moisture: 10
+  day: 0
   yield: 0
+  yieldFactor: 0
   growthFactor: 0.01
 --- !u!1 &614826154
 GameObject:
@@ -1201,7 +1205,7 @@ GameObject:
   - component: {fileID: 1442283728}
   - component: {fileID: 1442283731}
   m_Layer: 8
-  m_Name: Sphere
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1301,8 +1305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   year: 0
+  monthNum: 0
   day: 0
   hour: 0
   minute: 0
-  speedFactor: 60
-  months: 0
+  speedFactor: 30

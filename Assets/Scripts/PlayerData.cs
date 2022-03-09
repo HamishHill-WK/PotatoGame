@@ -7,18 +7,43 @@ public class PlayerData
 {
     //Code Written by Blair McCartan
 
-    public int score;
-    public int health;
-    public float[] position;
+    public int totalPotatos;
+    public float currentYield;
 
-    public PlayerData(RecipeBookObject_script player)
+    public int monthPlanted;        //hh
+
+    public int currentYear; //hh
+    public int currentMonth; //hh
+    public int day;//hh
+    public int hour;//hh
+  //  public int minute;//hh
+
+    public bool planted; //hh
+
+    public PlayerData(potato playerPotatos, soil playerSoil, time playerTime)
     {
-        score = player.totalScore;
+        if(playerPotatos != null)//hh
+        totalPotatos = playerPotatos.stock;
+
+        if (playerSoil != null)//hh
+        {
+            monthPlanted = playerSoil.monthPlanted;//hh
+            planted = playerSoil.planted;//hh
+            currentYield = playerSoil.yield;//hh
+        }
+
+        if(playerTime !=null)
+        {
+            currentYear = playerTime.year;
+            currentMonth = playerTime.monthNum;
+            day = playerTime.day;
+            hour = playerTime.hour;
+        }
 
         //level = player.level;
         //health = player.health;
 
-        position = new float[3];
+       // position = new float[3];
         //position[0] = .transform.po
     }
 

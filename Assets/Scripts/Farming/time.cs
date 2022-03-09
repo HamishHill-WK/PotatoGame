@@ -2,42 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//this script was written by Hamish Hill github: @HamishHill-wk
+
 public class time : MonoBehaviour
 {
     public int year = 0;
+    public int monthNum = 0;
     public int day = 0;
     public int hour = 0;
     public int minute = 0;
     private int second = 0;
-    private int mSecond = 0;
+   // private int mSecond = 0;
     public int speedFactor = 1;
-
-    public int months = 0;
 
     enum month { January = 0, February, March, April, May, June, July, August, September, October, November, December };
     month currentMonth = month.January;
 
+    void Start()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        year = data.currentYear;
+        currentMonth = (month)data.currentMonth;
+        day = data.day;
+        hour = data.hour;
+    }
+
     void Update()
     {
-        second += speedFactor;
-        months = ((int)currentMonth);
-
-        if(mSecond >= 60)
-        {
-            second++;
-            mSecond = 0;
-        }  
-        
-        if(second == 60)
-        {
-            minute++;
-            second = 0;
-        }
+        minute += speedFactor;
+        monthNum = ((int)currentMonth);
 
         if(minute == 60)
         {
             hour++;
             minute = 0;
+
+            SaveSystem.SavePlayer(null, null, this);
         }
 
         if(hour == 24)
@@ -51,7 +52,6 @@ public class time : MonoBehaviour
         {
             if (day >= 28)
             {
-                //months = currentMonth;
                 currentMonth++;
                 day = 0;
             }
@@ -70,10 +70,15 @@ public class time : MonoBehaviour
 
                 if (day == 31)
                 {
-                    if (currentMonth == month.January || currentMonth == month.March || currentMonth == month.May || currentMonth == month.July 
-                        || currentMonth == month.August || currentMonth == month.October || currentMonth == month.December)
+                    if( currentMonth == month.December)
                     {
-                        //months++;
+                        currentMonth = month.January;
+                        year++;
+                    }
+
+                    if (currentMonth == month.January || currentMonth == month.March || currentMonth == month.May || currentMonth == month.July 
+                        || currentMonth == month.August || currentMonth == month.October )
+                    {
                         currentMonth++;
                         day = 0;
                     }

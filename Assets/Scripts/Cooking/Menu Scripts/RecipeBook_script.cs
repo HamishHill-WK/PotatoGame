@@ -79,8 +79,8 @@ public class RecipeBook_script : MonoBehaviour
         proceedButton = GameObject.Find("Proceed Button").GetComponent<Button>();
         proceedButton.onClick.AddListener(selectRecipeMethod);
         
-        returnToRecipesButton = GameObject.Find("Return to Recipes Button").GetComponent<Button>();
-        returnToRecipesButton.onClick.AddListener(returnToRecipesMethod);
+        //returnToRecipesButton = GameObject.Find("Return to Recipes Button").GetComponent<Button>();
+        //returnToRecipesButton.onClick.AddListener(returnToRecipesMethod);
 
 
         recipeBook.enabled = false;
@@ -157,12 +157,16 @@ public class RecipeBook_script : MonoBehaviour
 
     void showFirstRecipe()
     {
+        
+
         recipeNumberSel = 1;        //used for the switch statement on the proceed button (avoids loads of button finds)
 
         if (recipePanel.activeInHierarchy == false)
             recipePanel.SetActive(true);
 
         textSetup();
+
+        Debug.Log("Not lorem ipsum code");
 
         //vb filling in the data for wedges
         recipeIng.text = "Ingedients: 3 Baking Potatoes, olive oil, salt";

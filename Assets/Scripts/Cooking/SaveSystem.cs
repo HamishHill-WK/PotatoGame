@@ -5,14 +5,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem 
 {
-   public static void SavePlayer (RecipeBookObject_script player)
+    //The following code was written by Blair McCartan
+    public static void SavePlayer (potato playerPotato)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = Application.persistentDataPath + "/player.fun";
+        //Set the path to be consistent with the application
+        string path = Application.persistentDataPath + "/player.data";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(player);
+        PlayerData data = new PlayerData(playerPotato);
 
         formatter.Serialize(stream, data);
         stream.Close();
@@ -20,7 +22,9 @@ public static class SaveSystem
 
     public static PlayerData LoadPlayer ()
     {
-        string path = Application.persistentDataPath + "/player.fun";
+        //Set the path to be consistent with the application
+        string path = Application.persistentDataPath + "/player.data";
+
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -38,4 +42,6 @@ public static class SaveSystem
             return null;
         }
     }
+
+    //End of code written by Blair McCartan
 }

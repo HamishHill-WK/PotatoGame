@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 254eedc06b03ba0418a00bb03e3bb859
+<<<<<<< HEAD:Assets/Images/Menu.meta
+guid: 4ac6ea2bd5e37e4459340f48bd11aa16
+=======
+guid: b697f2da2a013a742bd3522e4c40ecd5
+>>>>>>> Blair:Assets/Scripts/Cooking.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

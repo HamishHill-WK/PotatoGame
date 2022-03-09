@@ -8,6 +8,7 @@ public class soil : MonoBehaviour
     public bool planted = false;
 
     private float moisture = 10.0f;
+    private float moistureMod = 1.0f;
 
     public float yield = 0.0f;
     public float growthFactor = 0.01f;
@@ -19,14 +20,24 @@ public class soil : MonoBehaviour
         moisture -= random;
     }
 
+    void upMoistureMod()
+    {
+
+        //moistureMod = 
+    }
+
     void updateGrowth()
     {
-        //growthFactor *= 
+
+      //  growthFactor *= 
     }
 
     // Update is called once per frame
     void Update()
     {
+        updateMoisture();
+
+
         if (plantable)
             planted = false;
 

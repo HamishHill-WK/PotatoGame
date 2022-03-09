@@ -8,23 +8,40 @@ public class soil : MonoBehaviour
     public bool planted = false;
 
     public float yield = 0.0f;
+    public float growth = 0.01f;
 
-    // Start is called before the first frame update
-    void Start()
+    public float moisture = 10.0f;
+    public float moistureMod = 1.0f;
+
+    void updateMoisture()
     {
-        
+        float random = 0;
+        random = Random.Range(0.0f, 0.4f) ;
+        moisture -= random;
     }
 
-    // Update is called once per frame
+    void updateMoistMod()
+    {
+        moistureMod = 
+    }
+
+    void updateGrowth()
+    {
+
+        growth *= moistureMod;
+    }
+
     void Update()
     {
+        updateMoisture();
+
         if (plantable)
             planted = false;
 
         if (planted)
         {
-            if(yield < 100.0f)
-                yield += .01f;
+            if (yield < 100.0f)
+                yield += growth;
         }   
     }
 }

@@ -10,7 +10,7 @@ public class PotatoCutting_script : MonoBehaviour
     Vector2 secondPressPos;
     Vector2 currentSwipe;
 
-    private GameObject recipeBook;
+    public GameObject recipeBookScript;
 
 
     int noOfCuts = 1;
@@ -20,7 +20,7 @@ public class PotatoCutting_script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        recipeBook = GameObject.Find("Game Controller");
+        recipeBookScript = GameObject.Find("Game Controller");
     }
 
     // Update is called once per frame
@@ -183,7 +183,7 @@ public class PotatoCutting_script : MonoBehaviour
 
             Destroy(this.gameObject);
 
-            recipeBook.GetComponent<RecipeBook_script>().inMiniGame = false;
+            recipeBookScript.GetComponent<RecipeBook_script>().inMiniGame = false;
         }
 
         //Debug.Log("" + noOfCuts);

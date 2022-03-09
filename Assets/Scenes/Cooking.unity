@@ -1811,7 +1811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1936887837655132617, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -48195.22
+      value: -62013.22
       objectReference: {fileID: 0}
     - target: {fileID: 1936887837655132617, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1953,7 +1953,7 @@ GameObject:
   - component: {fileID: 1511776470}
   - component: {fileID: 1511776471}
   m_Layer: 0
-  m_Name: 'Game Controller '
+  m_Name: Game Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

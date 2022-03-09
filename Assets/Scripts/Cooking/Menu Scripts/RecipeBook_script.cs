@@ -220,7 +220,9 @@ public class RecipeBook_script : MonoBehaviour
         Debug.Log("Do first recipe ");
         
         Instantiate(potatoPrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
-        
+
+        //inMiniGame = false;
+
     }
 
     void secondRecipe()
@@ -233,6 +235,8 @@ public class RecipeBook_script : MonoBehaviour
         Debug.Log("Do Second Recipe");
 
         Instantiate(boilPrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
+
+        
     }
 
     //End of code written by Blair McCartan

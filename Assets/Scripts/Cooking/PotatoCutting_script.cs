@@ -10,6 +10,9 @@ public class PotatoCutting_script : MonoBehaviour
     Vector2 secondPressPos;
     Vector2 currentSwipe;
 
+    private GameObject recipeBook;
+
+
     int noOfCuts = 1;
 
     public Sprite[] potatoSprites;
@@ -179,6 +182,8 @@ public class PotatoCutting_script : MonoBehaviour
             this.GetComponent<SpriteRenderer>().sprite = null;
 
             Destroy(this.gameObject);
+
+            //recipeBook.inMiniGame = false;
         }
 
         //Debug.Log("" + noOfCuts);

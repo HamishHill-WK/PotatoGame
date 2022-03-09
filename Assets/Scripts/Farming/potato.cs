@@ -15,7 +15,7 @@ public class potato : MonoBehaviour
     {
         stock += add;
 
-        SaveSystem.SavePlayer(this);
+        SaveSystem.SavePlayer(this);        ///When updating stock save to file - BM
     }
 
     // Start is called before the first frame update

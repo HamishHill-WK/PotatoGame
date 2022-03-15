@@ -12,10 +12,16 @@ public class RecipeBook_script : MonoBehaviour
     public Canvas recipeBook;
     public GameObject recipePanel;
     public Button backButton;
+
+    //Prefab references 
+    public Transform MinigamePrefab;
+    public int miniGameSelection;
+
     public Transform potatoPrefab;        //Test prefab
     public Transform boilPrefab;        //Test prefab
+    
 
-
+    private int test = 2;
 
     private GameObject recipeBookObject;
     private Button recipe1Button;
@@ -78,7 +84,7 @@ public class RecipeBook_script : MonoBehaviour
 
         proceedButton = GameObject.Find("Proceed Button").GetComponent<Button>();
         proceedButton.onClick.AddListener(selectRecipeMethod);
-        
+
         //returnToRecipesButton = GameObject.Find("Return to Recipes Button").GetComponent<Button>();
         //returnToRecipesButton.onClick.AddListener(returnToRecipesMethod);
 
@@ -187,7 +193,7 @@ public class RecipeBook_script : MonoBehaviour
         textSetup();
 
 
-        recipeIng.text = "Ingedients: Potato 2";
+        recipeIng.text = "Ingedients: Potato " + test.ToString();
 
         recipeMethod.text = "Stir the potato 2";
 
@@ -222,8 +228,10 @@ public class RecipeBook_script : MonoBehaviour
         }
 
         Debug.Log("Do first recipe ");
-        
-        Instantiate(potatoPrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
+
+        miniGameSelection = 1;
+
+        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
 
         //inMiniGame = false;
 
@@ -238,7 +246,11 @@ public class RecipeBook_script : MonoBehaviour
 
         Debug.Log("Do Second Recipe");
 
-        Instantiate(boilPrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
+        miniGameSelection = 2;
+
+        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
+
+        
 
         
     }

@@ -1751,6 +1751,8 @@ MonoBehaviour:
   recipeBook: {fileID: 345218443}
   recipePanel: {fileID: 665597318}
   backButton: {fileID: 634976954}
+  MinigamePrefab: {fileID: 8769198578047640320, guid: d4f6955e6c4483c4db7cf71ca1aed265, type: 3}
+  miniGameSelection: 0
   potatoPrefab: {fileID: 51621264509104821, guid: a92099f29f0c502468188c7951142096, type: 3}
   boilPrefab: {fileID: 8489255367736953177, guid: 1bb90074992dedf4696c2eff394aeeb3, type: 3}
   inMiniGame: 0

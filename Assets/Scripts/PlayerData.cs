@@ -16,11 +16,11 @@ public class PlayerData
     public int currentMonth; //hh
     public int day;//hh
     public int hour;//hh
-  //  public int minute;//hh
+    //public int minute;//hh
 
     public bool planted; //hh
 
-    public PlayerData(potato playerPotatos, soil playerSoil, time playerTime)
+    public PlayerData(potato playerPotatos, soil playerSoil, timeTracking playerTime)
     {
         if(playerPotatos != null)//hh
         totalPotatos = playerPotatos.stock;
@@ -34,10 +34,11 @@ public class PlayerData
 
         if(playerTime !=null)
         {
-            currentYear = playerTime.year;
-            currentMonth = playerTime.monthNum;
-            day = playerTime.day;
-            hour = playerTime.hour;
+
+            currentYear = playerTime.getCurrentTime().year;//hh
+            currentMonth = playerTime.getCurrentTime().monthNum;//hh
+            day = playerTime.getCurrentTime().day;//hh
+            hour = playerTime.getCurrentTime().hour;//hh
         }
 
         //level = player.level;

@@ -62,7 +62,7 @@ public class soil : MonoBehaviour
     public void plantPot()
     {
         planted = true;
-        monthPlanted = timer.GetComponent<time>().monthNum;
+        monthPlanted = timer.GetComponent<timeTracking>().getCurrentTime().monthNum;
         yieldFactor = 0;
         updateGrowth();
         SaveSystem.SavePlayer(null, this, null);
@@ -90,7 +90,7 @@ public class soil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentDay = timer.GetComponent<time>().day;
+        currentDay = timer.GetComponent<timeTracking>().getCurrentTime().day;
 
         if (currentDay != lastDay)
         {

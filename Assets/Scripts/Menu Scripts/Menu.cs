@@ -44,11 +44,6 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("Farming");
     }
-        
-    public void openCooking() //open cooking scene -BM
-    {
-        SceneManager.LoadScene("Cooking");
-    }
 
     public void openOptions() //open options screen -hh
     {

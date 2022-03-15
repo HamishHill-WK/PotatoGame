@@ -12,17 +12,14 @@ public class RecipeBook_script : MonoBehaviour
     public Canvas recipeBook;
     public GameObject recipePanel;
     public Button backButton;
-    public Transform potatoPrefab;        //Test prefab
-    public Transform boilPrefab;        //Test prefab
+    public Transform prefab;        //Test prefab
 
 
 
     private GameObject recipeBookObject;
     private Button recipe1Button;
-    private Button recipe2Button;
 
     private Button proceedButton;
-    private Button returnToRecipesButton;
     
 
     //Recipe text references
@@ -30,9 +27,7 @@ public class RecipeBook_script : MonoBehaviour
     private Text recipeIng, recipeMethod, recipeMiniGames;
 
 
-    //Misc Variables
     public bool inMiniGame = false;
-    private int recipeNumberSel;
 
 
     // Start is called before the first frame update
@@ -41,7 +36,6 @@ public class RecipeBook_script : MonoBehaviour
         //Get obejct References
         GameObject tempObject = GameObject.Find("Recipebook Canvas");
         recipe1Button = GameObject.Find("Recipe 1 Button").GetComponent<Button>();
-        recipe2Button = GameObject.Find("Recipe 2 Button").GetComponent<Button>();
 
 
         if (tempObject != null)
@@ -63,24 +57,9 @@ public class RecipeBook_script : MonoBehaviour
         //Recipe 1 button
         Button rep1Btn = recipe1Button.GetComponent<Button>();
         rep1Btn.onClick.AddListener(showFirstRecipe);
-        
-        //Recipe 2 button
-        Button rep2Btn = recipe2Button.GetComponent<Button>();
-        rep2Btn.onClick.AddListener(showSecondRecipe);
-
-
-
-
-
-
-
-        //In recipe panel Butoons
 
         proceedButton = GameObject.Find("Proceed Button").GetComponent<Button>();
-        proceedButton.onClick.AddListener(selectRecipeMethod);
-        
-        //returnToRecipesButton = GameObject.Find("Return to Recipes Button").GetComponent<Button>();
-        //returnToRecipesButton.onClick.AddListener(returnToRecipesMethod);
+        proceedButton.onClick.AddListener(miniGame1Test);
 
 
         recipeBook.enabled = false;
@@ -89,14 +68,14 @@ public class RecipeBook_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown("space"))
-        //{
-        //    print("space key was pressed");
+        if (Input.GetKeyDown("space"))
+        {
+            print("space key was pressed");
 
-        //    //recipeBook.enabled = false;
+            //recipeBook.enabled = false;
 
-        //    showFirstRecipe();
-        //}
+            showFirstRecipe();
+        }
     }
     
 
@@ -113,6 +92,7 @@ public class RecipeBook_script : MonoBehaviour
 
 
     //Text Set Up
+
     void showFirstRecipeProto()
     {
         GameObject RecipeButton = GameObject.Find("Recipe 1 Button");
@@ -145,102 +125,39 @@ public class RecipeBook_script : MonoBehaviour
         recipeIng = GameObject.Find("Recipe Ingredients").GetComponent<Text>();
         recipeMethod = GameObject.Find("Recipe Method").GetComponent<Text>();
         recipeMiniGames = GameObject.Find("Minigames Involved").GetComponent<Text>();
-    }
 
-    void returnToRecipesMethod()
-    {
-        if (recipePanel.activeInHierarchy == true)
-            recipePanel.SetActive(false);
-
-        //Debug.Log("Return to recipe books ");
+        
     }
 
     void showFirstRecipe()
     {
-        
-
-        recipeNumberSel = 1;        //used for the switch statement on the proceed button (avoids loads of button finds)
-
-        if (recipePanel.activeInHierarchy == false)
-            recipePanel.SetActive(true);
-
-        textSetup();
-
-        Debug.Log("Not lorem ipsum code");
-
-        //vb filling in the data for wedges
-        recipeIng.text = "Ingedients: 3 Baking Potatoes, olive oil, salt";
-        
-        recipeMethod.text = "Simple Potato Wedges enjoyable as a snack or as a side dish";
-
-        recipeMiniGames.text = "Boil - Slice - add - drain - add - add - Roast";
-
-    }
-
-    void showSecondRecipe()
-    {
-        recipeNumberSel = 2;        //used for the switch statement on the proceed button (avoids loads of button finds)
-
         if (recipePanel.activeInHierarchy == false)
             recipePanel.SetActive(true);
 
         textSetup();
 
 
-        recipeIng.text = "Ingedients: Potato 2";
+        recipeIng.text = "Recipe Ingredients";
 
-        recipeMethod.text = "Stir the potato 2";
+        recipeMethod.text = "Recipe Method";
 
-        recipeMiniGames.text = "Boil the potato 2";
+        recipeMiniGames.text = "Recipe Minigames";
+
+
     }
 
-
-
-    void selectRecipeMethod()
+    void miniGame1Test()
     {
+        if (recipeBook.enabled == true)
+        {
+            recipeBook.enabled = false;
+        }
+
         inMiniGame = true;
 
-        switch (recipeNumberSel)
-        {
-            case 1:
-                firstRecipeTest();
-                break;
+        Debug.Log("This button works ");
 
-            case 2:
-                secondRecipe();
-                break;
-
-
-        }
-    }
-
-    void firstRecipeTest()
-    {
-        if (recipeBook.enabled == true)
-        {
-            recipeBook.enabled = false;
-        }
-
-        Debug.Log("Do first recipe ");
-        
-        Instantiate(potatoPrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
-
-        //inMiniGame = false;
-
-    }
-
-    void secondRecipe()
-    {
-        if (recipeBook.enabled == true)
-        {
-            recipeBook.enabled = false;
-        }
-
-        Debug.Log("Do Second Recipe");
-
-        Instantiate(boilPrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
-
-        
+        Instantiate(prefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
     }
 
     //End of code written by Blair McCartan

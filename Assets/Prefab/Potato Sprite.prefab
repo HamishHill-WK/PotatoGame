@@ -95,7 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429bfc723d55c7845aba35da711a9b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 8501683608524682311, guid: 9cc41e851af4c7b4ca70c8fb84622536, type: 3}
   potatoSprites:
   - {fileID: 21300000, guid: 16041311f88a10e45aac25f4ec5fd357, type: 3}
   - {fileID: 21300000, guid: 23bd846876bb864419210e51fd53e7c8, type: 3}

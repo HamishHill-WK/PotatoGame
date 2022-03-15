@@ -29,7 +29,7 @@ public class RecipeBookObject_script : MonoBehaviour
             }
         }
 
-        
+        v_recipeBook_script = v_gameController.GetComponent<RecipeBook_script>();
     }
 
     // Update is called once per frame
@@ -44,8 +44,6 @@ public class RecipeBookObject_script : MonoBehaviour
         // this object was clicked - do something
 
         //Debug.Log(totalScore);
-
-        v_recipeBook_script = v_gameController.GetComponent<RecipeBook_script>();
 
         if (v_recipeBook_script.inMiniGame == false)
         {

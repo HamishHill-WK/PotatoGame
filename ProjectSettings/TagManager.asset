@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Recipe Text
-  - Minigames Text
-  - Ingredients Text
-  - Soil
+  tags: []
   layers:
   - Default
   - TransparentFX

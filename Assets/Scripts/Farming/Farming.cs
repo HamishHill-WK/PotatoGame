@@ -19,7 +19,7 @@ public class Farming : MonoBehaviour
     enum selectable { none = 0, potato, spade, inventory };
     selectable currentSelect = selectable.none;
 
-    private MeshRenderer potatoMesh;
+    //private MeshRenderer potatoMesh;
     private MeshRenderer spadeMesh;
     private MeshRenderer invMesh;
 
@@ -75,6 +75,8 @@ public class Farming : MonoBehaviour
                 {
                     Selector(selectable.potato);
 
+                    Debug.Log("potato ");
+
                     StartCoroutine(wait());
                 }
                 
@@ -124,25 +126,25 @@ public class Farming : MonoBehaviour
         switch (currentSelect)
         {
             case selectable.none:
-                potatoMesh.material = mat2;
+               // potatoMesh.material = mat2;
                 spadeMesh.material = mat2;
                 invMesh.material = mat2;
                 break;
 
             case selectable.potato:
-                potatoMesh.material = mat1;
+               // potatoMesh.material = mat1;
                 spadeMesh.material = mat2;
                 invMesh.material = mat2;
                 break;
 
             case selectable.spade:
-                potatoMesh.material = mat2;
+               // potatoMesh.material = mat2;
                 spadeMesh.material = mat1;
                 invMesh.material = mat2;
                 break;
 
             case selectable.inventory:
-                potatoMesh.material = mat2;
+                //potatoMesh.material = mat2;
                 spadeMesh.material = mat2;
                 invMesh.material = mat1;
                 break;
@@ -175,7 +177,7 @@ public class Farming : MonoBehaviour
 
         camera1 = Camera.main;
 
-        potatoMesh = potato.GetComponent<MeshRenderer>();
+        //potatoMesh = potato.GetComponent<MeshRenderer>();
         spadeMesh = spade.GetComponent<MeshRenderer>();
         invMesh = inventory.GetComponent<MeshRenderer>();
     }

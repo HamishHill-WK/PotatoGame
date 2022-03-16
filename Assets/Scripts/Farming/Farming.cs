@@ -9,6 +9,7 @@ public class Farming : MonoBehaviour
     private GameObject potato;
     private GameObject spade;
     private GameObject soil;
+    private GameObject sphere;
     private GameObject inventory;
     private GameObject invPanel;
 
@@ -45,6 +46,11 @@ public class Farming : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
+                if (hit.collider.gameObject == sphere)
+                {
+                    Debug.Log("binary file cleared ");
+                    SaveSystem.clearBinaryFile();
+                }
 
                 if (hit.collider.gameObject == inventory)
                 {
@@ -107,7 +113,7 @@ public class Farming : MonoBehaviour
                         Selector(selectable.none);
 
                         soil.GetComponent<soil>().plantable = false;
-                        soil.GetComponent<soil>().planted = true;
+                        soil.GetComponent<soil>().plantPot();
                     }
                 }
             }
@@ -162,6 +168,7 @@ public class Farming : MonoBehaviour
     {
         potato = GameObject.Find("Potato");
         spade = GameObject.Find("Spade");
+        sphere = GameObject.Find("Timer");
         soil = GameObject.Find("Soil");
         inventory = GameObject.Find("Inventory");
         invPanel = GameObject.Find("invPanel");
@@ -180,6 +187,8 @@ public class Farming : MonoBehaviour
     void Start()
     {
         startLoad();
+
+       // SaveSystem.clearBinaryFile();
 
         updateVars();
     }

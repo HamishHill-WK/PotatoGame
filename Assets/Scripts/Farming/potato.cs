@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//this script was written by Hamish Hill github: @HamishHill-WK
+
 public class potato : MonoBehaviour
 {
     public bool selected = false;
@@ -15,20 +17,16 @@ public class potato : MonoBehaviour
     {
         stock += add;
 
-        SaveSystem.SavePlayer(this);        ///When updating stock save to file - BM
+        SaveSystem.SavePlayer(this, null, null);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        //txt = GameObject.Find("Text");
+        PlayerData data = SaveSystem.LoadPlayer();
 
-        PlayerData data = SaveSystem.LoadPlayer();      // Loading the saved number of potatoes - BM
-
-        stock = data.totalPotatos;      //Setting the number of potatoes from the stock saved value - BM
+        stock = data.totalPotatos;
     }
 
-    // Update is called once per frame
     void Update()
     {
         txt.text = stock.ToString();

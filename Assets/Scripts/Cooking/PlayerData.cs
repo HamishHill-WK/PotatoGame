@@ -7,20 +7,44 @@ public class PlayerData
 {
     //Code Written by Blair McCartan
 
-    //public int score;
-    //public int health;
-    //public float[] position;
-
     public int totalPotatos;
+    public float currentYield;
 
-    public PlayerData(potato playerPotatos)
+    public int monthPlanted;        //hh
+
+    public int currentYear; //hh
+    public int currentMonth; //hh
+    public int day;//hh
+    public int hour;//hh
+    //public int minute;//hh
+
+    public bool planted; //hh
+
+    public PlayerData(potato playerPotatos, soil playerSoil, timeTracking playerTime)
     {
+        if(playerPotatos != null)//hh
         totalPotatos = playerPotatos.stock;
+
+        if (playerSoil != null)//hh
+        {
+            monthPlanted = playerSoil.monthPlanted;//hh
+            planted = playerSoil.planted;//hh
+            currentYield = playerSoil.yield;//hh
+        }
+
+        if(playerTime !=null)
+        {
+
+            currentYear = playerTime.getCurrentTime().year;//hh
+            currentMonth = playerTime.getCurrentTime().monthNum;//hh
+            day = playerTime.getCurrentTime().day;//hh
+            hour = playerTime.getCurrentTime().hour;//hh
+        }
 
         //level = player.level;
         //health = player.health;
 
-        //position = new float[3];
+       // position = new float[3];
         //position[0] = .transform.po
     }
 

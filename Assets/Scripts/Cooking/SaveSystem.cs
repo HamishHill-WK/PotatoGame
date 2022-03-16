@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+//Code Written by Blair McCartan
 
 public static class SaveSystem 
 {
@@ -18,7 +19,7 @@ public static class SaveSystem
         stream.Close();
     }
 
-    public static void clearBinaryFile()
+    public static void clearBinaryFile()    //Use when the binary file contains bad data - hh (Can't remember whether blair or I wrote this 16/3/22)
     {
         string path = Application.persistentDataPath + "/player.data";
         if (File.Exists(path))

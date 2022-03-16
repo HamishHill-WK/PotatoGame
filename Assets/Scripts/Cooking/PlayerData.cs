@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerData
 {
     //Code Written by Blair McCartan
-
+    //extended by Hamish Hill to include soil +time data
+    
     public int totalPotatos;
     public float currentYield;
 
@@ -34,7 +35,6 @@ public class PlayerData
 
         if(playerTime !=null)
         {
-
             currentYear = playerTime.getCurrentTime().year;//hh
             currentMonth = playerTime.getCurrentTime().monthNum;//hh
             day = playerTime.getCurrentTime().day;//hh

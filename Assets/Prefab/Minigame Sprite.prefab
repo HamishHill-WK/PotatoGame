@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8769198578047640323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.0001338, y: 2.3872387, z: -9.767803}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff562efdd066d024c847a06933c69f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AddMinigamePrefab: {fileID: 5576872812639907500, guid: d4506095485e213468c5fc0f6ecb80a9, type: 3}
   recipe1Sprites:
   - {fileID: 21300000, guid: 16041311f88a10e45aac25f4ec5fd357, type: 3}
   - {fileID: 21300000, guid: 23bd846876bb864419210e51fd53e7c8, type: 3}

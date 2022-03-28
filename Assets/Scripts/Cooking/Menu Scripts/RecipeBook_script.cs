@@ -108,7 +108,6 @@ public class RecipeBook_script : MonoBehaviour
 
     void exitRecipeBook()
     {
-        Debug.Log("Hello world this back button click was detected");
         // this object was clicked - do something
 
         if (recipeBook.enabled == true)
@@ -227,14 +226,12 @@ public class RecipeBook_script : MonoBehaviour
             recipeBook.enabled = false;
         }
 
-        Debug.Log("Do first recipe ");
-
         miniGameSelection = 1;
 
-        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
+        //Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
+        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
 
         //inMiniGame = false;
-
     }
 
     void secondRecipe()
@@ -244,15 +241,10 @@ public class RecipeBook_script : MonoBehaviour
             recipeBook.enabled = false;
         }
 
-        Debug.Log("Do Second Recipe");
-
         miniGameSelection = 2;
 
-        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
-
-        
-
-        
+        //Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
+        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
     }
 
     //End of code written by Blair McCartan

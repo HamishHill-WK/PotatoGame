@@ -33,8 +33,7 @@ public class PlayerData
         }
 
         if(playerTime !=null)
-        {
-
+        { 
             currentYear = playerTime.getCurrentTime().year;//hh
             currentMonth = playerTime.getCurrentTime().monthNum;//hh
             day = playerTime.getCurrentTime().day;//hh

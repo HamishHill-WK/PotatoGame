@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //this script was written by Hamish Hill github: @HamishHill-wk
-
-
 public class timeTracking : MonoBehaviour
 {
     public struct timeData
@@ -91,7 +89,7 @@ public class timeTracking : MonoBehaviour
             hour++;
             minute = 0;
 
-            SaveSystem.SavePlayer(null, null, this);
+          //  SaveSystem.SavePlayer(null, null, this);
         }
 
         if(hour == 6)

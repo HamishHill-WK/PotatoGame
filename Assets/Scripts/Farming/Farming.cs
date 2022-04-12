@@ -12,6 +12,7 @@ public class Farming : MonoBehaviour
     private GameObject sphere;
     private GameObject inventory;
     private GameObject invPanel;
+    private GameObject timer;
 
     private bool plantable;
     private bool planted;
@@ -185,6 +186,7 @@ public class Farming : MonoBehaviour
         soil = GameObject.Find("Soil");
         inventory = GameObject.Find("Inventory");
         invPanel = GameObject.Find("invPanel");
+        timer = GameObject.Find("Timer");
 
         invPanel.SetActive(false);
 
@@ -212,6 +214,8 @@ public class Farming : MonoBehaviour
         userInput();
 
         updateVars();
+
+        SaveSystem.SavePlayer(potato.GetComponent<potato>(), soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
     }
 }
  

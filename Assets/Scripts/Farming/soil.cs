@@ -23,7 +23,13 @@ public class soil : MonoBehaviour
 
     private GameObject timer;
 
-   // PlayerData data = null;
+    private MeshFilter meshFilter;
+    public Mesh initialMesh;
+    public Mesh sproutMesh;
+    public Mesh grownMesh;
+
+    enum growthStage { initial = 0, sprout, grown, dead };    
+    growthStage currentGrowthStage = growthStage.initial;
 
     void updateMoisture()
     {
@@ -69,10 +75,62 @@ public class soil : MonoBehaviour
             {
                 //   Debug.Log("yield updated");
                 yieldFactor = Mathf.Round(yield);
-                SaveSystem.SavePlayer(null, this, null);
+               // SaveSystem.SavePlayer(null, this, null);
             }
         }
+
+
+
+        if (yield <= 10)
+        {
+            updateMesh(growthStage.initial);
+            return;
+        }
+
+        if (yield > 10 && yield <= 50)
+        {
+            updateMesh(growthStage.sprout);
+            return;
+        }
+
+        if(yield > 50)
+        {
+            updateMesh(growthStage.grown);
+        }
     }
+
+    void updateMesh(growthStage stage)
+    {
+        currentGrowthStage = stage;
+
+        switch (currentGrowthStage)
+        {
+            case growthStage.initial:
+                // code block
+                // meshFilter.sharedMesh = Resources.Load<Mesh>("teapotOBJ");
+                meshFilter.mesh = initialMesh;
+                break;
+
+            case growthStage.sprout:
+                // code block
+                // meshFilter.sharedMesh = Resources.Load<Mesh>("Sphere");
+                meshFilter.mesh = sproutMesh;
+                break;
+            case growthStage.grown:
+                // code block
+                //meshFilter.sharedMesh = Resources.Load<Mesh>("Cube");
+                meshFilter.mesh = grownMesh;
+                break;
+            case growthStage.dead:
+                // code block
+                //meshFilter.sharedMesh = Resources.Load<Mesh>("body");
+
+                break;
+        }
+
+        //this.GetComponent<MeshFilter>().sharedMesh = meshFilter.sharedMesh;
+    }
+
 
     public void addMoisture()
     {
@@ -86,7 +144,7 @@ public class soil : MonoBehaviour
         yieldFactor = 0;
         updateSeasonMod();
 
-        SaveSystem.SavePlayer(null, this, null);
+        //SaveSystem.SavePlayer(null, this, null);
     }
 
     void Start()
@@ -106,6 +164,9 @@ public class soil : MonoBehaviour
         yieldFactor = Mathf.Round(yield);
 
         timer = GameObject.Find("Timer");
+
+        meshFilter = this.GetComponent<MeshFilter>();
+       // meshFilter.sharedMesh = Resources.Load<Mesh>("teapotOBJ");
     }
 
     // Update is called once per frame

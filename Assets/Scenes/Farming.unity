@@ -625,7 +625,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532855728}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &532855733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,6 +646,9 @@ MonoBehaviour:
   moistureMod: 1
   yield: 0
   yieldFactor: 0
+  initialMesh: {fileID: -8545447256379345787, guid: f27a2038529a5234ba565a31ae5bd79e, type: 3}
+  sproutMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  grownMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &543216648
 GameObject:
   m_ObjectHideFlags: 0

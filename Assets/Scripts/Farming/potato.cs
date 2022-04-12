@@ -17,7 +17,7 @@ public class potato : MonoBehaviour
     {
         stock += add;
 
-        SaveSystem.SavePlayer(this, null, null);
+      //  SaveSystem.SavePlayer(this, null, null);
     }
 
     void Start()

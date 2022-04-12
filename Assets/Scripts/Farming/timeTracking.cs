@@ -63,6 +63,11 @@ public class timeTracking : MonoBehaviour
         speedFactor = 10;
     }
 
+    public void setRateZero()
+    {
+        speedFactor = 0;
+    }
+
     void Start()
     {
        // SaveSystem.clearBinaryFile();

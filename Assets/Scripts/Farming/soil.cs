@@ -8,16 +8,18 @@ public class soil : MonoBehaviour
     public bool planted = false;
 
     public int monthPlanted = 0;
+    public float seasonMod = 0.0f;
 
-    public float moisture = 10.0f;
-    private float moistureMod = 1.0f;
-    public int lastDay = 0;
-    public int currentDay = 0;
+    public float moisture = 100.0f;
+    public float moistureMod = 1.0f;
+
+    private int lastDay = 0;
+    private int currentDay = 0;
 
     public float yield = 0.0f;
-    public float yieldFactor =0;
+    public float yieldFactor = 0.0f;
 
-    public float growthFactor = 0.01f;
+    private float growthFactor = 0.01f;
 
     private GameObject timer;
 
@@ -25,30 +27,43 @@ public class soil : MonoBehaviour
 
     void updateMoisture()
     {
-        float random;
-        random = Random.Range(0.0f, 0.4f);
-        moisture -= random;
+        if (moisture <= 0.0f)
+            return;
+
+        float random = 0.0f;
+
+        if (moisture > 100.0f)
+            random = Random.Range(1.0f, 2.5f);
+
+        if(moisture > 30.0f && moisture <= 100.0f)
+            random = Random.Range(0.0f, 0.4f);
+        
+        if(moisture <= 30.0f)
+            random = Random.Range(0.0f, 0.05f);
+
+        moisture -= random;        
     }
 
-    void upMoistureMod()
+    void updateMoistureMod()
     {
-
-        //moistureMod = 
+        if(moisture >= 20.0f)
+            moistureMod = moisture / 100.0f;
     }
 
-    void updateGrowth()
+    void updateSeasonMod()
     {
         if (monthPlanted == 3)
-            growthFactor += .01f;
+            seasonMod = 0.1f;
 
-
+        else
+            seasonMod = 0.05f;
     }
 
     void updateYield()
     {
         if (yield < 100.0f && planted)
         {
-            yield += .01f;
+            yield += (growthFactor + seasonMod + moistureMod);
 
             if (yield > (yieldFactor + 5.0f))
             {
@@ -59,12 +74,18 @@ public class soil : MonoBehaviour
         }
     }
 
+    public void addMoisture()
+    {
+        moisture += 10.0f;
+    }
+
     public void plantPot()
     {
         planted = true;
         monthPlanted = timer.GetComponent<timeTracking>().getCurrentTime().monthNum;
         yieldFactor = 0;
-        updateGrowth();
+        updateSeasonMod();
+
         SaveSystem.SavePlayer(null, this, null);
     }
 
@@ -98,14 +119,12 @@ public class soil : MonoBehaviour
 
             updateMoisture();
 
-            updateYield();
+            updateMoistureMod();
 
-           // Debug.Log("day");
+            updateYield();
         }
 
         if (plantable)
             planted = false;
-
-
     }
 }

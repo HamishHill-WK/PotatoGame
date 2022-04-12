@@ -45,7 +45,7 @@ public class ProgressBar : MonoBehaviour
         }
 
         // Hide bar when it reaches max // CM
-        if (Soil.yield >= 100)
+        if (Soil.yield >= 100 || Soil.planted == false) //added or planted equals false to check - hh
         {
             gameObject.GetComponent<CanvasGroup>().alpha = 0; // Add gradual fade later
             value = startValue;

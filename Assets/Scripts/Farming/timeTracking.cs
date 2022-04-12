@@ -48,8 +48,30 @@ public class timeTracking : MonoBehaviour
         txt.text = "Day: " + timeData2.day.ToString() +  " Month: " + currentMonth.ToString() + " Year: " + timeData2.year.ToString() ;
     }
 
+    public void setRateSlow()
+    {
+        speedFactor = 1;
+    }    
+    
+    public void setRateMed()
+    {
+        speedFactor = 5;
+    }    
+    
+    public void setRateFast()
+    {
+        speedFactor = 10;
+    }
+
+    public void setRateZero()
+    {
+        speedFactor = 0;
+    }
+
     void Start()
     {
+       // SaveSystem.clearBinaryFile();
+
         PlayerData data = SaveSystem.LoadPlayer();  //load time data from binary file and update variables - hh
 
         year = data.currentYear;
@@ -64,7 +86,7 @@ public class timeTracking : MonoBehaviour
 
         minute += speedFactor;
 
-        if(minute == 60)
+        if(minute >= 10)
         {
             hour++;
             minute = 0;
@@ -72,7 +94,7 @@ public class timeTracking : MonoBehaviour
             SaveSystem.SavePlayer(null, null, this);
         }
 
-        if(hour == 24)
+        if(hour == 6)
         {
             day++;
             hour = 0;
@@ -93,7 +115,6 @@ public class timeTracking : MonoBehaviour
             {
                 if (currentMonth == month.April || currentMonth == month.June || currentMonth == month.September || currentMonth == month.November)
                 {
-                   // months++;
                     currentMonth++;
                     day = 0;
                 }

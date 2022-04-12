@@ -1853,7 +1853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txt: {fileID: 1229567873}
-  speedFactor: 30
+  speedFactor: 10
 --- !u!114 &1882023666
 MonoBehaviour:
   m_ObjectHideFlags: 0

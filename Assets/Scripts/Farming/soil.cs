@@ -40,15 +40,13 @@ public class soil : MonoBehaviour
     {
         if (monthPlanted == 3)
             growthFactor += .01f;
-
-
     }
 
     void updateYield()
     {
         if (yield < 100.0f && planted)
         {
-            yield += .01f;
+            yield += .1f;
 
             if (yield > (yieldFactor + 5.0f))
             {

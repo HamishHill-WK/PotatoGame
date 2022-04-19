@@ -75,8 +75,6 @@ public class Farming : MonoBehaviour
                 {
                     Selector(selectable.potato);
 
-                    Debug.Log("potato ");
-
                     StartCoroutine(wait());
                 }
                 
@@ -198,17 +196,13 @@ public class Farming : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
     void Start()
     {
         startLoad();
 
-       // SaveSystem.clearBinaryFile();
-
         updateVars();
     }
 
-    // Update is called once per frame
     void Update()
     {
         userInput();

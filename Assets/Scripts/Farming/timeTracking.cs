@@ -68,7 +68,7 @@ public class timeTracking : MonoBehaviour
 
     void Start()
     {
-       // SaveSystem.clearBinaryFile();
+        //SaveSystem.clearBinaryFile();
 
         PlayerData data = SaveSystem.LoadPlayer();  //load time data from binary file and update variables - hh
 
@@ -88,8 +88,6 @@ public class timeTracking : MonoBehaviour
         {
             hour++;
             minute = 0;
-
-          //  SaveSystem.SavePlayer(null, null, this);
         }
 
         if(hour == 6)
@@ -121,9 +119,10 @@ public class timeTracking : MonoBehaviour
                 {
                     if( currentMonth == month.December)
                     {
-                        currentMonth = month.January;
+                        currentMonth = 0;
                         year++;
                         day = 0;
+                        return;
                     }
 
                     if (currentMonth == month.January || currentMonth == month.March || currentMonth == month.May || currentMonth == month.July 

@@ -16,7 +16,6 @@ public class PlayerData
     public int currentMonth; //hh
     public int day;//hh
     public int hour;//hh
-    //public int minute;//hh
 
     public bool planted; //hh
 
@@ -39,12 +38,6 @@ public class PlayerData
             day = playerTime.getCurrentTime().day;//hh
             hour = playerTime.getCurrentTime().hour;//hh
         }
-
-        //level = player.level;
-        //health = player.health;
-
-       // position = new float[3];
-        //position[0] = .transform.po
     }
 
     //https://www.youtube.com/watch?v=XOjd_qU2Ido

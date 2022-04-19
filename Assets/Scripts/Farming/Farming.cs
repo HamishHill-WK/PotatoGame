@@ -9,16 +9,18 @@ public class Farming : MonoBehaviour
     private GameObject potato;
     private GameObject spade;
     private GameObject soil;
+    private GameObject sphere;
     private GameObject inventory;
     private GameObject invPanel;
+    private GameObject timer;
 
     private bool plantable;
     private bool planted;
 
-    enum selectable { none = 0, potato, spade, inventory };
+    enum selectable { none = 0, potato, spade, inventory, water };
     selectable currentSelect = selectable.none;
 
-    private MeshRenderer potatoMesh;
+    private MeshRenderer sphereMesh;
     private MeshRenderer spadeMesh;
     private MeshRenderer invMesh;
 
@@ -45,6 +47,10 @@ public class Farming : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
+                if (hit.collider.gameObject == sphere)
+                {
+                    Selector(selectable.water);
+                }
 
                 if (hit.collider.gameObject == inventory)
                 {
@@ -69,43 +75,53 @@ public class Farming : MonoBehaviour
                 {
                     Selector(selectable.potato);
 
+                    Debug.Log("potato ");
+
                     StartCoroutine(wait());
                 }
                 
                 if (hit.collider.gameObject == spade)
                 {
                     Selector(selectable.spade);
-                }   
+                }
 
-                if (hit.collider.gameObject == soil && currentSelect == selectable.spade )
+                if (hit.collider.gameObject == soil)
                 {
-                    if (!plantable && !planted)
+                    if (currentSelect == selectable.spade)
                     {
-                        Selector(selectable.none);
+                        if (!plantable && !planted)
+                        {
+                            Selector(selectable.none);
 
-                        soil.GetComponent<soil>().plantable = true;
+                            soil.GetComponent<soil>().plantable = true;
+                        }
+
+                        if (planted)
+                        {
+                            Selector(selectable.none);
+
+                            Harvest(soil.GetComponent<soil>().yield);
+
+                            soil.GetComponent<soil>().planted = false;
+
+                            soil.GetComponent<soil>().yield = 0.0f;
+                        }
                     }
 
-                    if(planted)
+                    if (currentSelect == selectable.potato)
                     {
-                        Selector(selectable.none);
+                        if (plantable)
+                        {
+                            Selector(selectable.none);
 
-                        Harvest(soil.GetComponent<soil>().yield);
-
-                        soil.GetComponent<soil>().planted = false;
-
-                        soil.GetComponent<soil>().yield = 0.0f;
+                            soil.GetComponent<soil>().plantable = false;
+                            soil.GetComponent<soil>().plantPot();
+                        }
                     }
-                }            
-                
-                if (hit.collider.gameObject == soil && currentSelect == selectable.potato )
-                {
-                    if (plantable)
-                    {
-                        Selector(selectable.none);
 
-                        soil.GetComponent<soil>().plantable = false;
-                        soil.GetComponent<soil>().planted = true;
+                    if(currentSelect == selectable.water)
+                    {
+                        soil.GetComponent<soil>().addMoisture();
                     }
                 }
             }
@@ -118,34 +134,41 @@ public class Farming : MonoBehaviour
         switch (currentSelect)
         {
             case selectable.none:
-                potatoMesh.material = mat2;
+                sphereMesh.material = mat2;
                 spadeMesh.material = mat2;
                 invMesh.material = mat2;
                 break;
 
             case selectable.potato:
-                potatoMesh.material = mat1;
+                sphereMesh.material = mat2;
                 spadeMesh.material = mat2;
                 invMesh.material = mat2;
                 break;
 
             case selectable.spade:
-                potatoMesh.material = mat2;
+                sphereMesh.material = mat2;
                 spadeMesh.material = mat1;
                 invMesh.material = mat2;
                 break;
 
             case selectable.inventory:
-                potatoMesh.material = mat2;
+                sphereMesh.material = mat2;
                 spadeMesh.material = mat2;
                 invMesh.material = mat1;
+                break;            
+            
+            case selectable.water:
+                sphereMesh.material = mat1;
+                spadeMesh.material = mat2;
+                invMesh.material = mat2;
                 break;
         }
     }
 
     private void Harvest(float yield)
     {
-        harvest += (int)Mathf.CeilToInt(yield/10.0f);
+        yield /= 10.0f;
+        harvest = (int)Mathf.Round(yield);
         potato.GetComponent<potato>().addStock(harvest);
     }
 
@@ -159,15 +182,17 @@ public class Farming : MonoBehaviour
     {
         potato = GameObject.Find("Potato");
         spade = GameObject.Find("Spade");
+        sphere = GameObject.Find("Watering");
         soil = GameObject.Find("Soil");
         inventory = GameObject.Find("Inventory");
         invPanel = GameObject.Find("invPanel");
+        timer = GameObject.Find("Timer");
 
         invPanel.SetActive(false);
 
         camera1 = Camera.main;
 
-        potatoMesh = potato.GetComponent<MeshRenderer>();
+        sphereMesh = sphere.GetComponent<MeshRenderer>();
         spadeMesh = spade.GetComponent<MeshRenderer>();
         invMesh = inventory.GetComponent<MeshRenderer>();
     }
@@ -178,6 +203,8 @@ public class Farming : MonoBehaviour
     {
         startLoad();
 
+       // SaveSystem.clearBinaryFile();
+
         updateVars();
     }
 
@@ -187,6 +214,8 @@ public class Farming : MonoBehaviour
         userInput();
 
         updateVars();
+
+        SaveSystem.SavePlayer(potato.GetComponent<potato>(), soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
     }
 }
  

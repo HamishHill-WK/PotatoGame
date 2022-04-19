@@ -10,6 +10,9 @@ public class PotatoCutting_script : MonoBehaviour
     Vector2 secondPressPos;
     Vector2 currentSwipe;
 
+    public GameObject recipeBookScript;
+
+
     int noOfCuts = 1;
 
     public Sprite[] potatoSprites;
@@ -17,7 +20,7 @@ public class PotatoCutting_script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        recipeBookScript = GameObject.Find("Game Controller");
     }
 
     // Update is called once per frame
@@ -115,6 +118,13 @@ public class PotatoCutting_script : MonoBehaviour
 
     public void updatePotato()
     {
+        //if (Input.GetKeyDown("space"))
+        //{
+        //    print("space key was pressed - setting cuts to final");
+
+        //    noOfCuts = 10;
+        //}
+
         switch (noOfCuts)
         {
             case 1:
@@ -161,6 +171,22 @@ public class PotatoCutting_script : MonoBehaviour
                 this.GetComponent<SpriteRenderer>().sprite = potatoSprites[10];
                 break;
         }
+
+        if (noOfCuts >= 12)
+        {
+            this.transform.position += new Vector3(0, 0.005f, 0.005f);
+        }
+
+        if (this.transform.position.y > 2.5f)
+        {
+            this.GetComponent<SpriteRenderer>().sprite = null;
+
+            Destroy(this.gameObject);
+
+            recipeBookScript.GetComponent<RecipeBook_script>().inMiniGame = false;
+        }
+
+        //Debug.Log("" + noOfCuts);
     }
 
 

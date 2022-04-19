@@ -62,13 +62,11 @@ public class swipeDetection_script : MonoBehaviour
                 if (currentSwipe.x < 0 & (currentSwipe.y > -0.5f || currentSwipe.y < 0.5f))
                 {
                     Debug.Log("left swipe");
-                    testObject.GetComponent<MeshRenderer>().material = material2;
                 }
                 //swipe right
                 if (currentSwipe.x > 0 & (currentSwipe.y > -0.5f || currentSwipe.y < 0.5f))
                 {
                     Debug.Log("right swipe");
-                    testObject.GetComponent<MeshRenderer>().material = material1;
                 }
             }
         }
@@ -96,22 +94,22 @@ public class swipeDetection_script : MonoBehaviour
 
             //swipe upwards
             if (currentSwipe.y > 0 & (currentSwipe.x > -0.5f  || currentSwipe.x < 0.5f))
-        {
+            {
                 Debug.Log("up swipe");
             }
             //swipe down
             if (currentSwipe.y < 0 & (currentSwipe.x > -0.5f  || currentSwipe.x < 0.5f))
-        {
+            {
                 Debug.Log("down swipe");
             }
             //swipe left
             if (currentSwipe.x < 0 & (currentSwipe.y > -0.5f  || currentSwipe.y < 0.5f))
-        {
+            {
                 Debug.Log("left swipe");
             }
             //swipe right
             if (currentSwipe.x > 0 & (currentSwipe.y > -0.5f  || currentSwipe.y < 0.5f))
-        {
+            {
                 Debug.Log("right swipe");
             }
         }

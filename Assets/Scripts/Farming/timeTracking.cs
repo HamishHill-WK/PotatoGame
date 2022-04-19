@@ -124,6 +124,7 @@ public class timeTracking : MonoBehaviour
                         currentMonth = month.January;
                         year++;
                         day = 0;
+                        return;
                     }
 
                     if (currentMonth == month.January || currentMonth == month.March || currentMonth == month.May || currentMonth == month.July 

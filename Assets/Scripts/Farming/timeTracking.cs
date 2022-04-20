@@ -66,6 +66,14 @@ public class timeTracking : MonoBehaviour
         speedFactor = 0;
     }
 
+    public void resetToDefs()
+    {
+        year = 0;
+        currentMonth = 0;
+        day = 0;
+        hour = 0;
+    }
+
     void Start()
     {
         //SaveSystem.clearBinaryFile();

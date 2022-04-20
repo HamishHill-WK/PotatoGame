@@ -51,6 +51,6 @@ public class ProgressBar : MonoBehaviour
             value = startValue;
         }
     }
-}
 
-// CM
+    // Code by Corey Mitchell
+}

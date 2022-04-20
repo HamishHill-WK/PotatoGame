@@ -6,7 +6,7 @@ public class soil : MonoBehaviour
 {
     public bool plantable = false;
     public bool planted = false;
-
+    public bool dead = false;
     public int monthPlanted = 0;
     private int monthsAfterPlant = 0;
     private float seasonMod = 0.0f;
@@ -125,6 +125,7 @@ public class soil : MonoBehaviour
         if (monthsAfterPlant >= 6)
         {
             updateMesh(growthStage.dead);
+            dead = true;
         }
 
         if (planted == false)
@@ -161,6 +162,12 @@ public class soil : MonoBehaviour
 
     void updateMaxYield()
     {
+        if(dead)
+        {
+            yield = 0;
+            return;
+        }    
+
         float lowCount = 0.0f;
         float medCount = 0.0f;
         float highCount = 0.0f;

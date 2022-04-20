@@ -168,6 +168,9 @@ public class Farming : MonoBehaviour
         yield /= 10.0f;
         harvest = (int)Mathf.Round(yield);
         potato.GetComponent<potato>().addStock(harvest);
+
+        if (soil.GetComponent<soil>().dead)
+            soil.GetComponent<soil>().dead = false;
     }
 
     private void updateVars()

@@ -169,6 +169,8 @@ public class Farming : MonoBehaviour
         harvest = (int)Mathf.Round(yield);
         potato.GetComponent<potato>().addStock(harvest);
 
+        soil.GetComponent<soil>().planted = false;
+
         if (soil.GetComponent<soil>().dead)
             soil.GetComponent<soil>().dead = false;
     }

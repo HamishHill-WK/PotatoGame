@@ -33,8 +33,9 @@ public class soil : MonoBehaviour
     public Mesh sproutMesh;
     public Mesh grownMesh;
     public Mesh deadMesh;
+    public Mesh emptyMesh;
 
-    enum growthStage { initial = 0, sprout, grown, dead };
+    enum growthStage { initial = 0, sprout, grown, dead, empty };
     growthStage currentGrowthStage = growthStage.initial;
 
     enum moistureLevel { low = 0, medium, high };
@@ -125,6 +126,9 @@ public class soil : MonoBehaviour
         {
             updateMesh(growthStage.dead);
         }
+
+        if (planted == false)
+            updateMesh(growthStage.empty);
     }
 
     void updateMesh(growthStage stage)
@@ -147,6 +151,10 @@ public class soil : MonoBehaviour
 
             case growthStage.dead:
                 meshFilter.mesh = deadMesh;
+                break;            
+            
+            case growthStage.empty:
+                meshFilter.mesh = emptyMesh;
                 break;
         }
     }
@@ -251,7 +259,11 @@ public class soil : MonoBehaviour
         {
             lastMonth = currentMonth;
 
-            monthsAfterPlant++;
+            if (planted)
+                monthsAfterPlant++;
+
+            else
+                monthPlanted = 0;
 
             moistureLevels.Push(currentMoistureLevel);
             updateMaxYield();

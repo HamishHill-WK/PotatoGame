@@ -28,22 +28,16 @@ public class ChangeCounterSprite : MonoBehaviour
         if (basicOn == true)
         {
             spriteRenderer.sprite = basicCounter;
-            ovenOn = false;
-            sinkOn = false;
         }
         
         if (ovenOn == true)
         {
             spriteRenderer.sprite = ovenCounter;
-            basicOn = false;
-            sinkOn = false;
         }
 
         if (sinkOn == true)
         {
             spriteRenderer.sprite = sinkCounter;
-            basicOn = false;
-            ovenOn = false;
         }
     }
 

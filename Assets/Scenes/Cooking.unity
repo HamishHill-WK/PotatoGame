@@ -1564,6 +1564,7 @@ MonoBehaviour:
   potatoPrefab: {fileID: 51621264509104821, guid: a92099f29f0c502468188c7951142096, type: 3}
   boilPrefab: {fileID: 8489255367736953177, guid: 1bb90074992dedf4696c2eff394aeeb3, type: 3}
   inMiniGame: 0
+  counterObj: {fileID: 1555984706}
 --- !u!1 &1519486975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,6 +1767,9 @@ MonoBehaviour:
   basicCounter: {fileID: 21300000, guid: aa60b6cdd83aeca47aa8b1043a75539e, type: 3}
   ovenCounter: {fileID: 21300000, guid: 1bad31c40d4570248b898c282c484eab, type: 3}
   sinkCounter: {fileID: 21300000, guid: 009e618ee28fcc14eae48c8ca5d1b3dd, type: 3}
+  basicOn: 0
+  ovenOn: 0
+  sinkOn: 0
 --- !u!1 &1670562606
 GameObject:
   m_ObjectHideFlags: 0

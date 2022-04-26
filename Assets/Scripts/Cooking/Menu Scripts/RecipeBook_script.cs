@@ -35,6 +35,13 @@ public class RecipeBook_script : MonoBehaviour
     private int recipeNumberSel;
 
 
+    // Background Sprite Variables // CM
+    public GameObject counterObj;
+    private ChangeCounterSprite Counter;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +91,11 @@ public class RecipeBook_script : MonoBehaviour
 
 
         recipeBook.enabled = false;
+
+
+
+        // Get ref to counter script // CM
+        Counter = counterObj.GetComponent<ChangeCounterSprite>();
     }
 
     // Update is called once per frame
@@ -97,6 +109,14 @@ public class RecipeBook_script : MonoBehaviour
 
         //    showFirstRecipe();
         //}
+
+        // Set the background to it's original sprite if not in mini-game // CM
+        if (inMiniGame == false)
+        {
+            Counter.basicOn = true;
+            Counter.ovenOn = false;
+            Counter.sinkOn = false;
+        }
     }
     
 
@@ -227,6 +247,10 @@ public class RecipeBook_script : MonoBehaviour
 
         //inMiniGame = false;
 
+        // Trying to change the sprite (Needs Work) // CM
+        Counter.basicOn = true;
+        Counter.ovenOn = false;
+        Counter.sinkOn = false;
     }
 
     void secondRecipe()
@@ -240,8 +264,15 @@ public class RecipeBook_script : MonoBehaviour
 
         Instantiate(boilPrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
 
+        // Trying to change the sprite (Needs Work) // CM
+        Counter.ovenOn = true;
+        Counter.sinkOn = false;
+        Counter.basicOn = false;
+
         
     }
+
+
 
     //End of code written by Blair McCartan
 }

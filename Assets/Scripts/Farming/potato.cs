@@ -16,6 +16,10 @@ public class potato : MonoBehaviour
 
     private string varName = "potato";
 
+    public float diseaseResist;
+    public float moistureReq;
+    public int[] plantingMonths;
+
     public void addStock(int add)
     {
         stock += add;
@@ -38,13 +42,16 @@ public class potato : MonoBehaviour
         return stock;
     }
 
+    public void setName(string newName)
+    {
+        varName = newName;
+        this.gameObject.name = varName;
+    }
+
     void Start()
     {
-        //PlayerData data = SaveSystem.LoadPlayer();
-
-        //stock = data.totalPotatos;
-
         txt.text = stock.ToString();
+       // nameTxt.text = varName;
     }
 
 }

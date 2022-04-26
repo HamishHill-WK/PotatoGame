@@ -6,7 +6,7 @@ public class soil : MonoBehaviour
 {
     public bool plantable = false;
     public bool planted = false;
-    public bool dead = false;
+
     public int monthPlanted = 0;
     private int monthsAfterPlant = 0;
     private float seasonMod = 0.0f;
@@ -33,9 +33,8 @@ public class soil : MonoBehaviour
     public Mesh sproutMesh;
     public Mesh grownMesh;
     public Mesh deadMesh;
-    public Mesh emptyMesh;
 
-    enum growthStage { initial = 0, sprout, grown, dead, empty };
+    enum growthStage { initial = 0, sprout, grown, dead };    
     growthStage currentGrowthStage = growthStage.initial;
 
     enum moistureLevel { low = 0, medium, high };
@@ -57,12 +56,12 @@ public class soil : MonoBehaviour
         {
             random = Random.Range(0.1f, 0.8f);
 
-            if (moisture <= 65.0f)
+            if(moisture <= 65.0f)
             {
                 currentMoistureLevel = moistureLevel.medium;
-            }
-
-            if (moisture > 65.0f)
+            }            
+            
+            if(moisture > 65.0f)
             {
                 currentMoistureLevel = moistureLevel.high;
             }
@@ -73,12 +72,12 @@ public class soil : MonoBehaviour
             random = Random.Range(0.0f, 0.05f);
             currentMoistureLevel = moistureLevel.low;
         }
-        moisture -= random;
+        moisture -= random;        
     }
 
     void updateMoistureMod()
     {
-        if (moisture >= 20.0f)
+        if(moisture >= 20.0f)
             moistureMod = moisture / 100.0f;
     }
 
@@ -102,7 +101,7 @@ public class soil : MonoBehaviour
 
             if (yield > (yieldFactor + 5.0f))
                 yieldFactor = Mathf.Round(yield);
-
+            
         }
 
         if (monthsAfterPlant < 1)
@@ -117,19 +116,15 @@ public class soil : MonoBehaviour
             return;
         }
 
-        if (monthsAfterPlant > 1 && monthsAfterPlant < 6)
+        if(monthsAfterPlant > 1 && monthsAfterPlant < 6)
         {
             updateMesh(growthStage.grown);
-        }
-
-        if (monthsAfterPlant >= 6)
+        }        
+        
+        if(monthsAfterPlant >= 6 )
         {
             updateMesh(growthStage.dead);
-            dead = true;
         }
-
-        if (planted == false)
-            updateMesh(growthStage.empty);
     }
 
     void updateMesh(growthStage stage)
@@ -152,22 +147,12 @@ public class soil : MonoBehaviour
 
             case growthStage.dead:
                 meshFilter.mesh = deadMesh;
-                break;            
-            
-            case growthStage.empty:
-                meshFilter.mesh = emptyMesh;
                 break;
         }
     }
 
     void updateMaxYield()
     {
-        if(dead)
-        {
-            yield = 0;
-            return;
-        }    
-
         float lowCount = 0.0f;
         float medCount = 0.0f;
         float highCount = 0.0f;
@@ -187,16 +172,16 @@ public class soil : MonoBehaviour
         if (currentGrowthStage == growthStage.initial)
         {
             maxYield += (1.5f * lowCount) + (2.0f * medCount) + (2.5f * highCount);
-        }
-
+        }        
+        
         if (currentGrowthStage == growthStage.sprout)
         {
             maxYield += (1.0f * lowCount) + (1.5f * medCount) + (2.0f * highCount);
-        }
-
+        }        
+        
         if (currentGrowthStage == growthStage.grown)
         {
-            if (maxYield < 100.0f)
+            if(maxYield < 100.0f)
                 maxYield += (0.5f * lowCount) + (1.0f * medCount) + (1.5f * highCount);
         }
 
@@ -222,7 +207,7 @@ public class soil : MonoBehaviour
 
     void Start()
     {
-        //  SaveSystem.clearBinaryFile();
+      //  SaveSystem.clearBinaryFile();
 
 
         PlayerData data = SaveSystem.LoadPlayer();
@@ -262,15 +247,11 @@ public class soil : MonoBehaviour
             updateYield();
         }
 
-        if (currentMonth != lastMonth)
+        if(currentMonth != lastMonth)
         {
             lastMonth = currentMonth;
 
-            if (planted)
-                monthsAfterPlant++;
-
-            else
-                monthPlanted = 0;
+            monthsAfterPlant++;
 
             moistureLevels.Push(currentMoistureLevel);
             updateMaxYield();

@@ -44,8 +44,9 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("Farming");
     }
-        
-    public void openCooking() //open cooking scene -BM
+
+
+    public void openCooking() //open cooking scene -hs
     {
         SceneManager.LoadScene("Cooking");
     }

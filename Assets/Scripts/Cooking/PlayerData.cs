@@ -6,8 +6,9 @@ using UnityEngine;
 public class PlayerData
 {
     //Code Written by Blair McCartan
-
-    public int[] totalPotatos;
+    //extended by Hamish Hill to include soil +time data
+    
+    public int totalPotatos;
     public float currentYield;
 
     public int monthPlanted;        //hh
@@ -19,17 +20,10 @@ public class PlayerData
 
     public bool planted; //hh
 
-    public PlayerData(int[] playerPotatos, soil playerSoil, timeTracking playerTime) //modified potato to be an array - hh 
+    public PlayerData(potato playerPotatos, soil playerSoil, timeTracking playerTime)
     {
-        if (playerPotatos != null)//hh
-        {
-            int i = 0;
-            foreach (int p in playerPotatos)
-            {
-                totalPotatos[i] = p;
-                i++;
-            }
-        }
+        if(playerPotatos != null)//hh
+        totalPotatos = playerPotatos.stock;
 
         if (playerSoil != null)//hh
         {
@@ -39,7 +33,7 @@ public class PlayerData
         }
 
         if(playerTime !=null)
-        { 
+        {
             currentYear = playerTime.getCurrentTime().year;//hh
             currentMonth = playerTime.getCurrentTime().monthNum;//hh
             day = playerTime.getCurrentTime().day;//hh

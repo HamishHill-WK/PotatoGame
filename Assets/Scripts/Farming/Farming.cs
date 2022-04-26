@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Farming : MonoBehaviour
 {
-    public GameObject[] potatos;
+    private GameObject potato;
     private GameObject spade;
     private GameObject soil;
     private GameObject sphere;
@@ -14,16 +14,10 @@ public class Farming : MonoBehaviour
     private GameObject invPanel;
     private GameObject timer;
 
-    private int[] potatoStocks;
-
-    public int[] stocks;
-
     private bool plantable;
     private bool planted;
 
-    public int potatoType = 0;
-    
-    enum selectable { none = 0, potatoObj, spade, inventory, water };
+    enum selectable { none = 0, potato, spade, inventory, water };
     selectable currentSelect = selectable.none;
 
     private MeshRenderer sphereMesh;
@@ -77,15 +71,9 @@ public class Farming : MonoBehaviour
                     }
                 }
 
-                if (hit.collider.gameObject.tag == "Potato")
+                if (hit.collider.gameObject == potato)
                 {
-                    Selector(selectable.potatoObj);
-
-                    if (hit.collider.gameObject.name == "Potato 0")
-                        potatoType = 0;                    
-                    
-                    if (hit.collider.gameObject.name == "Potato 1")
-                        potatoType = 1;
+                    Selector(selectable.potato);
 
                     StartCoroutine(wait());
                 }
@@ -118,7 +106,7 @@ public class Farming : MonoBehaviour
                         }
                     }
 
-                    if (currentSelect == selectable.potatoObj)
+                    if (currentSelect == selectable.potato)
                     {
                         if (plantable)
                         {
@@ -149,7 +137,7 @@ public class Farming : MonoBehaviour
                 invMesh.material = mat2;
                 break;
 
-            case selectable.potatoObj:
+            case selectable.potato:
                 sphereMesh.material = mat2;
                 spadeMesh.material = mat2;
                 invMesh.material = mat2;
@@ -179,7 +167,12 @@ public class Farming : MonoBehaviour
     {
         yield /= 10.0f;
         harvest = (int)Mathf.Round(yield);
-        potatos[potatoType].GetComponent<potato>().addStock(harvest);
+        potato.GetComponent<potato>().addStock(harvest);
+
+        soil.GetComponent<soil>().planted = false;
+
+        if (soil.GetComponent<soil>().dead)
+            soil.GetComponent<soil>().dead = false;
     }
 
     private void updateVars()
@@ -190,7 +183,7 @@ public class Farming : MonoBehaviour
 
     private void startLoad()
     {
-        potatos = GameObject.FindGameObjectsWithTag("Potato");
+        potato = GameObject.Find("Potato");
         spade = GameObject.Find("Spade");
         sphere = GameObject.Find("Watering");
         soil = GameObject.Find("Soil");
@@ -205,36 +198,8 @@ public class Farming : MonoBehaviour
         sphereMesh = sphere.GetComponent<MeshRenderer>();
         spadeMesh = spade.GetComponent<MeshRenderer>();
         invMesh = inventory.GetComponent<MeshRenderer>();
-
-        getScripts();
-
-        loadStock();
     }
 
-    private void loadStock()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-
-        int[] values = data.totalPotatos;
-
-        int i = 0;
-
-        foreach (GameObject p in potatos)
-        {
-            p.GetComponent<potato>().setStock(values[i]);
-            i++;
-        }
-    }
-
-     void getScripts()
-    {
-        int j = 1;
-
-        for(int i =0; i < j; i++)
-        {
-            potatoStocks[i] = potatos[i].GetComponent<potato>().getStock();
-        }
-    }
 
     void Start()
     {
@@ -249,9 +214,7 @@ public class Farming : MonoBehaviour
 
         updateVars();
 
-        getScripts();
-
-        SaveSystem.SavePlayer(potatoStocks, soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
+        SaveSystem.SavePlayer(potato.GetComponent<potato>(), soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
     }
 }
  

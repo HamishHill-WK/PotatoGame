@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MiniGameSprite_script : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class MiniGameSprite_script : MonoBehaviour
     private int onMiniGame = 0;
 
     private GameObject gameController;
+
+    private Text currentRecipe, currentGuide;
 
     //Prefabs 
 
@@ -51,6 +54,9 @@ public class MiniGameSprite_script : MonoBehaviour
 
         recipeSel = gameController.GetComponent<RecipeBook_script>().recipeSelection;       //Get the selected recipe
 
+        currentRecipe = GameObject.Find("Current Recipe Text - Text").GetComponent<Text>();
+        currentGuide = GameObject.Find("Current Recipe Guide - Text").GetComponent<Text>();
+
         SwitchMiniGame();       //To start the minigames
     }
 
@@ -73,6 +79,8 @@ public class MiniGameSprite_script : MonoBehaviour
 
             //First Recipe minigame set - Wedges 
             case 1:
+                currentRecipe.text = "Potato Wedges";
+
                 switch (onMiniGame)     // Switch based on the minigame we are on
                 {
                     case 1:
@@ -104,8 +112,7 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 8:
-                        gameController.GetComponent<RecipeBook_script>().inMiniGame = false;
-                        Destroy(this.gameObject);
+                        RecipeComplete();
                         break;
                 }
                 break;
@@ -113,6 +120,9 @@ public class MiniGameSprite_script : MonoBehaviour
 
             //Second Recipe minigame set - Mashed potatoes
             case 2:
+                currentRecipe.fontSize = 45;
+                currentRecipe.text = "Mashed Potatoes";
+
                 switch (onMiniGame)
                 {
                     case 1:
@@ -145,8 +155,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
 
                     case 8:
-                        gameController.GetComponent<RecipeBook_script>().inMiniGame = false;
-                        Destroy(this.gameObject);
+                        RecipeComplete();
                         break;
 
                 }
@@ -154,6 +163,8 @@ public class MiniGameSprite_script : MonoBehaviour
                
 
             case 3:     // - Crispy Roast 
+                currentRecipe.text = "Crispy Roast";
+
                 switch (onMiniGame)
                 {
                     case 1:
@@ -189,14 +200,15 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 9:
-                        gameController.GetComponent<RecipeBook_script>().inMiniGame = false;
-                        Destroy(this.gameObject);
+                        RecipeComplete();
                         break;
 
                 }
                 break;
 
             case 4:     // - Dauphioise
+                currentRecipe.text = "Dauphioise";
+
                 switch (onMiniGame)
                 {
                     case 1:
@@ -244,13 +256,22 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 12:
-                        gameController.GetComponent<RecipeBook_script>().inMiniGame = false;
-                        Destroy(this.gameObject);
+                        RecipeComplete();
                         break;
 
                 }
                 break;
         }
+    }
+
+
+    void RecipeComplete()
+    {
+        currentRecipe.text = "";
+        currentGuide.text = "";
+
+        gameController.GetComponent<RecipeBook_script>().inMiniGame = false;
+        Destroy(this.gameObject);
     }
 
 
@@ -417,13 +438,11 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
                 }
                 break;
-                
-
-
         }
     }
 
 
+   
 
 
     /// <summary>
@@ -513,8 +532,6 @@ public class MiniGameSprite_script : MonoBehaviour
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
         // Above Testing  
-
-
     }
 
     public void cuttingTouchSwipeMethod()
@@ -560,6 +577,7 @@ public class MiniGameSprite_script : MonoBehaviour
             }
         }
     }
+
     public void cuttingMouseSwipeMethod()
     {
         if (Input.GetMouseButtonDown(0))
@@ -666,6 +684,8 @@ public class MiniGameSprite_script : MonoBehaviour
         referencedSprites = recipe1Sprites;
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
+
+        currentGuide.text = "Swipe Up";
     }
 
     void PeelMiniGameUpdate()
@@ -722,8 +742,6 @@ public class MiniGameSprite_script : MonoBehaviour
             case 12:
                 SwitchMiniGame();
                 break;
-
-
         }
     }
 
@@ -745,6 +763,7 @@ public class MiniGameSprite_script : MonoBehaviour
         {
             case 1:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
+                currentGuide.text = "Tap";
 
                 if (Input.GetMouseButtonDown(0))
                     noOfBoil++;
@@ -753,30 +772,34 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 2:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[1];
+                currentGuide.text = "Swipe";
 
-                if(ReturnSwipeControlsHorizontal() == (1 / 2) || ReturnSwipeControlsVertical() == (1 / 2))
+                if (ReturnSwipeControlsHorizontal() != 0 || ReturnSwipeControlsVertical() != 0)
                     noOfBoil++;
 
                 break;
 
             case 3:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[2];
+                currentGuide.text = "Swipe";
 
-                if (ReturnSwipeControlsHorizontal() == (1 / 2) || ReturnSwipeControlsVertical() == (1 / 2))
+                if (ReturnSwipeControlsHorizontal() != 0 || ReturnSwipeControlsVertical() != 0)
                     noOfBoil++;
 
                 break;
 
             case 4:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[3];
+                currentGuide.text = "Swipe";
 
-                if (ReturnSwipeControlsHorizontal() == (1 / 2) || ReturnSwipeControlsVertical() == (1 / 2))
+                if (ReturnSwipeControlsHorizontal() != 0 || ReturnSwipeControlsVertical() != 0)
                     noOfBoil++;
 
                 break;
 
             case 5:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[4];
+                currentGuide.text = "Tap";
 
                 if (Input.GetMouseButtonDown(0))
                     noOfBoil++;
@@ -796,10 +819,11 @@ public class MiniGameSprite_script : MonoBehaviour
         referencedSprites = recipe2Sprites;
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
-
         this.transform.position = new Vector3(-1.5f, 0.5f, -3.5f);
 
         AddMinigameGameObject = Instantiate(AddMinigamePrefab, new Vector3(1.5f, 2.0f, -3.1f), Quaternion.identity);
+
+        currentGuide.text = "Swipe Left";
     }
 
     void AddMiniGameUpdate()
@@ -850,6 +874,7 @@ public class MiniGameSprite_script : MonoBehaviour
         {
             case 1:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
+                currentGuide.text = "Tap";
 
                 if (Input.GetMouseButtonDown(0))
                     noOfDrain++;
@@ -858,6 +883,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 2:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[1];
+                currentGuide.text = "Swipe Left";
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
@@ -868,6 +894,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 3:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[2];
+                currentGuide.text = "Swipe Right";
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
@@ -878,6 +905,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 4:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[3];
+                currentGuide.text = "Swipe Left";
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
@@ -888,6 +916,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 5:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[4];
+                currentGuide.text = "Swipe Right";
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
@@ -898,6 +927,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 6:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[5];
+                currentGuide.text = "Swipe Left";
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
@@ -908,6 +938,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 7:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[6];
+                currentGuide.text = "Swipe Right";
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
@@ -918,6 +949,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 8:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[7];
+                currentGuide.text = "Tap";
 
                 if (Input.GetMouseButtonDown(0))
                     noOfDrain++;
@@ -950,6 +982,7 @@ public class MiniGameSprite_script : MonoBehaviour
         {
             case 1:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
+                currentGuide.text = "Tap";
 
                 if (Input.GetMouseButtonDown(0))
                     noOfRoast++;
@@ -958,6 +991,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 2:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[1];
+                currentGuide.text = "Swipe Up";
 
                 if (ReturnSwipeControlsVertical() == 1)
                 {
@@ -968,19 +1002,15 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 3:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[2];
+                currentGuide.text = "Waiting";
 
                 StartCoroutine(RoastWait());
 
-
-                //if (ReturnSwipeControlsHorizontal() == 2)
-                //{
-                //    Debug.Log("Left Swipe Detected");
-                //    noOfRoast++;
-                //}
                 break;
 
             case 4:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[3];
+                currentGuide.text = "Swipe Down";
 
                 if (ReturnSwipeControlsVertical() == 2)
                 {
@@ -991,6 +1021,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 5:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[4];
+                currentGuide.text = "Tap";
 
                 if (Input.GetMouseButtonDown(0))
                     noOfRoast++;
@@ -1007,6 +1038,7 @@ public class MiniGameSprite_script : MonoBehaviour
         referencedSprites = recipe1Sprites;
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
+        currentGuide.text = "Swipe Down";
     }
 
     void SliceMiniGameUpdate()
@@ -1088,8 +1120,9 @@ public class MiniGameSprite_script : MonoBehaviour
         {
             case 1:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
+                currentGuide.text = "Swipe";
 
-                if (ReturnSwipeControlsHorizontal() == (1 / 2) || ReturnSwipeControlsVertical() == (1 / 2))
+                if (ReturnSwipeControlsHorizontal() != 0 || ReturnSwipeControlsVertical() != 0)
                 {
                     noOfStir++;
                 }
@@ -1097,6 +1130,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 2:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[1];
+                currentGuide.text = "Waiting";
 
                 // wait for 1 second
                 StartCoroutine(StirWait());
@@ -1104,8 +1138,9 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 3:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[2];
+                currentGuide.text = "Swipe";
 
-                if (ReturnSwipeControlsHorizontal() == (1 / 2) || ReturnSwipeControlsVertical() == (1 / 2))
+                if (ReturnSwipeControlsHorizontal() != 0 || ReturnSwipeControlsVertical() != 0)
                 {
                     noOfStir++;
                 }
@@ -1113,6 +1148,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 4:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[3];
+                currentGuide.text = "Waiting";
 
                 // wait for 1 second
                 StartCoroutine(StirWait());
@@ -1120,8 +1156,9 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 5:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[4];
+                currentGuide.text = "Swipe";
 
-                if (ReturnSwipeControlsHorizontal() == (1 / 2) || ReturnSwipeControlsVertical() == (1 / 2))
+                if (ReturnSwipeControlsHorizontal() != 0 || ReturnSwipeControlsVertical() != 0)
                 {
                     noOfStir++;
                 }
@@ -1129,6 +1166,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 6:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[5];
+                currentGuide.text = "Waiting";
 
                 // wait for 1 second
                 StartCoroutine(StirWait());
@@ -1136,8 +1174,9 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 7:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[6];
+                currentGuide.text = "Swipe";
 
-                if (ReturnSwipeControlsHorizontal() == (1 / 2) || ReturnSwipeControlsVertical() == (1 / 2))
+                if (ReturnSwipeControlsHorizontal() != 0 || ReturnSwipeControlsVertical() != 0)
                 {
                     noOfStir++;
                 }
@@ -1145,6 +1184,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 8:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[7];
+                currentGuide.text = "Waiting";
 
                 // wait for 1 second
                 StartCoroutine(StirWait());
@@ -1152,8 +1192,9 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 9:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[8];
+                currentGuide.text = "Swipe";
 
-                if (ReturnSwipeControlsHorizontal() == (1 / 2) || ReturnSwipeControlsVertical() == (1 / 2))
+                if (ReturnSwipeControlsHorizontal() != 0 || ReturnSwipeControlsVertical() != 0)
                 {
                     noOfStir++;
                 }
@@ -1161,6 +1202,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
             case 10:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[9];
+                currentGuide.text = "Waiting";
 
                 // wait for 1 second
                 StartCoroutine(StirWait());
@@ -1181,6 +1223,8 @@ public class MiniGameSprite_script : MonoBehaviour
         referencedSprites = recipe1Sprites;
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
+
+        currentGuide.text = "Tap";
     }
 
     void MashMiniGameUpdate()
@@ -1241,18 +1285,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
         //Do something else to switch the minigame 
     }
-
-
-   
-
-
-    
-
-
-
-    
-
-    
 
     //void RoastMiniGameUpdate()
     //{

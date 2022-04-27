@@ -640,15 +640,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantable: 0
   planted: 0
+  dead: 0
   monthPlanted: 0
-  seasonMod: 0
   moisture: 100
-  moistureMod: 1
   yield: 0
-  yieldFactor: 0
+  maxYield: 50
   initialMesh: {fileID: -8545447256379345787, guid: f27a2038529a5234ba565a31ae5bd79e, type: 3}
   sproutMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   grownMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  deadMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  emptyMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &543216648
 GameObject:
   m_ObjectHideFlags: 0

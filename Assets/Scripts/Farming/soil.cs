@@ -26,8 +26,6 @@ public class soil : MonoBehaviour
 
     private float growthFactor = 0.01f;
 
-    private string potatoTypeName;
-
     private GameObject timer;
 
     private MeshFilter meshFilter;
@@ -196,9 +194,8 @@ public class soil : MonoBehaviour
         moisture += 10.0f;
     }
 
-    public void plantPot(string type)
+    public void plantPot()
     {
-        potatoTypeName = type;
         planted = true;
         monthPlanted = timer.GetComponent<timeTracking>().getCurrentTime().monthNum;
         monthsAfterPlant = 0;
@@ -210,7 +207,7 @@ public class soil : MonoBehaviour
 
     void Start()
     {
-       // SaveSystem.clearBinaryFile();
+      //  SaveSystem.clearBinaryFile();
 
 
         PlayerData data = SaveSystem.LoadPlayer();

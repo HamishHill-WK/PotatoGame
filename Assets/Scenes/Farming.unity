@@ -1170,9 +1170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f209b0bcf202247a6449482b104ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potatos: []
-  stocks: 
-  potatoType: 0
   mat1: {fileID: 2100000, guid: 76addb2f98db8634c986531549160bb5, type: 2}
   mat2: {fileID: 2100000, guid: b48f2c4cd30312a41b63f29f925c07d1, type: 2}
 --- !u!4 &936398850
@@ -2131,7 +2128,6 @@ GameObject:
   - component: {fileID: 1394829754}
   - component: {fileID: 1394829756}
   - component: {fileID: 1394829755}
-  - component: {fileID: 1394829757}
   m_Layer: 5
   m_Name: invPanel
   m_TagString: Untagged
@@ -2198,20 +2194,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394829753}
   m_CullTransparentMesh: 0
---- !u!114 &1394829757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394829753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 831a5d58b60ae584ab9032945bc2580e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameFile: {fileID: 4900000, guid: f7193aac1851d264cb283a06c26a52fb, type: 3}
-  fileNames: []
 --- !u!1 &1442283726
 GameObject:
   m_ObjectHideFlags: 0

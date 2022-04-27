@@ -7,7 +7,7 @@ public class PlayerData
 {
     //Code Written by Blair McCartan
 
-    public List<int> totalPotatos = new List<int>(); //hh
+    public int[] totalPotatos;
     public float currentYield;
 
     public int monthPlanted;        //hh
@@ -23,12 +23,11 @@ public class PlayerData
     {
         if (playerPotatos != null)//hh
         {
-            totalPotatos.Clear();//hh
-            int i = 0;//hh
-            foreach (int p in playerPotatos)//hh
+            int i = 0;
+            foreach (int p in playerPotatos)
             {
-                totalPotatos.Add(playerPotatos[i]); //hh
-                i++;//hh
+                totalPotatos[i] = p;
+                i++;
             }
         }
 

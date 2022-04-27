@@ -28,6 +28,7 @@ public class potato : MonoBehaviour
             stock = 99;
 
         txt.text = stock.ToString();
+
     }
 
     public void setStock(int add)
@@ -45,11 +46,12 @@ public class potato : MonoBehaviour
     {
         varName = newName;
         this.gameObject.name = varName;
-        nameTxt.text = varName;
     }
 
     void Start()
     {
         txt.text = stock.ToString();
+       // nameTxt.text = varName;
     }
+
 }

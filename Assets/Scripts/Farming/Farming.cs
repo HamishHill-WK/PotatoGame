@@ -14,14 +14,14 @@ public class Farming : MonoBehaviour
     private GameObject invPanel;
     private GameObject timer;
 
-    private int[] potatoStocks = { 0, 0, 0 };
+    private int[] potatoStocks;
 
     public int[] stocks;
 
     private bool plantable;
     private bool planted;
 
-    public string potatoType = "none";
+    public int potatoType = 0;
     
     enum selectable { none = 0, potatoObj, spade, inventory, water };
     selectable currentSelect = selectable.none;
@@ -81,7 +81,11 @@ public class Farming : MonoBehaviour
                 {
                     Selector(selectable.potatoObj);
 
-                    potatoType = hit.collider.gameObject.name;
+                    if (hit.collider.gameObject.name == "Potato 0")
+                        potatoType = 0;                    
+                    
+                    if (hit.collider.gameObject.name == "Potato 1")
+                        potatoType = 1;
 
                     StartCoroutine(wait());
                 }
@@ -121,7 +125,7 @@ public class Farming : MonoBehaviour
                             Selector(selectable.none);
 
                             soil.GetComponent<soil>().plantable = false;
-                            soil.GetComponent<soil>().plantPot(potatoType);
+                            soil.GetComponent<soil>().plantPot();
                         }
                     }
 
@@ -175,12 +179,7 @@ public class Farming : MonoBehaviour
     {
         yield /= 10.0f;
         harvest = (int)Mathf.Round(yield);
-
-        foreach (GameObject g in potatos)
-        {
-            if(g.name == potatoType)
-                g.GetComponent<potato>().addStock(harvest);
-        }
+        potatos[potatoType].GetComponent<potato>().addStock(harvest);
     }
 
     private void updateVars()
@@ -207,6 +206,8 @@ public class Farming : MonoBehaviour
         spadeMesh = spade.GetComponent<MeshRenderer>();
         invMesh = inventory.GetComponent<MeshRenderer>();
 
+        getScripts();
+
         loadStock();
     }
 
@@ -214,7 +215,7 @@ public class Farming : MonoBehaviour
     {
         PlayerData data = SaveSystem.LoadPlayer();
 
-        List<int> values = data.totalPotatos;
+        int[] values = data.totalPotatos;
 
         int i = 0;
 
@@ -223,15 +224,15 @@ public class Farming : MonoBehaviour
             p.GetComponent<potato>().setStock(values[i]);
             i++;
         }
-    }   
-    
-    private void saveStock()
+    }
+
+     void getScripts()
     {
-        int i = 0;
-        foreach (GameObject g in potatos)
+        int j = 1;
+
+        for(int i =0; i < j; i++)
         {
-            potatoStocks[i] = g.GetComponent<potato>().getStock();
-            i++;
+            potatoStocks[i] = potatos[i].GetComponent<potato>().getStock();
         }
     }
 
@@ -248,8 +249,9 @@ public class Farming : MonoBehaviour
 
         updateVars();
 
-        saveStock();
+        getScripts();
 
         SaveSystem.SavePlayer(potatoStocks, soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
     }
 }
+ 

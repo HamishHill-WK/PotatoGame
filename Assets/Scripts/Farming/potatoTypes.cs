@@ -18,7 +18,7 @@ public class potatoTypes : MonoBehaviour
     {
         fileNames = nameFile.text.Split('\n');
 
-        for (int j = 0; j < 5; j++)
+        for (int j = 0; j < 6; j++)
         {
             Debug.Log("loop");
             switch (j)      //BM
@@ -48,8 +48,9 @@ public class potatoTypes : MonoBehaviour
                     break;
             }
 
+            potatoes[j] = Instantiate(potatoPrefab, new Vector3(0,0,0), Quaternion.identity);
             potatoes[j].transform.SetParent(transform);
-            potatoes[j] = Instantiate(potatoPrefab, assetLocation, Quaternion.identity);
+            potatoes[j].transform.position = assetLocation;
         }
 
         int i = 0;

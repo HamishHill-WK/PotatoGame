@@ -13,7 +13,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
     private GameObject gameController;
 
-    private Text currentRecipe, currentGuide;
+    private Text currentRecipe, currentMinigame, currentGuide;
 
     //Prefabs 
 
@@ -55,6 +55,7 @@ public class MiniGameSprite_script : MonoBehaviour
         recipeSel = gameController.GetComponent<RecipeBook_script>().recipeSelection;       //Get the selected recipe
 
         currentRecipe = GameObject.Find("Current Recipe Text - Text").GetComponent<Text>();
+        currentMinigame = GameObject.Find("Current Recipe Minigame - Text").GetComponent<Text>();
         currentGuide = GameObject.Find("Current Recipe Guide - Text").GetComponent<Text>();
 
         SwitchMiniGame();       //To start the minigames
@@ -268,6 +269,7 @@ public class MiniGameSprite_script : MonoBehaviour
     void RecipeComplete()
     {
         currentRecipe.text = "";
+        currentMinigame.text = "";
         currentGuide.text = "";
 
         gameController.GetComponent<RecipeBook_script>().inMiniGame = false;
@@ -685,6 +687,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
+        currentMinigame.text = "Peel";
         currentGuide.text = "Swipe Up";
     }
 
@@ -754,7 +757,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
         // Above Testing  
 
-
+        currentMinigame.text = "Boil";
     }
 
     void BoilMiniGameUpdate()
@@ -823,6 +826,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
         AddMinigameGameObject = Instantiate(AddMinigamePrefab, new Vector3(1.5f, 2.0f, -3.1f), Quaternion.identity);
 
+        currentMinigame.text = "Add";
         currentGuide.text = "Swipe Left";
     }
 
@@ -866,6 +870,8 @@ public class MiniGameSprite_script : MonoBehaviour
         referencedSprites = recipe1Sprites;
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
+
+        currentMinigame.text = "Drain";
     }
 
     void DrainMiniGameUpdate()
@@ -965,7 +971,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
     IEnumerator RoastWait()
     {
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(3);
         noOfRoast++;
     }
 
@@ -974,6 +980,8 @@ public class MiniGameSprite_script : MonoBehaviour
         referencedSprites = recipe1Sprites;
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
+
+        currentMinigame.text = "Roast";
     }
 
     void RoastMiniGameUpdate()
@@ -1038,6 +1046,8 @@ public class MiniGameSprite_script : MonoBehaviour
         referencedSprites = recipe1Sprites;
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
+
+        currentMinigame.text = "Slice";
         currentGuide.text = "Swipe Down";
     }
 
@@ -1111,7 +1121,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void StirMiniGameStart()
     {
-
+        currentMinigame.text = "Stir";
     }
 
     void StirMiniGameUpdate()
@@ -1224,6 +1234,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
+        currentMinigame.text = "Mash";
         currentGuide.text = "Tap";
     }
 

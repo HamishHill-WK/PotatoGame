@@ -40,7 +40,7 @@ public class RecipeBook_script : MonoBehaviour
     public bool inMiniGame = false;
     private int recipeNumberSel;
 
-    public GameObject currentRecipe, currentGuide;
+    public GameObject currentRecipe, currentMinigame, currentGuide;
 
 
     // Start is called before the first frame update
@@ -255,6 +255,9 @@ public class RecipeBook_script : MonoBehaviour
 
         if (currentRecipe.activeInHierarchy == false)
             currentRecipe.SetActive(true);
+
+        if (currentMinigame.activeInHierarchy == false)
+            currentMinigame.SetActive(true);
 
         if (currentGuide.activeInHierarchy == false)
             currentGuide.SetActive(true);

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerData
 {
     //Code Written by Blair McCartan
-    //extended by Hamish Hill to include soil +time data
+    //extended by Hamish Hill to include soil + time data
     
     public int totalPotatos;
     public float currentYield;

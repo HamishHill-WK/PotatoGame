@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Farming : MonoBehaviour
 {
-    private GameObject potato;
+    public GameObject[] potatos;
     private GameObject spade;
     private GameObject soil;
     private GameObject sphere;
@@ -14,10 +14,16 @@ public class Farming : MonoBehaviour
     private GameObject invPanel;
     private GameObject timer;
 
+    private int[] potatoStocks = { 0, 0, 0 };
+
+    public int[] stocks;
+
     private bool plantable;
     private bool planted;
 
-    enum selectable { none = 0, potato, spade, inventory, water };
+    public string potatoType = "none";
+    
+    enum selectable { none = 0, potatoObj, spade, inventory, water };
     selectable currentSelect = selectable.none;
 
     private MeshRenderer sphereMesh;
@@ -71,9 +77,11 @@ public class Farming : MonoBehaviour
                     }
                 }
 
-                if (hit.collider.gameObject == potato)
+                if (hit.collider.gameObject.tag == "Potato")
                 {
-                    Selector(selectable.potato);
+                    Selector(selectable.potatoObj);
+
+                    potatoType = hit.collider.gameObject.name;
 
                     StartCoroutine(wait());
                 }
@@ -106,14 +114,14 @@ public class Farming : MonoBehaviour
                         }
                     }
 
-                    if (currentSelect == selectable.potato)
+                    if (currentSelect == selectable.potatoObj)
                     {
                         if (plantable)
                         {
                             Selector(selectable.none);
 
                             soil.GetComponent<soil>().plantable = false;
-                            soil.GetComponent<soil>().plantPot();
+                            soil.GetComponent<soil>().plantPot(potatoType);
                         }
                     }
 
@@ -137,7 +145,7 @@ public class Farming : MonoBehaviour
                 invMesh.material = mat2;
                 break;
 
-            case selectable.potato:
+            case selectable.potatoObj:
                 sphereMesh.material = mat2;
                 spadeMesh.material = mat2;
                 invMesh.material = mat2;
@@ -167,12 +175,12 @@ public class Farming : MonoBehaviour
     {
         yield /= 10.0f;
         harvest = (int)Mathf.Round(yield);
-        potato.GetComponent<potato>().addStock(harvest);
 
-        soil.GetComponent<soil>().planted = false;
-
-        if (soil.GetComponent<soil>().dead)
-            soil.GetComponent<soil>().dead = false;
+        foreach (GameObject g in potatos)
+        {
+            if(g.name == potatoType)
+                g.GetComponent<potato>().addStock(harvest);
+        }
     }
 
     private void updateVars()
@@ -183,7 +191,7 @@ public class Farming : MonoBehaviour
 
     private void startLoad()
     {
-        potato = GameObject.Find("Potato");
+        potatos = GameObject.FindGameObjectsWithTag("Potato");
         spade = GameObject.Find("Spade");
         sphere = GameObject.Find("Watering");
         soil = GameObject.Find("Soil");
@@ -198,8 +206,34 @@ public class Farming : MonoBehaviour
         sphereMesh = sphere.GetComponent<MeshRenderer>();
         spadeMesh = spade.GetComponent<MeshRenderer>();
         invMesh = inventory.GetComponent<MeshRenderer>();
+
+        loadStock();
     }
 
+    private void loadStock()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        List<int> values = data.totalPotatos;
+
+        int i = 0;
+
+        foreach (GameObject p in potatos)
+        {
+            p.GetComponent<potato>().setStock(values[i]);
+            i++;
+        }
+    }   
+    
+    private void saveStock()
+    {
+        int i = 0;
+        foreach (GameObject g in potatos)
+        {
+            potatoStocks[i] = g.GetComponent<potato>().getStock();
+            i++;
+        }
+    }
 
     void Start()
     {
@@ -214,7 +248,8 @@ public class Farming : MonoBehaviour
 
         updateVars();
 
-        SaveSystem.SavePlayer(potato.GetComponent<potato>(), soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
+        saveStock();
+
+        SaveSystem.SavePlayer(potatoStocks, soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
     }
 }
- 

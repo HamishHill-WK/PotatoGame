@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Farming : MonoBehaviour
 {
-    public GameObject[] potatos;
+    public GameObject[] potatos = { null, null, null, null, null, null };
     private GameObject spade;
     private GameObject soil;
     private GameObject sphere;
@@ -14,7 +14,7 @@ public class Farming : MonoBehaviour
     private GameObject invPanel;
     private GameObject timer;
 
-    private int[] potatoStocks = { 0, 0, 0 };
+    private int[] potatoStocks = { 0, 0, 0, 0, 0, 0 };
 
     public int[] stocks;
 
@@ -173,14 +173,21 @@ public class Farming : MonoBehaviour
 
     private void Harvest(float yield)
     {
+        invPanel.SetActive(true);
         yield /= 10.0f;
         harvest = (int)Mathf.Round(yield);
 
         foreach (GameObject g in potatos)
         {
-            if(g.name == potatoType)
+            Debug.Log("bloops");
+            if (g.name == potatoType)
+            {
+                Debug.Log("loops");
                 g.GetComponent<potato>().addStock(harvest);
+            }
         }
+
+        StartCoroutine(wait());
     }
 
     private void updateVars()
@@ -191,7 +198,6 @@ public class Farming : MonoBehaviour
 
     private void startLoad()
     {
-        potatos = GameObject.FindGameObjectsWithTag("Potato");
         spade = GameObject.Find("Spade");
         sphere = GameObject.Find("Watering");
         soil = GameObject.Find("Soil");
@@ -199,7 +205,9 @@ public class Farming : MonoBehaviour
         invPanel = GameObject.Find("invPanel");
         timer = GameObject.Find("Timer");
 
-        invPanel.SetActive(false);
+        potatos = GameObject.FindGameObjectsWithTag("Potato");
+
+        StartCoroutine(wait());
 
         camera1 = Camera.main;
 
@@ -248,7 +256,8 @@ public class Farming : MonoBehaviour
 
         updateVars();
 
-        saveStock();
+        if(invPanel.activeInHierarchy)
+            saveStock();
 
         SaveSystem.SavePlayer(potatoStocks, soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
     }

@@ -247,17 +247,21 @@ public class soil : MonoBehaviour
 
             updateMoistureMod();
 
-            updateYield();
+            if(planted)
+                updateYield();
         }
 
         if(currentMonth != lastMonth)
         {
             lastMonth = currentMonth;
 
-            monthsAfterPlant++;
+            if (planted)
+            {
+                monthsAfterPlant++;
 
-            moistureLevels.Push(currentMoistureLevel);
-            updateMaxYield();
+                moistureLevels.Push(currentMoistureLevel);
+                updateMaxYield();
+            }
         }
 
         if (plantable)

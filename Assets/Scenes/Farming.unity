@@ -927,7 +927,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f209b0bcf202247a6449482b104ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potatos: []
+  potatos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   stocks: 
   potatoType: 0
   mat1: {fileID: 2100000, guid: 76addb2f98db8634c986531549160bb5, type: 2}
@@ -1829,7 +1835,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 248.4, y: 66.40001}
+  m_AnchoredPosition: {x: 248.4, y: 69}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1295032266

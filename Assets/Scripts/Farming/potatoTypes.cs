@@ -22,7 +22,6 @@ public class potatoTypes : MonoBehaviour
 
         for (int j = 0; j < 6; j++)
         {
-            Debug.Log("loop");
             switch (j)      //BM
             {
                 case 0:

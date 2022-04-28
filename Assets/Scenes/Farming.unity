@@ -874,7 +874,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -934,7 +934,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  stocks: 
+  potatoStocks: 000000000000000000000000000000000000000000000000
+  values: 000000000000000000000000000000000000000000000000
   potatoType: 0
   mat1: {fileID: 2100000, guid: 76addb2f98db8634c986531549160bb5, type: 2}
   mat2: {fileID: 2100000, guid: b48f2c4cd30312a41b63f29f925c07d1, type: 2}
@@ -1490,7 +1491,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 97ee6a85f834cbc4cb50fd545bbb311d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.09
   m_Pitch: 1
   Loop: 1
   Mute: 0

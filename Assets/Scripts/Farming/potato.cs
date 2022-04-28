@@ -34,6 +34,8 @@ public class potato : MonoBehaviour
     {
         stock = add;
         txt.text = stock.ToString();
+        Debug.Log(" hello" + name + stock.ToString());
+        Debug.Log("hello 1");
     }
 
     public int getStock()

@@ -42,7 +42,9 @@ public class MiniGameSprite_script : MonoBehaviour
     int noOfRoast = 1;
     int noOfStir = 1;
 
-
+    // Variables for Changing Background Sprite // CM
+    public GameObject ChangeSprite;
+    private ChangeCounterSprite CCS;
 
     //////////// End of varaibles declaration ////////////
 
@@ -51,6 +53,10 @@ public class MiniGameSprite_script : MonoBehaviour
     void Start()
     {
         gameController = GameObject.Find("Game Controller");
+
+        // CM
+        ChangeSprite = GameObject.Find("Background");
+        CCS = ChangeSprite.GetComponent<ChangeCounterSprite>();
 
         recipeSel = gameController.GetComponent<RecipeBook_script>().recipeSelection;       //Get the selected recipe
 
@@ -533,6 +539,11 @@ public class MiniGameSprite_script : MonoBehaviour
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
+        // Change Backdrop // CM
+        CCS.basicOn = true;
+        CCS.ovenOn = false;
+        CCS.sinkOn = false;
+
         // Above Testing  
     }
 
@@ -689,6 +700,11 @@ public class MiniGameSprite_script : MonoBehaviour
 
         currentMinigame.text = "Peel";
         currentGuide.text = "Swipe Up";
+
+        // Change Backdrop // CM
+        CCS.basicOn = true;
+        CCS.ovenOn = false;
+        CCS.sinkOn = false;
     }
 
     void PeelMiniGameUpdate()
@@ -758,6 +774,11 @@ public class MiniGameSprite_script : MonoBehaviour
         // Above Testing  
 
         currentMinigame.text = "Boil";
+
+        // Change Backdrop // CM
+        CCS.basicOn = false;
+        CCS.ovenOn = true;
+        CCS.sinkOn = false;
     }
 
     void BoilMiniGameUpdate()
@@ -828,6 +849,11 @@ public class MiniGameSprite_script : MonoBehaviour
 
         currentMinigame.text = "Add";
         currentGuide.text = "Swipe Left";
+
+        // Change Backdrop // CM
+        CCS.basicOn = false;
+        CCS.ovenOn = true;
+        CCS.sinkOn = false;
     }
 
     void AddMiniGameUpdate()
@@ -872,6 +898,11 @@ public class MiniGameSprite_script : MonoBehaviour
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
         currentMinigame.text = "Drain";
+
+        // Change Backdrop // CM
+        CCS.basicOn = false;
+        CCS.ovenOn = false;
+        CCS.sinkOn = true;
     }
 
     void DrainMiniGameUpdate()
@@ -982,6 +1013,11 @@ public class MiniGameSprite_script : MonoBehaviour
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
         currentMinigame.text = "Roast";
+
+        // Change Backdrop // CM
+        CCS.basicOn = false;
+        CCS.ovenOn = true;
+        CCS.sinkOn = false;
     }
 
     void RoastMiniGameUpdate()
@@ -1049,6 +1085,11 @@ public class MiniGameSprite_script : MonoBehaviour
 
         currentMinigame.text = "Slice";
         currentGuide.text = "Swipe Down";
+
+        // Change Backdrop // CM
+        CCS.basicOn = true;
+        CCS.ovenOn = false;
+        CCS.sinkOn = false;
     }
 
     void SliceMiniGameUpdate()
@@ -1122,6 +1163,11 @@ public class MiniGameSprite_script : MonoBehaviour
     void StirMiniGameStart()
     {
         currentMinigame.text = "Stir";
+
+        // Change Backdrop // CM
+        CCS.basicOn = false;
+        CCS.ovenOn = true;
+        CCS.sinkOn = false;
     }
 
     void StirMiniGameUpdate()
@@ -1236,6 +1282,11 @@ public class MiniGameSprite_script : MonoBehaviour
 
         currentMinigame.text = "Mash";
         currentGuide.text = "Tap";
+
+        // Change Backdrop // CM
+        CCS.basicOn = false;
+        CCS.ovenOn = true;
+        CCS.sinkOn = false;
     }
 
     void MashMiniGameUpdate()

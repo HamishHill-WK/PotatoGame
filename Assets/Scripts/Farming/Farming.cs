@@ -106,6 +106,7 @@ public class Farming : MonoBehaviour
                         }
                     }
 
+
                     if (currentSelect == selectable.potato)
                     {
                         if (plantable)

@@ -170,8 +170,6 @@ public class RecipeBook_script : MonoBehaviour
 
         textSetup();
 
-        Debug.Log("Not lorem ipsum code");
-
         //vb filling in the data for wedges
         recipeIng.text = "Ingedients: 3 Baking Potatoes, olive oil, salt";
         
@@ -269,7 +267,6 @@ public class RecipeBook_script : MonoBehaviour
 
         recipeSelection = 1;
 
-        //Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
         Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
     }
 
@@ -279,8 +276,6 @@ public class RecipeBook_script : MonoBehaviour
 
         recipeSelection = 2;
 
-
-        //Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -0.1f), Quaternion.Euler(45.0f, 0.0f, 0.0f));
         Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
     }
 

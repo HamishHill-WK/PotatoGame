@@ -527,13 +527,9 @@ public class MiniGameSprite_script : MonoBehaviour
     //Minigame Methods
     void PotatoCuttingMiniGameStart()
     {
-        //Debug.Log("Potato Cutting");
-
         referencedSprites = recipe1Sprites;
 
-        this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
-
-        // Above Testing  
+        this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];  
     }
 
     public void cuttingTouchSwipeMethod()
@@ -751,11 +747,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void BoilMiniGameStart()
     {
-        //Debug.Log("Potato Boiling");
-
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
-
-        // Above Testing  
 
         currentMinigame.text = "Boil";
     }
@@ -852,8 +844,6 @@ public class MiniGameSprite_script : MonoBehaviour
             //swipe left
             if (currentSwipe.x < 0 & (currentSwipe.y > -0.5f || currentSwipe.y < 0.5f))
             {
-                Debug.Log("Salted Potato");
-
                 Destroy(AddMinigameGameObject.gameObject);
 
                 this.transform.position = new Vector3(0.20f, 2.0f, -3.1f); 
@@ -893,7 +883,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -904,7 +893,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -915,7 +903,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -926,7 +913,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -937,7 +923,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -948,7 +933,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -1003,7 +987,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsVertical() == 1)
                 {
-                    Debug.Log("Up Swipe Detected");
                     noOfRoast++;
                 }
                 break;
@@ -1022,7 +1005,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsVertical() == 2)
                 {
-                    Debug.Log("Down Swipe Detected");
                     noOfRoast++;
                 }
                 break;
@@ -1296,12 +1278,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
         //Do something else to switch the minigame 
     }
-
-    //void RoastMiniGameUpdate()
-    //{
-    //    "You bi but you still alone? " +
-    //    "Damn. You really putting the L in LGBTQ"
-    //}
 
 
     /////////////////End of script written by Blair McCartan

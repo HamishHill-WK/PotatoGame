@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 //this script was written by Hamish Hill GitHub: @HamishHill-WK
-//this script assigns names to potato objects from the "potatoNames.txt" file
+//this script instantiates potato objects in the player's inventory and assigns names to potato objects from the "potatoNames.txt" file
 
 public class potatoTypes : MonoBehaviour
 {

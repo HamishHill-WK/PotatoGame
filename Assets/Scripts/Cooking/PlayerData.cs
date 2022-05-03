@@ -27,7 +27,6 @@ public class PlayerData
             int i = 0;//hh
             foreach (int p in playerPotatos)//hh
             {
-                //Debug.Log("loop");
                 totalPotatos[i] = playerPotatos[i]; //hh
                 i++;//hh
             }

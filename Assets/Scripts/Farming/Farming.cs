@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //this script was written by Hamish Hill Github: @HamishHill-WK
-
+//this script handles player input and assigns stock to potatoes in inventory from data contained in the binary file
 public class Farming : MonoBehaviour
 {
     public GameObject[] potatos;// = { null, null, null, null, null, null };
@@ -108,6 +108,8 @@ public class Farming : MonoBehaviour
                             Selector(selectable.none);
 
                             Harvest(soil.GetComponent<soil>().yield);
+
+                            soil.GetComponent<soil>().updateMesh(global::soil.growthStage.noPlant);
 
                             soil.GetComponent<soil>().planted = false;
 
@@ -232,9 +234,7 @@ public class Farming : MonoBehaviour
 
         foreach(GameObject p in potatos)
         {
-            p.GetComponent<potato>().setStock(values[i]);
-            Debug.Log(p.name);
-            
+            p.GetComponent<potato>().setStock(values[i]);            
             i++;
         }
     }   
@@ -244,7 +244,6 @@ public class Farming : MonoBehaviour
         int i = 0;
         foreach (GameObject g in potatos)
         {
-           // Debug.Log("bloop");
             potatoStocks[i] = g.GetComponent<potato>().getStock();
             i++;
         }
@@ -263,15 +262,10 @@ public class Farming : MonoBehaviour
 
         updateVars();
 
-       // if(invPanel.activeInHierarchy)
-        //    saveStock();
-
-        //SaveSystem.SavePlayer(potatoStocks, soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
     }
 
     private void OnApplicationQuit()
     {
-        Debug.Log("closing");
         invPanel.SetActive(true);
         saveStock();
         SaveSystem.SavePlayer(potatoStocks, soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());

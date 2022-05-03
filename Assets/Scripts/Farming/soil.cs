@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//this script was written by Hamish Hill GitHub: @HamishHill-WK
+//this script tracks the growth and moisture level of the soil object when planted 
+//this script updates the soil mesh according to the plant's stage of growth 
+
 public class soil : MonoBehaviour
 {
     public bool plantable = false;
@@ -35,8 +39,9 @@ public class soil : MonoBehaviour
     public Mesh sproutMesh;
     public Mesh grownMesh;
     public Mesh deadMesh;
+    public Mesh blankMesh;
 
-    enum growthStage { initial = 0, sprout, grown, dead };    
+    public enum growthStage { initial = 0, sprout, grown, dead, noPlant };    
     growthStage currentGrowthStage = growthStage.initial;
 
     enum moistureLevel { low = 0, medium, high };
@@ -129,12 +134,12 @@ public class soil : MonoBehaviour
         }
     }
 
-    void updateMesh(growthStage stage)
+    public void updateMesh(growthStage stage)
     {
         currentGrowthStage = stage;
 
         switch (currentGrowthStage)
-        {
+        {             
             case growthStage.initial:
                 meshFilter.mesh = initialMesh;
                 break;
@@ -149,6 +154,10 @@ public class soil : MonoBehaviour
 
             case growthStage.dead:
                 meshFilter.mesh = deadMesh;
+                break;            
+                    
+            case growthStage.noPlant:
+                meshFilter.mesh = blankMesh;
                 break;
         }
     }
@@ -171,21 +180,26 @@ public class soil : MonoBehaviour
                 highCount++;
         }
 
-        if (currentGrowthStage == growthStage.initial)
+        switch (currentGrowthStage)
         {
-            maxYield += (1.5f * lowCount) + (2.0f * medCount) + (2.5f * highCount);
-        }        
-        
-        if (currentGrowthStage == growthStage.sprout)
-        {
-            maxYield += (1.0f * lowCount) + (1.5f * medCount) + (2.0f * highCount);
-        }        
-        
-        if (currentGrowthStage == growthStage.grown)
-        {
-            if(maxYield < 100.0f)
-                maxYield += (0.5f * lowCount) + (1.0f * medCount) + (1.5f * highCount);
-        }
+            case growthStage.initial:
+                maxYield += (1.5f * lowCount) + (2.0f * medCount) + (2.5f * highCount);
+            break;
+
+            case growthStage.sprout:
+                maxYield += (1.0f * lowCount) + (1.5f * medCount) + (2.0f * highCount);
+            break;
+
+            case growthStage.grown:
+                if (maxYield < 100.0f)
+                    maxYield += (0.5f * lowCount) + (1.0f * medCount) + (1.5f * highCount);
+            break;
+
+            case growthStage.dead:
+                yield = 0;
+                maxYield = 0;
+            break;
+        }    
 
         if (maxYield > 100.0f)
             maxYield = 100.0f;
@@ -193,7 +207,8 @@ public class soil : MonoBehaviour
 
     public void addMoisture()
     {
-        moisture += 10.0f;
+        if(moisture < 100.0f)
+            moisture += 10.0f;
     }
 
     public void plantPot(string type)
@@ -210,8 +225,6 @@ public class soil : MonoBehaviour
 
     void Start()
     {
-       // SaveSystem.clearBinaryFile();
-
 
         PlayerData data = SaveSystem.LoadPlayer();
 
@@ -247,8 +260,11 @@ public class soil : MonoBehaviour
 
             updateMoistureMod();
 
-            if(planted)
+            if(planted && currentGrowthStage != growthStage.dead)
                 updateYield();
+
+            if (currentGrowthStage == growthStage.dead)
+                updateMaxYield();
         }
 
         if(currentMonth != lastMonth)

@@ -8,18 +8,25 @@ public class soil : MonoBehaviour
     public bool planted = false;
 
     public int monthPlanted = 0;
-    public float seasonMod = 0.0f;
+    private int monthsAfterPlant = 0;
+    private float seasonMod = 0.0f;
 
     public float moisture = 100.0f;
-    public float moistureMod = 1.0f;
+    private float moistureMod = 1.0f;
 
     private int lastDay = 0;
     private int currentDay = 0;
 
+    private int lastMonth = 0;
+    private int currentMonth = 0;
+
     public float yield = 0.0f;
-    public float yieldFactor = 0.0f;
+    private float yieldFactor = 0.0f;
+    public float maxYield = 50.0f;
 
     private float growthFactor = 0.01f;
+
+    private string potatoTypeName;
 
     private GameObject timer;
 
@@ -27,9 +34,15 @@ public class soil : MonoBehaviour
     public Mesh initialMesh;
     public Mesh sproutMesh;
     public Mesh grownMesh;
+    public Mesh deadMesh;
 
     enum growthStage { initial = 0, sprout, grown, dead };    
     growthStage currentGrowthStage = growthStage.initial;
+
+    enum moistureLevel { low = 0, medium, high };
+    moistureLevel currentMoistureLevel = moistureLevel.low;
+
+    Stack<moistureLevel> moistureLevels;
 
     void updateMoisture()
     {
@@ -41,12 +54,26 @@ public class soil : MonoBehaviour
         if (moisture > 100.0f)
             random = Random.Range(1.0f, 2.5f);
 
-        if(moisture > 30.0f && moisture <= 100.0f)
-            random = Random.Range(0.0f, 0.4f);
-        
-        if(moisture <= 30.0f)
-            random = Random.Range(0.0f, 0.05f);
+        if (moisture > 30.0f && moisture <= 100.0f)
+        {
+            random = Random.Range(0.1f, 0.8f);
 
+            if(moisture <= 65.0f)
+            {
+                currentMoistureLevel = moistureLevel.medium;
+            }            
+            
+            if(moisture > 65.0f)
+            {
+                currentMoistureLevel = moistureLevel.high;
+            }
+        }
+
+        if (moisture <= 30.0f)
+        {
+            random = Random.Range(0.0f, 0.05f);
+            currentMoistureLevel = moistureLevel.low;
+        }
         moisture -= random;        
     }
 
@@ -58,8 +85,11 @@ public class soil : MonoBehaviour
 
     void updateSeasonMod()
     {
-        if (monthPlanted == 3)
+        if (monthPlanted >= 3 && monthPlanted <= 5)
+        {
+            maxYield += 5.0f;
             seasonMod = 0.1f;
+        }
 
         else
             seasonMod = 0.05f;
@@ -67,35 +97,35 @@ public class soil : MonoBehaviour
 
     void updateYield()
     {
-        if (yield < 100.0f && planted)
+        if (yield < maxYield && planted)
         {
             yield += (growthFactor + seasonMod + moistureMod);
 
             if (yield > (yieldFactor + 5.0f))
-            {
-                //   Debug.Log("yield updated");
                 yieldFactor = Mathf.Round(yield);
-               // SaveSystem.SavePlayer(null, this, null);
-            }
+            
         }
 
-
-
-        if (yield <= 10)
+        if (monthsAfterPlant < 1)
         {
             updateMesh(growthStage.initial);
             return;
         }
 
-        if (yield > 10 && yield <= 50)
+        if (monthsAfterPlant == 1)
         {
             updateMesh(growthStage.sprout);
             return;
         }
 
-        if(yield > 50)
+        if(monthsAfterPlant > 1 && monthsAfterPlant < 6)
         {
             updateMesh(growthStage.grown);
+        }        
+        
+        if(monthsAfterPlant >= 6 )
+        {
+            updateMesh(growthStage.dead);
         }
     }
 
@@ -106,73 +136,108 @@ public class soil : MonoBehaviour
         switch (currentGrowthStage)
         {
             case growthStage.initial:
-                // code block
-                // meshFilter.sharedMesh = Resources.Load<Mesh>("teapotOBJ");
                 meshFilter.mesh = initialMesh;
                 break;
 
             case growthStage.sprout:
-                // code block
-                // meshFilter.sharedMesh = Resources.Load<Mesh>("Sphere");
                 meshFilter.mesh = sproutMesh;
                 break;
+
             case growthStage.grown:
-                // code block
-                //meshFilter.sharedMesh = Resources.Load<Mesh>("Cube");
                 meshFilter.mesh = grownMesh;
                 break;
-            case growthStage.dead:
-                // code block
-                //meshFilter.sharedMesh = Resources.Load<Mesh>("body");
 
+            case growthStage.dead:
+                meshFilter.mesh = deadMesh;
                 break;
         }
-
-        //this.GetComponent<MeshFilter>().sharedMesh = meshFilter.sharedMesh;
     }
 
+    void updateMaxYield()
+    {
+        float lowCount = 0.0f;
+        float medCount = 0.0f;
+        float highCount = 0.0f;
+
+        foreach (moistureLevel ML in moistureLevels)
+        {
+            if (ML == moistureLevel.low)
+                lowCount++;
+
+            if (ML == moistureLevel.medium)
+                medCount++;
+
+            if (ML == moistureLevel.high)
+                highCount++;
+        }
+
+        if (currentGrowthStage == growthStage.initial)
+        {
+            maxYield += (1.5f * lowCount) + (2.0f * medCount) + (2.5f * highCount);
+        }        
+        
+        if (currentGrowthStage == growthStage.sprout)
+        {
+            maxYield += (1.0f * lowCount) + (1.5f * medCount) + (2.0f * highCount);
+        }        
+        
+        if (currentGrowthStage == growthStage.grown)
+        {
+            if(maxYield < 100.0f)
+                maxYield += (0.5f * lowCount) + (1.0f * medCount) + (1.5f * highCount);
+        }
+
+        if (maxYield > 100.0f)
+            maxYield = 100.0f;
+    }
 
     public void addMoisture()
     {
         moisture += 10.0f;
     }
 
-    public void plantPot()
+    public void plantPot(string type)
     {
+        potatoTypeName = type;
         planted = true;
         monthPlanted = timer.GetComponent<timeTracking>().getCurrentTime().monthNum;
+        monthsAfterPlant = 0;
         yieldFactor = 0;
         updateSeasonMod();
-
-        //SaveSystem.SavePlayer(null, this, null);
+        moistureLevels.Clear();
+        moistureLevels.Push(currentMoistureLevel);
     }
 
     void Start()
     {
+       // SaveSystem.clearBinaryFile();
+
+
         PlayerData data = SaveSystem.LoadPlayer();
 
         lastDay = data.day;
-
         currentDay = lastDay;
 
+        lastMonth = data.currentMonth;
+        currentMonth = lastMonth;
         monthPlanted = data.monthPlanted;
 
         planted = data.planted;
 
         yield = data.currentYield;
-
         yieldFactor = Mathf.Round(yield);
 
         timer = GameObject.Find("Timer");
 
         meshFilter = this.GetComponent<MeshFilter>();
-       // meshFilter.sharedMesh = Resources.Load<Mesh>("teapotOBJ");
+
+        moistureLevels = new Stack<moistureLevel>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentDay = timer.GetComponent<timeTracking>().getCurrentTime().day;
+        currentMonth = timer.GetComponent<timeTracking>().getCurrentTime().monthNum;
 
         if (currentDay != lastDay)
         {
@@ -182,7 +247,21 @@ public class soil : MonoBehaviour
 
             updateMoistureMod();
 
-            updateYield();
+            if(planted)
+                updateYield();
+        }
+
+        if(currentMonth != lastMonth)
+        {
+            lastMonth = currentMonth;
+
+            if (planted)
+            {
+                monthsAfterPlant++;
+
+                moistureLevels.Push(currentMoistureLevel);
+                updateMaxYield();
+            }
         }
 
         if (plantable)

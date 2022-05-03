@@ -44,8 +44,9 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("Farming");
     }
-        
-    public void openCooking() //open cooking scene -BM
+
+
+    public void openCooking() //open cooking scene -hs
     {
         SceneManager.LoadScene("Cooking");
     }
@@ -70,28 +71,24 @@ public class Menu : MonoBehaviour
         switch (current)
         {
             case States.menu:
-                // code block
                 profilePanel.SetActive(false);
                 menuPanel.SetActive(true);
                 optionsPanel.SetActive(false);
                 gamePanel.SetActive(false);
                 break;
             case States.profile:
-                // code block
                 profilePanel.SetActive(true);
                 menuPanel.SetActive(false);
                 optionsPanel.SetActive(false);
                 gamePanel.SetActive(false);
                 break;
             case States.options:
-                // code block
                 profilePanel.SetActive(false);
                 menuPanel.SetActive(false);
                 optionsPanel.SetActive(true);
                 gamePanel.SetActive(false);
                 break;            
             case States.closed:
-                // code block
                 profilePanel.SetActive(false);
                 menuPanel.SetActive(false);
                 optionsPanel.SetActive(false);

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Farming : MonoBehaviour
 {
-    private GameObject potato;
+    public GameObject[] potatos = { null, null, null, null, null, null };
     private GameObject spade;
     private GameObject soil;
     private GameObject sphere;
@@ -14,10 +14,16 @@ public class Farming : MonoBehaviour
     private GameObject invPanel;
     private GameObject timer;
 
+    private int[] potatoStocks = { 0, 0, 0, 0, 0, 0 };
+
+    public int[] stocks;
+
     private bool plantable;
     private bool planted;
 
-    enum selectable { none = 0, potato, spade, inventory, water };
+    public string potatoType = "none";
+    
+    enum selectable { none = 0, potatoObj, spade, inventory, water };
     selectable currentSelect = selectable.none;
 
     private MeshRenderer sphereMesh;
@@ -71,11 +77,11 @@ public class Farming : MonoBehaviour
                     }
                 }
 
-                if (hit.collider.gameObject == potato)
+                if (hit.collider.gameObject.tag == "Potato")
                 {
-                    Selector(selectable.potato);
+                    Selector(selectable.potatoObj);
 
-                    Debug.Log("potato ");
+                    potatoType = hit.collider.gameObject.name;
 
                     StartCoroutine(wait());
                 }
@@ -108,14 +114,14 @@ public class Farming : MonoBehaviour
                         }
                     }
 
-                    if (currentSelect == selectable.potato)
+                    if (currentSelect == selectable.potatoObj)
                     {
                         if (plantable)
                         {
                             Selector(selectable.none);
 
                             soil.GetComponent<soil>().plantable = false;
-                            soil.GetComponent<soil>().plantPot();
+                            soil.GetComponent<soil>().plantPot(potatoType);
                         }
                     }
 
@@ -139,7 +145,7 @@ public class Farming : MonoBehaviour
                 invMesh.material = mat2;
                 break;
 
-            case selectable.potato:
+            case selectable.potatoObj:
                 sphereMesh.material = mat2;
                 spadeMesh.material = mat2;
                 invMesh.material = mat2;
@@ -167,9 +173,21 @@ public class Farming : MonoBehaviour
 
     private void Harvest(float yield)
     {
+        invPanel.SetActive(true);
         yield /= 10.0f;
         harvest = (int)Mathf.Round(yield);
-        potato.GetComponent<potato>().addStock(harvest);
+
+        foreach (GameObject g in potatos)
+        {
+            Debug.Log("bloops");
+            if (g.name == potatoType)
+            {
+                Debug.Log("loops");
+                g.GetComponent<potato>().addStock(harvest);
+            }
+        }
+
+        StartCoroutine(wait());
     }
 
     private void updateVars()
@@ -180,7 +198,6 @@ public class Farming : MonoBehaviour
 
     private void startLoad()
     {
-        potato = GameObject.Find("Potato");
         spade = GameObject.Find("Spade");
         sphere = GameObject.Find("Watering");
         soil = GameObject.Find("Soil");
@@ -188,34 +205,60 @@ public class Farming : MonoBehaviour
         invPanel = GameObject.Find("invPanel");
         timer = GameObject.Find("Timer");
 
-        invPanel.SetActive(false);
+        potatos = GameObject.FindGameObjectsWithTag("Potato");
+
+        StartCoroutine(wait());
 
         camera1 = Camera.main;
 
         sphereMesh = sphere.GetComponent<MeshRenderer>();
         spadeMesh = spade.GetComponent<MeshRenderer>();
         invMesh = inventory.GetComponent<MeshRenderer>();
+
+        loadStock();
     }
 
+    private void loadStock()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
 
-    // Start is called before the first frame update
+        List<int> values = data.totalPotatos;
+
+        int i = 0;
+
+        foreach (GameObject p in potatos)
+        {
+            p.GetComponent<potato>().setStock(values[i]);
+            i++;
+        }
+    }   
+    
+    private void saveStock()
+    {
+        int i = 0;
+        foreach (GameObject g in potatos)
+        {
+            potatoStocks[i] = g.GetComponent<potato>().getStock();
+            i++;
+        }
+    }
+
     void Start()
     {
         startLoad();
 
-       // SaveSystem.clearBinaryFile();
-
         updateVars();
     }
 
-    // Update is called once per frame
     void Update()
     {
         userInput();
 
         updateVars();
 
-        SaveSystem.SavePlayer(potato.GetComponent<potato>(), soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
+        if(invPanel.activeInHierarchy)
+            saveStock();
+
+        SaveSystem.SavePlayer(potatoStocks, soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
     }
 }
- 

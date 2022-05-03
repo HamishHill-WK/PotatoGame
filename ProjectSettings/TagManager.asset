@@ -8,6 +8,7 @@ TagManager:
   - Minigames Text
   - Ingredients Text
   - Soil
+  - Potato
   layers:
   - Default
   - TransparentFX

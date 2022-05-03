@@ -26,6 +26,10 @@ public class RecipeBook_script : MonoBehaviour
     private GameObject recipeBookObject;
     private Button recipe1Button;
     private Button recipe2Button;
+    private Button recipe3Button;
+    private Button recipe4Button;
+    private Button recipe5Button;
+    private Button recipe6Button;
 
     private Button proceedButton;
     private Button returnToRecipesButton;
@@ -50,6 +54,10 @@ public class RecipeBook_script : MonoBehaviour
         GameObject tempObject = GameObject.Find("Recipebook Canvas");
         recipe1Button = GameObject.Find("Recipe 1 Button").GetComponent<Button>();
         recipe2Button = GameObject.Find("Recipe 2 Button").GetComponent<Button>();
+        recipe3Button = GameObject.Find("Recipe 3 Button").GetComponent<Button>();
+        recipe4Button = GameObject.Find("Recipe 4 Button").GetComponent<Button>();
+        recipe5Button = GameObject.Find("Recipe 4 Button").GetComponent<Button>();
+        recipe6Button = GameObject.Find("Recipe 4 Button").GetComponent<Button>();
 
 
         if (tempObject != null)
@@ -75,16 +83,22 @@ public class RecipeBook_script : MonoBehaviour
         //Recipe 2 button
         Button rep2Btn = recipe2Button.GetComponent<Button>();
         rep2Btn.onClick.AddListener(showSecondRecipe);
-        
+
         ////Recipe 3 button
-        //Button rep3Btn = recipe3Button.GetComponent<Button>();
-        //rep3Btn.onClick.AddListener(showSecondRecipe);
-        
+        Button rep3Btn = recipe3Button.GetComponent<Button>();
+        rep3Btn.onClick.AddListener(showThirdRecipe);
+
         ////Recipe 4 button
-        //Button rep4Btn = recipe4Button.GetComponent<Button>();
-        //rep4Btn.onClick.AddListener(showSecondRecipe);
+        Button rep4Btn = recipe4Button.GetComponent<Button>();
+        rep4Btn.onClick.AddListener(showFourthRecipe);
 
+        ////Recipe 5 button
+        Button rep5Btn = recipe5Button.GetComponent<Button>();
+        rep5Btn.onClick.AddListener(showThirdRecipe);
 
+        ////Recipe 6 button
+        Button rep6Btn = recipe6Button.GetComponent<Button>();
+        rep6Btn.onClick.AddListener(showFourthRecipe);
 
 
 
@@ -101,20 +115,6 @@ public class RecipeBook_script : MonoBehaviour
 
         recipeBook.enabled = false;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (Input.GetKeyDown("space"))
-        //{
-        //    print("space key was pressed");
-
-        //    //recipeBook.enabled = false;
-
-        //    showFirstRecipe();
-        //}
-    }
-    
 
     void exitRecipeBook()
     {
@@ -217,6 +217,31 @@ public class RecipeBook_script : MonoBehaviour
         recipeMiniGames.text = "Boil the potato 4";
     }
 
+    void showFifthRecipe()
+    {
+        recipeNumberSel = 5;
+
+        textSetup();
+
+        recipeIng.text = "Ingedients: Potato " + test.ToString();
+
+        recipeMethod.text = "Stir the potato 5";
+
+        recipeMiniGames.text = "Boil the potato 5";
+    }
+
+    void showSixthRecipe()
+    {
+        recipeNumberSel = 6;
+
+        textSetup();
+
+        recipeIng.text = "Ingedients: Potato " + test.ToString();
+
+        recipeMethod.text = "Stir the potato 6";
+
+        recipeMiniGames.text = "Boil the potato 6";
+    }
 
 
     void selectRecipeMethod()
@@ -239,6 +264,14 @@ public class RecipeBook_script : MonoBehaviour
 
             case 4:
                 fourthRecipe();
+                break;
+            
+            case 5:
+                fifthRecipe();
+                break;
+
+            case 6:
+                sixthRecipe();
                 break;
         }
     }
@@ -293,6 +326,24 @@ public class RecipeBook_script : MonoBehaviour
         changeRecipeSetUp();
 
         recipeSelection = 4;
+
+        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
+    }
+
+    void fifthRecipe()
+    {
+        changeRecipeSetUp();
+
+        recipeSelection = 5;
+
+        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
+    }
+
+    void sixthRecipe()
+    {
+        changeRecipeSetUp();
+
+        recipeSelection = 6;
 
         Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
     }

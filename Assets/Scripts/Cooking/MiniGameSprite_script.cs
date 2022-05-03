@@ -207,8 +207,8 @@ public class MiniGameSprite_script : MonoBehaviour
                 }
                 break;
 
-            case 4:     // - Dauphioise
-                currentRecipe.text = "Dauphioise";
+            case 4:     // - Potato Salad
+                currentRecipe.text = "Potato Salad";
 
                 switch (onMiniGame)
                 {
@@ -221,15 +221,15 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 3:
-                        AddMiniGameStart();
-                        break;
-
-                    case 4:
                         BoilMiniGameStart();
                         break;
 
+                    case 4:
+                        DrainMiniGameStart();
+                        break;
+
                     case 5:
-                        SliceMiniGameStart();
+                        AddMiniGameStart();
                         break;
 
                     case 6:
@@ -237,7 +237,87 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 7:
-                        StirMiniGameStart();
+                        AddMiniGameStart();
+                        break;
+
+                    case 8:
+                        RecipeComplete();
+                        break;
+
+                }
+                break;
+
+            case 5:     // - Baked Potatoes
+                currentRecipe.text = "Baked Potatoes";
+
+                switch (onMiniGame)
+                {
+                    case 1:
+                        PeelMiniGameStart();
+                        break;
+
+                    case 2:
+                        AddMiniGameStart();
+                        break;
+
+                    case 3:
+                        BoilMiniGameStart();
+                        break;
+
+                    case 4:
+                        DrainMiniGameStart();
+                        break;
+
+                    case 5:
+                        RoastMiniGameStart();
+                        break;
+
+                    case 6:
+                        AddMiniGameStart();
+                        break;
+
+                    case 7:
+                        AddMiniGameStart();
+                        break;
+
+                    case 8:
+                        RecipeComplete();
+                        break;
+
+                }
+                break;
+
+            case 6:     // - Chips
+                currentRecipe.text = "Chips";
+
+                switch (onMiniGame)
+                {
+                    case 1:
+                        SliceMiniGameStart();
+                        break;
+
+                    case 2:
+                        AddMiniGameStart();
+                        break;
+
+                    case 3:
+                        BoilMiniGameStart();
+                        break;
+
+                    case 4:
+                        DrainMiniGameStart();
+                        break;
+
+                    case 5:
+                        AddMiniGameStart();
+                        break;
+
+                    case 6:
+                        AddMiniGameStart();
+                        break;
+
+                    case 7:
+                        RoastMiniGameStart();
                         break;
 
                     case 8:
@@ -245,18 +325,6 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 9:
-                        AddMiniGameStart();
-                        break;
-
-                    case 10:
-                        AddMiniGameStart();
-                        break;
-
-                    case 11:
-                        RoastMiniGameStart();
-                        break;
-
-                    case 12:
                         RecipeComplete();
                         break;
 
@@ -392,7 +460,9 @@ public class MiniGameSprite_script : MonoBehaviour
                 }
                 break;
 
-            case 4:    // - Dauphioise
+            case 4:     // - Potato Salad
+                currentRecipe.text = "Potato Salad";
+
                 switch (onMiniGame)
                 {
                     case 1:
@@ -404,15 +474,15 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 3:
-                        AddMiniGameUpdate();
-                        break;
-
-                    case 4:
                         BoilMiniGameUpdate();
                         break;
 
+                    case 4:
+                        DrainMiniGameUpdate();
+                        break;
+
                     case 5:
-                        SliceMiniGameUpdate();
+                        AddMiniGameUpdate();
                         break;
 
                     case 6:
@@ -420,7 +490,87 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 7:
-                        StirMiniGameUpdate();
+                        AddMiniGameUpdate();
+                        break;
+
+                    case 8:
+                        RecipeComplete();
+                        break;
+
+                }
+                break;
+
+            case 5:     // - Baked Potatoes
+                currentRecipe.text = "Baked Potatoes";
+
+                switch (onMiniGame)
+                {
+                    case 1:
+                        PeelMiniGameUpdate();
+                        break;
+
+                    case 2:
+                        AddMiniGameUpdate();
+                        break;
+
+                    case 3:
+                        BoilMiniGameUpdate();
+                        break;
+
+                    case 4:
+                        DrainMiniGameUpdate();
+                        break;
+
+                    case 5:
+                        RoastMiniGameUpdate();
+                        break;
+
+                    case 6:
+                        AddMiniGameUpdate();
+                        break;
+
+                    case 7:
+                        AddMiniGameUpdate();
+                        break;
+
+                    case 8:
+                        RecipeComplete();
+                        break;
+
+                }
+                break;
+
+            case 6:     // - Chips
+                currentRecipe.text = "Chips";
+
+                switch (onMiniGame)
+                {
+                    case 1:
+                        SliceMiniGameUpdate();
+                        break;
+
+                    case 2:
+                        AddMiniGameUpdate();
+                        break;
+
+                    case 3:
+                        BoilMiniGameUpdate();
+                        break;
+
+                    case 4:
+                        DrainMiniGameUpdate();
+                        break;
+
+                    case 5:
+                        AddMiniGameUpdate();
+                        break;
+
+                    case 6:
+                        AddMiniGameUpdate();
+                        break;
+
+                    case 7:
+                        RoastMiniGameUpdate();
                         break;
 
                     case 8:
@@ -428,16 +578,9 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 9:
-                        AddMiniGameUpdate();
+                        RecipeComplete();
                         break;
 
-                    case 10:
-                        AddMiniGameUpdate();
-                        break;
-
-                    case 11:
-                        RoastMiniGameUpdate();
-                        break;
                 }
                 break;
         }
@@ -811,7 +954,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void AddMiniGameStart()
     {
-        referencedSprites = recipe2Sprites;
+        referencedSprites = recipe1Sprites;
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
         this.transform.position = new Vector3(-1.5f, 0.5f, -3.5f);

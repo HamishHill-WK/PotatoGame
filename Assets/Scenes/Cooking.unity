@@ -384,7 +384,6 @@ GameObject:
   - component: {fileID: 167636879}
   - component: {fileID: 167636881}
   - component: {fileID: 167636880}
-  - component: {fileID: 167636882}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -449,22 +448,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167636878}
   m_CullTransparentMesh: 0
---- !u!114 &167636882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167636878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8066d275d4c97541aae1667138156bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  v_gameController: {fileID: 1511776469}
-  recipeBook: {fileID: 345218443}
-  recipePanel: {fileID: 665597318}
-  totalScore: 0
 --- !u!223 &345218443 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 1936887836270076950, guid: 027edf70551961549a3125ab756e8930, type: 3}
@@ -2042,7 +2025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1065708983548942790, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_Text
-      value: Dauphioise
+      value: Potato Salad
       objectReference: {fileID: 0}
     - target: {fileID: 1384075881786184304, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_Text
@@ -2584,6 +2567,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2421319893369629283, guid: 027edf70551961549a3125ab756e8930, type: 3}
+      propertyPath: m_Name
+      value: Recipe 4 Button
+      objectReference: {fileID: 0}
     - target: {fileID: 2869148788055696953, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -2600,6 +2587,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2876655535197135424, guid: 027edf70551961549a3125ab756e8930, type: 3}
+      propertyPath: m_Name
+      value: Recipe 5 Button
+      objectReference: {fileID: 0}
     - target: {fileID: 2891751391076707408, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -2615,6 +2606,10 @@ PrefabInstance:
     - target: {fileID: 2891751391076707408, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982249576893166320, guid: 027edf70551961549a3125ab756e8930, type: 3}
+      propertyPath: m_Name
+      value: Recipe 3 Button
       objectReference: {fileID: 0}
     - target: {fileID: 3675978166528866930, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_AnchorMin.y
@@ -2844,6 +2839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Recipe 2 Button
       objectReference: {fileID: 0}
+    - target: {fileID: 7349978363065769951, guid: 027edf70551961549a3125ab756e8930, type: 3}
+      propertyPath: m_Text
+      value: Chips
+      objectReference: {fileID: 0}
     - target: {fileID: 7549622209485685972, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -2907,6 +2906,10 @@ PrefabInstance:
     - target: {fileID: 7676433266574764344, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7689110354675195193, guid: 027edf70551961549a3125ab756e8930, type: 3}
+      propertyPath: m_Text
+      value: Baked Potatoes
       objectReference: {fileID: 0}
     - target: {fileID: 7901897626078994105, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_AnchorMin.y
@@ -2959,6 +2962,10 @@ PrefabInstance:
     - target: {fileID: 8346657758683724838, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8877036355944816603, guid: 027edf70551961549a3125ab756e8930, type: 3}
+      propertyPath: m_Name
+      value: Recipe 6 Button
       objectReference: {fileID: 0}
     - target: {fileID: 9188113416803031474, guid: 027edf70551961549a3125ab756e8930, type: 3}
       propertyPath: m_AnchorMin.y

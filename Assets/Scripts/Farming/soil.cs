@@ -39,6 +39,7 @@ public class soil : MonoBehaviour
     enum growthStage { initial = 0, sprout, grown, dead };    
     growthStage currentGrowthStage = growthStage.initial;
 
+
     enum moistureLevel { low = 0, medium, high };
     moistureLevel currentMoistureLevel = moistureLevel.low;
 
@@ -115,6 +116,7 @@ public class soil : MonoBehaviour
         if (monthsAfterPlant == 1)
         {
             updateMesh(growthStage.sprout);
+
             return;
         }
 
@@ -131,6 +133,7 @@ public class soil : MonoBehaviour
 
     void updateMesh(growthStage stage)
     {
+
         currentGrowthStage = stage;
 
         switch (currentGrowthStage)
@@ -238,6 +241,7 @@ public class soil : MonoBehaviour
     {
         currentDay = timer.GetComponent<timeTracking>().getCurrentTime().day;
         currentMonth = timer.GetComponent<timeTracking>().getCurrentTime().monthNum;
+
 
         if (currentDay != lastDay)
         {

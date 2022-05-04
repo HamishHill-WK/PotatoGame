@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //this script was written by Hamish Hill Github: @HamishHill-WK
-
+//this script handles player input and assigns stock to potatoes in inventory from data contained in the binary file
 public class Farming : MonoBehaviour
 {
-    public GameObject[] potatos = { null, null, null, null, null, null };
+    public GameObject[] potatos;// = { null, null, null, null, null, null };
     private GameObject spade;
     private GameObject soil;
     private GameObject sphere;
@@ -14,9 +14,9 @@ public class Farming : MonoBehaviour
     private GameObject invPanel;
     private GameObject timer;
 
-    private int[] potatoStocks = { 0, 0, 0, 0, 0, 0 };
+    public int[] potatoStocks = { 0, 0, 0, 0, 0, 0 };
 
-    public int[] stocks;
+    public int[] values = { 0, 0, 0, 0, 0, 0 };
 
     private bool plantable;
     private bool planted;
@@ -42,6 +42,7 @@ public class Farming : MonoBehaviour
     IEnumerator wait()
     {
         yield return new WaitForSecondsRealtime(1);
+        loadStock();
         invPanel.SetActive(false);
     }
 
@@ -107,6 +108,8 @@ public class Farming : MonoBehaviour
                             Selector(selectable.none);
 
                             Harvest(soil.GetComponent<soil>().yield);
+
+                            soil.GetComponent<soil>().updateMesh(global::soil.growthStage.noPlant);
 
                             soil.GetComponent<soil>().planted = false;
 
@@ -179,15 +182,18 @@ public class Farming : MonoBehaviour
 
         foreach (GameObject g in potatos)
         {
-            Debug.Log("bloops");
             if (g.name == potatoType)
             {
-                Debug.Log("loops");
                 g.GetComponent<potato>().addStock(harvest);
             }
         }
 
         StartCoroutine(wait());
+
+        // if(invPanel.activeInHierarchy)
+        saveStock();
+
+        SaveSystem.SavePlayer(potatoStocks, soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
     }
 
     private void updateVars()
@@ -198,6 +204,7 @@ public class Farming : MonoBehaviour
 
     private void startLoad()
     {
+       ////SaveSystem.clearBinaryFile();
         spade = GameObject.Find("Spade");
         sphere = GameObject.Find("Watering");
         soil = GameObject.Find("Soil");
@@ -206,6 +213,7 @@ public class Farming : MonoBehaviour
         timer = GameObject.Find("Timer");
 
         potatos = GameObject.FindGameObjectsWithTag("Potato");
+        loadStock();
 
         StartCoroutine(wait());
 
@@ -213,22 +221,20 @@ public class Farming : MonoBehaviour
 
         sphereMesh = sphere.GetComponent<MeshRenderer>();
         spadeMesh = spade.GetComponent<MeshRenderer>();
-        invMesh = inventory.GetComponent<MeshRenderer>();
-
-        loadStock();
+        invMesh = inventory.GetComponent<MeshRenderer>(); 
     }
 
-    private void loadStock()
+    public void loadStock()
     {
         PlayerData data = SaveSystem.LoadPlayer();
 
-        List<int> values = data.totalPotatos;
+        values = data.totalPotatos;
 
         int i = 0;
 
-        foreach (GameObject p in potatos)
+        foreach(GameObject p in potatos)
         {
-            p.GetComponent<potato>().setStock(values[i]);
+            p.GetComponent<potato>().setStock(values[i]);            
             i++;
         }
     }   
@@ -256,9 +262,12 @@ public class Farming : MonoBehaviour
 
         updateVars();
 
-        if(invPanel.activeInHierarchy)
-            saveStock();
+    }
 
+    private void OnApplicationQuit()
+    {
+        invPanel.SetActive(true);
+        saveStock();
         SaveSystem.SavePlayer(potatoStocks, soil.GetComponent<soil>(), timer.GetComponent<timeTracking>());
     }
 }

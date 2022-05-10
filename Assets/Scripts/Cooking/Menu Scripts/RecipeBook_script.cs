@@ -19,9 +19,6 @@ public class RecipeBook_script : MonoBehaviour
 
     public Transform potatoPrefab;        //Test prefab
     public Transform boilPrefab;        //Test prefab
-    
-
-    private int test = 2;
 
     private GameObject recipeBookObject;
     private Button recipe1Button;
@@ -191,9 +188,9 @@ public class RecipeBook_script : MonoBehaviour
 
         textSetup();
 
-        recipeIng.text = "Ingedients: Potato " + test.ToString();
+        recipeIng.text = "1.5kg floury potato, 125ml Semi Skimmed Milk, 1tbsp butter, 4tbsp Creme Fraiche";
 
-        recipeMethod.text = "Simple Mashed Potatoes";
+        recipeMethod.text = "A deliciious creamy mash with reduced fat calories";
 
         recipeMiniGames.text = "Boil - Add - Stir - Drain - Add - Mash - Add";
     }
@@ -204,9 +201,9 @@ public class RecipeBook_script : MonoBehaviour
 
         textSetup();
 
-        recipeIng.text = "Ingedients: Potato " + test.ToString();
+        recipeIng.text = "4tbsp oil, 1.5kg potato, 50g butter, 1/2 bunch of lemon thyme, 6 garlic cloves, lightly bashed, 1tbsp sea salt";
 
-        recipeMethod.text = "Crispy Roast Potatoes";
+        recipeMethod.text = "Crispy roast potatoes with a fluffy middle and golden crisp exterior";
 
         recipeMiniGames.text = "Peel - Boil - Add - Add - Drain - Add - Add - Roast";
     }
@@ -217,9 +214,9 @@ public class RecipeBook_script : MonoBehaviour
 
         textSetup();
 
-        recipeIng.text = "Ingedients: Potato " + test.ToString();
+        recipeIng.text = "600g of Potatoes, halving large ones. 2tsp vinegar, 2spt virgin olive oil, 120g mayonnaise, 1.5 tbsp Dijon Mustard, 1/2 red onion, 2tsp capers, parsely chives";
 
-        recipeMethod.text = "Potato Salad";
+        recipeMethod.text = "A vegan Potato salid, great as a side";
 
         recipeMiniGames.text = "Add - Add - Boil - Drain - Add - Add - Add";
     }
@@ -230,9 +227,9 @@ public class RecipeBook_script : MonoBehaviour
 
         textSetup();
 
-        recipeIng.text = "Ingedients: Potato " + test.ToString();
+        recipeIng.text = "700g, 1tbsp olive oil, 30g butter, 150g yogurt, 6 spring onions, 200g sweetcorn, 150g cheese, chives";
 
-        recipeMethod.text = "Baked Potatoes";
+        recipeMethod.text = "Baked Potatoes as a healthy homemade meal";
 
         recipeMiniGames.text = "Peel - Add - Boil - Drain - Roast - Add - Add";
     }
@@ -243,9 +240,9 @@ public class RecipeBook_script : MonoBehaviour
 
         textSetup();
 
-        recipeIng.text = "Ingedients: Potato " + test.ToString();
+        recipeIng.text = "4-5 large potatoes. 5tbsp vegetable oil, 1tsbs pepper. 1 onion. 2 peppers, 2 garlic cloves, 1 red chilli, 1tbsp salt, or preference of seasoning";
 
-        recipeMethod.text = "Chips";
+        recipeMethod.text = "Delicious Chips seasoned to taste";
 
         recipeMiniGames.text = "Slice - Add - Boil - Drain - Add - Ad - Roast - Add";
     }

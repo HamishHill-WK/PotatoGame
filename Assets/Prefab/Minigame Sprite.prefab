@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8769198578047640323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.0001338, y: 2.3872387, z: -9.767803}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,6 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff562efdd066d024c847a06933c69f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundSprites:
+  - {fileID: 21300000, guid: aa60b6cdd83aeca47aa8b1043a75539e, type: 3}
+  - {fileID: 21300000, guid: 1bad31c40d4570248b898c282c484eab, type: 3}
+  - {fileID: 21300000, guid: 009e618ee28fcc14eae48c8ca5d1b3dd, type: 3}
   AddMinigamePrefab: {fileID: 5576872812639907500, guid: d4506095485e213468c5fc0f6ecb80a9, type: 3}
   recipe1Sprites:
   - {fileID: 21300000, guid: 16041311f88a10e45aac25f4ec5fd357, type: 3}
@@ -108,15 +112,62 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e90357a0ec993ef41a4b0ea65bc1e480, type: 3}
   - {fileID: 21300000, guid: 890462c6adfe5cf429b504442eba0f07, type: 3}
   - {fileID: 21300000, guid: 44144df9bd2436548acdc7147536ae31, type: 3}
-  recipe2Sprites:
-  - {fileID: 21300000, guid: d61d6dcd6ca62e241b76ae6edd59663d, type: 3}
-  - {fileID: 21300000, guid: 287646393168b9748b83e6e25d992d7b, type: 3}
-  - {fileID: 21300000, guid: 7243009ff4bf9a04ab2db8887d3d6d08, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  PeelSprites:
+  - {fileID: 21300000, guid: 21e7e40afbd84f9409e01472df84822a, type: 3}
+  - {fileID: 21300000, guid: a981567d05fe64844b03a62e27f5c401, type: 3}
+  - {fileID: 21300000, guid: e1813e8c67ea7ea4fa085ac6e62f506b, type: 3}
+  - {fileID: 21300000, guid: 366b45400e8a7a84793b04494f0d9969, type: 3}
+  - {fileID: 21300000, guid: 5828cf3f188a52e4d86dc9b7bbf3801a, type: 3}
+  - {fileID: 21300000, guid: 1827479e6675e2e4c861883d387d697a, type: 3}
+  - {fileID: 21300000, guid: 0c20d9ad920fbb0468272595eb7a787d, type: 3}
+  - {fileID: 21300000, guid: d4ad64b6e82014241b392fa93c97261b, type: 3}
+  - {fileID: 21300000, guid: a5631c4f30fd541418129edca1ec4676, type: 3}
+  - {fileID: 21300000, guid: b3b795de158b1e048895ae4cc8160ddd, type: 3}
+  - {fileID: 21300000, guid: dd6acae8dd427fd4e8c70aa301b95fba, type: 3}
+  BoilSprites:
+  - {fileID: 21300000, guid: a9f7cbb279dd6f74ba7d1460c4d58fa9, type: 3}
+  - {fileID: 21300000, guid: 7a4f969e6d5ad074fa935d981fc1e52e, type: 3}
+  - {fileID: 21300000, guid: 770a0debe2229d142a817295b25ba81a, type: 3}
+  - {fileID: 21300000, guid: 4ac583d1f1f755045ad9e8923024a8f0, type: 3}
+  - {fileID: 21300000, guid: 64a24085903c997458f8b6e976ccf56b, type: 3}
+  AddSprites:
+  - {fileID: 21300000, guid: 44144df9bd2436548acdc7147536ae31, type: 3}
+  DrainSprites:
+  - {fileID: 21300000, guid: d5e8640c2f88efd4ea6230ef2c04aa1f, type: 3}
+  - {fileID: 21300000, guid: f187f3464920d094d8a9c5050443d01b, type: 3}
+  - {fileID: 21300000, guid: 3bbf67440f9635f43af0e02917735733, type: 3}
+  - {fileID: 21300000, guid: 6a3a890a86a2d304ea00cc6892e6bd14, type: 3}
+  - {fileID: 21300000, guid: af7120ec330097042b6eef1d31e33c29, type: 3}
+  - {fileID: 21300000, guid: 5be7e077456c1ab41aa096b320176e47, type: 3}
+  - {fileID: 21300000, guid: 62d3af78acfa0e84380880d08a6baa1b, type: 3}
+  - {fileID: 21300000, guid: bdfc8e4c04d22994594b76cc65dab3c7, type: 3}
+  RoastSprites:
+  - {fileID: 21300000, guid: a5f0f96f317531a448a6a6ccae359cbd, type: 3}
+  - {fileID: 21300000, guid: db6556780e516b64aaa0ed4252c61ab0, type: 3}
+  - {fileID: 21300000, guid: 61e98da78e5f576429916d60353d1c2a, type: 3}
+  - {fileID: 21300000, guid: 962b0cd2a5d346c4480c370bb10007bd, type: 3}
+  - {fileID: 21300000, guid: a6ebcb2f932880b41bfb92a6dd5a7e26, type: 3}
+  SliceSprites:
+  - {fileID: 21300000, guid: 16041311f88a10e45aac25f4ec5fd357, type: 3}
+  - {fileID: 21300000, guid: 23bd846876bb864419210e51fd53e7c8, type: 3}
+  - {fileID: 21300000, guid: a0930f0d31e7aaf43b876abf21c537f7, type: 3}
+  - {fileID: 21300000, guid: 04bc0b30955795c44872d4b9427bd81f, type: 3}
+  - {fileID: 21300000, guid: 64f7c7de57fe0d546aa2d1a6efb905ff, type: 3}
+  - {fileID: 21300000, guid: f9f39c486b2fd6d43b0a53694277ada7, type: 3}
+  - {fileID: 21300000, guid: 6a88097cb52a1ef44bacef731a927c7a, type: 3}
+  - {fileID: 21300000, guid: 572026db49353cd43920e7ab7def13e6, type: 3}
+  - {fileID: 21300000, guid: e90357a0ec993ef41a4b0ea65bc1e480, type: 3}
+  - {fileID: 21300000, guid: 890462c6adfe5cf429b504442eba0f07, type: 3}
+  - {fileID: 21300000, guid: 44144df9bd2436548acdc7147536ae31, type: 3}
+  StirSprites:
+  - {fileID: 21300000, guid: a9f7cbb279dd6f74ba7d1460c4d58fa9, type: 3}
+  - {fileID: 21300000, guid: c37a0f2026ad85442a334b60ca605a07, type: 3}
+  - {fileID: 21300000, guid: 97e52b345fb673044aed04c82e36a7d3, type: 3}
+  - {fileID: 21300000, guid: dd38772e6cbeae946884580b35c223c4, type: 3}
+  - {fileID: 21300000, guid: a5a10d70cf6a5cc4ea76f9cfa7f5af4c, type: 3}
+  MashSprites:
+  - {fileID: 21300000, guid: b09de8d0e623fd3448b1645af9f8b69e, type: 3}
+  - {fileID: 21300000, guid: b7dbd2c5fab98ed49b49167f0446e0c4, type: 3}
+  - {fileID: 21300000, guid: b5170e9517c15924ab5a20e0b660c2af, type: 3}
+  - {fileID: 21300000, guid: 0e40ca8f633c93749bdfa0fb95ec94b7, type: 3}
+  - {fileID: 21300000, guid: 148c3a826c3f3b84385678f138502bf5, type: 3}

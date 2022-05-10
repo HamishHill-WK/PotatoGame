@@ -15,6 +15,8 @@ public class MiniGameSprite_script : MonoBehaviour
 
     private Text currentRecipe, currentMinigame, currentGuide;
 
+    public Sprite[] backgroundSprites;
+
     //Prefabs 
 
     //Add minigame prefabs
@@ -23,7 +25,14 @@ public class MiniGameSprite_script : MonoBehaviour
 
     //References for the sprites in the game
     public Sprite[] recipe1Sprites;
-    public Sprite[] recipe2Sprites;
+    public Sprite[] PeelSprites;
+    public Sprite[] BoilSprites;
+    public Sprite[] AddSprites;
+    public Sprite[] DrainSprites;
+    public Sprite[] RoastSprites;
+    public Sprite[] SliceSprites;
+    public Sprite[] StirSprites;
+    public Sprite[] MashSprites;
 
     private Sprite[] referencedSprites;     //use the reference for the publically loaded sprites
 
@@ -691,11 +700,11 @@ public class MiniGameSprite_script : MonoBehaviour
     }
 
     //Minigame Methods
-    void PotatoCuttingMiniGameStart()
+    /*void PotatoCuttingMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = ;
 
-        this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];  
+        this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
     }
 
     public void cuttingTouchSwipeMethod()
@@ -839,13 +848,14 @@ public class MiniGameSprite_script : MonoBehaviour
         {
             SwitchMiniGame();
         }
-    }
+    }*/
 
 
 
     void PeelMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = PeelSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[0];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
@@ -913,6 +923,10 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void BoilMiniGameStart()
     {
+        referencedSprites = BoilSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[2];
+
+
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
         currentMinigame.text = "Boil";
@@ -977,7 +991,8 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void AddMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = AddSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[0];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
         this.transform.position = new Vector3(-1.5f, 0.5f, -3.5f);
@@ -1023,7 +1038,8 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void DrainMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = DrainSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[1];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
@@ -1127,7 +1143,8 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void RoastMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = RoastSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[2];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
@@ -1191,7 +1208,8 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void SliceMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = SliceSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[0];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
@@ -1269,6 +1287,9 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void StirMiniGameStart()
     {
+        referencedSprites = StirSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[1];
+
         currentMinigame.text = "Stir";
     }
 
@@ -1378,7 +1399,8 @@ public class MiniGameSprite_script : MonoBehaviour
     //Mash and add are the same in the reference sheet
     void MashMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = MashSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[0];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
@@ -1414,30 +1436,6 @@ public class MiniGameSprite_script : MonoBehaviour
                 break;
 
             case 6:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[5];
-                break;
-
-            case 7:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[6];
-                break;
-
-            case 8:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[7];
-                break;
-
-            case 9:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[8];
-                break;
-
-            case 10:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[9];
-                break;
-
-            case 11:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[10];
-                break;
-
-            case 12:
                 SwitchMiniGame();
                 break;
         }

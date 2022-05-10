@@ -17,9 +17,9 @@ public class MiniGameSprite_script : MonoBehaviour
 
     //Prefabs 
 
-        //Add minigame prefabs
-        public Transform AddMinigamePrefab;
-        private Transform AddMinigameGameObject;
+    //Add minigame prefabs
+    public Transform AddMinigamePrefab;
+    private Transform AddMinigameGameObject;
 
     //References for the sprites in the game
     public Sprite[] recipe1Sprites;
@@ -29,6 +29,8 @@ public class MiniGameSprite_script : MonoBehaviour
 
 
     //Variables for the touch and swipe mechanics
+    bool inputEnabled = false;
+
     Vector2 firstPressPos;
     Vector2 secondPressPos;
     Vector2 currentSwipe;
@@ -340,6 +342,16 @@ public class MiniGameSprite_script : MonoBehaviour
         currentMinigame.text = "";
         currentGuide.text = "";
 
+        if (gameController.GetComponent<RecipeBook_script>().currentRecipe.activeInHierarchy == true)
+            gameController.GetComponent<RecipeBook_script>().currentRecipe.SetActive(false);
+
+        if (gameController.GetComponent<RecipeBook_script>().currentMinigame.activeInHierarchy == true)
+            gameController.GetComponent<RecipeBook_script>().currentMinigame.SetActive(false);
+
+        if (gameController.GetComponent<RecipeBook_script>().currentGuide.activeInHierarchy == true)
+            gameController.GetComponent<RecipeBook_script>().currentGuide.SetActive(false);
+
+
         gameController.GetComponent<RecipeBook_script>().inMiniGame = false;
         Destroy(this.gameObject);
     }
@@ -348,253 +360,264 @@ public class MiniGameSprite_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Only the neccessary methds are called for each minigame
-        switch (recipeSel)
+        if (inputEnabled)
         {
-            default:
-                break;
+            // Only the neccessary methds are called for each minigame
+            switch (recipeSel)
+            {
+                default:
+                    break;
 
-            case 1:     // - Potato Wedges 
-                switch (onMiniGame)
-                {
-                    case 1:
-                        BoilMiniGameUpdate();      // Start the potato cutting minigame
-                        break;
+                case 1:     // - Potato Wedges 
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            BoilMiniGameUpdate();      // Start the potato cutting minigame
+                            break;
 
-                    case 2:
-                        SliceMiniGameUpdate();
-                        break;
+                        case 2:
+                            SliceMiniGameUpdate();
+                            break;
 
-                    case 3:
-                        AddMiniGameUpdate();
-                        break;
+                        case 3:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 4:
-                        DrainMiniGameUpdate();
-                        break;
+                        case 4:
+                            DrainMiniGameUpdate();
+                            break;
 
-                    case 5:
-                        AddMiniGameUpdate();
-                        break;
+                        case 5:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 6:
-                        AddMiniGameUpdate();
-                        break;
+                        case 6:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 7:
-                        RoastMiniGameUpdate();
-                        break;
+                        case 7:
+                            RoastMiniGameUpdate();
+                            break;
 
-                }
-                break;
-
-
-            case 2:     // - Mashed Potatoes
-                switch (onMiniGame)
-                {
-                    case 1:
-                        BoilMiniGameUpdate();
-                        break;
-
-                    case 2:
-                        AddMiniGameUpdate();
-                        break;
-
-                    case 3:
-                        StirMiniGameUpdate();
-                        break;
-
-                    case 4:
-                        DrainMiniGameUpdate();
-                        break;
-
-                    case 5:
-                        AddMiniGameUpdate();
-                        break;
-
-                    case 6:
-                        MashMiniGameUpdate();
-                        break;
-
-                    case 7:
-                        AddMiniGameUpdate();
-                        break;
-                }
-                break;
+                    }
+                    break;
 
 
-            case 3:    // - Crispy Roast 
-                switch (onMiniGame)
-                {
-                    case 1:
-                        PeelMiniGameUpdate();
-                        break;
+                case 2:     // - Mashed Potatoes
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            BoilMiniGameUpdate();
+                            break;
 
-                    case 2:
-                        BoilMiniGameUpdate();
-                        break;
+                        case 2:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 3:
-                        AddMiniGameUpdate();
-                        break;
+                        case 3:
+                            StirMiniGameUpdate();
+                            break;
 
-                    case 4:
-                        AddMiniGameUpdate();
-                        break;
+                        case 4:
+                            DrainMiniGameUpdate();
+                            break;
 
-                    case 5:
-                        DrainMiniGameUpdate();
-                        break;
+                        case 5:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 6:
-                        AddMiniGameUpdate();
-                        break;
+                        case 6:
+                            MashMiniGameUpdate();
+                            break;
 
-                    case 7:
-                        AddMiniGameUpdate();
-                        break;
+                        case 7:
+                            AddMiniGameUpdate();
+                            break;
+                    }
+                    break;
 
-                    case 8:
-                        RoastMiniGameUpdate();
-                        break;
-                }
-                break;
 
-            case 4:     // - Potato Salad
-                currentRecipe.text = "Potato Salad";
+                case 3:    // - Crispy Roast 
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            PeelMiniGameUpdate();
+                            break;
 
-                switch (onMiniGame)
-                {
-                    case 1:
-                        AddMiniGameUpdate();
-                        break;
+                        case 2:
+                            BoilMiniGameUpdate();
+                            break;
 
-                    case 2:
-                        AddMiniGameUpdate();
-                        break;
+                        case 3:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 3:
-                        BoilMiniGameUpdate();
-                        break;
+                        case 4:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 4:
-                        DrainMiniGameUpdate();
-                        break;
+                        case 5:
+                            DrainMiniGameUpdate();
+                            break;
 
-                    case 5:
-                        AddMiniGameUpdate();
-                        break;
+                        case 6:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 6:
-                        AddMiniGameUpdate();
-                        break;
+                        case 7:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 7:
-                        AddMiniGameUpdate();
-                        break;
+                        case 8:
+                            RoastMiniGameUpdate();
+                            break;
+                    }
+                    break;
 
-                    case 8:
-                        RecipeComplete();
-                        break;
+                case 4:     // - Potato Salad
+                    currentRecipe.text = "Potato Salad";
 
-                }
-                break;
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            AddMiniGameUpdate();
+                            break;
 
-            case 5:     // - Baked Potatoes
-                currentRecipe.text = "Baked Potatoes";
+                        case 2:
+                            AddMiniGameUpdate();
+                            break;
 
-                switch (onMiniGame)
-                {
-                    case 1:
-                        PeelMiniGameUpdate();
-                        break;
+                        case 3:
+                            BoilMiniGameUpdate();
+                            break;
 
-                    case 2:
-                        AddMiniGameUpdate();
-                        break;
+                        case 4:
+                            DrainMiniGameUpdate();
+                            break;
 
-                    case 3:
-                        BoilMiniGameUpdate();
-                        break;
+                        case 5:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 4:
-                        DrainMiniGameUpdate();
-                        break;
+                        case 6:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 5:
-                        RoastMiniGameUpdate();
-                        break;
+                        case 7:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 6:
-                        AddMiniGameUpdate();
-                        break;
+                        case 8:
+                            RecipeComplete();
+                            break;
 
-                    case 7:
-                        AddMiniGameUpdate();
-                        break;
+                    }
+                    break;
 
-                    case 8:
-                        RecipeComplete();
-                        break;
+                case 5:     // - Baked Potatoes
+                    currentRecipe.text = "Baked Potatoes";
 
-                }
-                break;
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            PeelMiniGameUpdate();
+                            break;
 
-            case 6:     // - Chips
-                currentRecipe.text = "Chips";
+                        case 2:
+                            AddMiniGameUpdate();
+                            break;
 
-                switch (onMiniGame)
-                {
-                    case 1:
-                        SliceMiniGameUpdate();
-                        break;
+                        case 3:
+                            BoilMiniGameUpdate();
+                            break;
 
-                    case 2:
-                        AddMiniGameUpdate();
-                        break;
+                        case 4:
+                            DrainMiniGameUpdate();
+                            break;
 
-                    case 3:
-                        BoilMiniGameUpdate();
-                        break;
+                        case 5:
+                            RoastMiniGameUpdate();
+                            break;
 
-                    case 4:
-                        DrainMiniGameUpdate();
-                        break;
+                        case 6:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 5:
-                        AddMiniGameUpdate();
-                        break;
+                        case 7:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 6:
-                        AddMiniGameUpdate();
-                        break;
+                        case 8:
+                            RecipeComplete();
+                            break;
 
-                    case 7:
-                        RoastMiniGameUpdate();
-                        break;
+                    }
+                    break;
 
-                    case 8:
-                        AddMiniGameUpdate();
-                        break;
+                case 6:     // - Chips
+                    currentRecipe.text = "Chips";
 
-                    case 9:
-                        RecipeComplete();
-                        break;
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            SliceMiniGameUpdate();
+                            break;
 
-                }
-                break;
+                        case 2:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 3:
+                            BoilMiniGameUpdate();
+                            break;
+
+                        case 4:
+                            DrainMiniGameUpdate();
+                            break;
+
+                        case 5:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 6:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 7:
+                            RoastMiniGameUpdate();
+                            break;
+
+                        case 8:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 9:
+                            RecipeComplete();
+                            break;
+
+                    }
+                    break;
+            }
         }
+
+        inputEnabled = false;
+
+        StartCoroutine(ResumeInputMethod());
     }
 
 
-   
+    IEnumerator ResumeInputMethod()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        inputEnabled = true;
+    }
 
 
     /// <summary>
     /// Start of Minigame Functions ///////
     /// </summary>
 
-    
+
 
     int ReturnSwipeControlsVertical()
     {

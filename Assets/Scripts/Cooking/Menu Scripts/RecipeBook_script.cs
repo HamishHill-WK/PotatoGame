@@ -56,8 +56,8 @@ public class RecipeBook_script : MonoBehaviour
         recipe2Button = GameObject.Find("Recipe 2 Button").GetComponent<Button>();
         recipe3Button = GameObject.Find("Recipe 3 Button").GetComponent<Button>();
         recipe4Button = GameObject.Find("Recipe 4 Button").GetComponent<Button>();
-        recipe5Button = GameObject.Find("Recipe 4 Button").GetComponent<Button>();
-        recipe6Button = GameObject.Find("Recipe 4 Button").GetComponent<Button>();
+        recipe5Button = GameObject.Find("Recipe 5 Button").GetComponent<Button>();
+        recipe6Button = GameObject.Find("Recipe 6 Button").GetComponent<Button>();
 
 
         if (tempObject != null)
@@ -68,6 +68,7 @@ public class RecipeBook_script : MonoBehaviour
                 Debug.Log("Could not locate canvas object on " + tempObject.name);
             }
         }
+
 
 
 
@@ -94,14 +95,11 @@ public class RecipeBook_script : MonoBehaviour
 
         ////Recipe 5 button
         Button rep5Btn = recipe5Button.GetComponent<Button>();
-        rep5Btn.onClick.AddListener(showThirdRecipe);
+        rep5Btn.onClick.AddListener(showFifthRecipe);
 
         ////Recipe 6 button
         Button rep6Btn = recipe6Button.GetComponent<Button>();
-        rep6Btn.onClick.AddListener(showFourthRecipe);
-
-
-
+        rep6Btn.onClick.AddListener(showSixthRecipe);
 
 
         //In recipe panel Butoons
@@ -124,6 +122,15 @@ public class RecipeBook_script : MonoBehaviour
         {
             recipeBook.enabled = false;
         }
+
+        if (currentRecipe.activeInHierarchy == true)
+            currentRecipe.SetActive(false);
+
+        if (currentMinigame.activeInHierarchy == true)
+            currentMinigame.SetActive(false);
+
+        if (currentGuide.activeInHierarchy == true)
+            currentGuide.SetActive(false);
     }
 
 
@@ -186,9 +193,9 @@ public class RecipeBook_script : MonoBehaviour
 
         recipeIng.text = "Ingedients: Potato " + test.ToString();
 
-        recipeMethod.text = "Stir the potato 2";
+        recipeMethod.text = "Simple Mashed Potatoes";
 
-        recipeMiniGames.text = "Boil the potato 2";
+        recipeMiniGames.text = "Boil - Add - Stir - Drain - Add - Mash - Add";
     }
 
     void showThirdRecipe()
@@ -199,9 +206,9 @@ public class RecipeBook_script : MonoBehaviour
 
         recipeIng.text = "Ingedients: Potato " + test.ToString();
 
-        recipeMethod.text = "Stir the potato 3";
+        recipeMethod.text = "Crispy Roast Potatoes";
 
-        recipeMiniGames.text = "Boil the potato 3";
+        recipeMiniGames.text = "Peel - Boil - Add - Add - Drain - Add - Add - Roast";
     }
 
     void showFourthRecipe()
@@ -212,9 +219,9 @@ public class RecipeBook_script : MonoBehaviour
 
         recipeIng.text = "Ingedients: Potato " + test.ToString();
 
-        recipeMethod.text = "Stir the potato 4";
+        recipeMethod.text = "Potato Salad";
 
-        recipeMiniGames.text = "Boil the potato 4";
+        recipeMiniGames.text = "Add - Add - Boil - Drain - Add - Add - Add";
     }
 
     void showFifthRecipe()
@@ -225,9 +232,9 @@ public class RecipeBook_script : MonoBehaviour
 
         recipeIng.text = "Ingedients: Potato " + test.ToString();
 
-        recipeMethod.text = "Stir the potato 5";
+        recipeMethod.text = "Baked Potatoes";
 
-        recipeMiniGames.text = "Boil the potato 5";
+        recipeMiniGames.text = "Peel - Add - Boil - Drain - Roast - Add - Add";
     }
 
     void showSixthRecipe()
@@ -238,9 +245,9 @@ public class RecipeBook_script : MonoBehaviour
 
         recipeIng.text = "Ingedients: Potato " + test.ToString();
 
-        recipeMethod.text = "Stir the potato 6";
+        recipeMethod.text = "Chips";
 
-        recipeMiniGames.text = "Boil the potato 6";
+        recipeMiniGames.text = "Slice - Add - Boil - Drain - Add - Ad - Roast - Add";
     }
 
 

@@ -71,6 +71,11 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
+    public void clearSave() //had to call this puplic static function clearBinaryFile from here because button OnClick() doesn't like static methods - hh 
+    {
+        SaveSystem.clearBinaryFile();
+    }
+
     private void switchState(States state)
     {
         current = state;

@@ -2,9 +2,14 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+
 public static class SaveSystem 
 {
-   public static void SavePlayer (int[] playerPotato, soil playerSoil, timeTracking playerTime)
+    static int[] potatoDef = { 0, 0, 0, 0, 0, 0 };
+    static soil soilDef = new soil();
+    static timeTracking timeDef = new timeTracking();
+
+    public static void SavePlayer (int[] playerPotato, soil playerSoil, timeTracking playerTime)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
@@ -19,10 +24,17 @@ public static class SaveSystem
 
     public static void clearBinaryFile()
     {
+        Debug.Log("file cleared");
         string path = Application.persistentDataPath + "/player.data";
         if (File.Exists(path))
         {
-            File.Delete(path);
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Create);
+
+            PlayerData data = new PlayerData(potatoDef, soilDef, timeDef);
+
+            formatter.Serialize(stream, data);
+            stream.Close();
         }
     }
 

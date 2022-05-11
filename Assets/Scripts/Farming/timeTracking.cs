@@ -76,6 +76,7 @@ public class timeTracking : MonoBehaviour
         currentMonth = (month)data.currentMonth;
         day = data.day;
         hour = data.hour;
+
     }
 
     void Update()

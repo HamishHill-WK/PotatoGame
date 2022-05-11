@@ -57,10 +57,12 @@ public class Farming : MonoBehaviour
                 if (hit.collider.gameObject == sphere)
                 {
                     Selector(selectable.water);
+                    SoundManager.PlaySound("Watering"); //calls sound from SoundManager Script - hs
                 }
 
                 if (hit.collider.gameObject == inventory)
                 {
+                    SoundManager.PlaySound("ButtonTap"); //calls sound from SoundManager Script - hs
                     if (currentSelect == selectable.inventory)
                     {
                         invPanel.SetActive(false);
@@ -75,13 +77,14 @@ public class Farming : MonoBehaviour
                         invPanel.SetActive(true);
 
                         Selector(selectable.inventory);
+                        
                     }
                 }
 
                 if (hit.collider.gameObject.tag == "Potato")
                 {
                     Selector(selectable.potatoObj);
-
+                    SoundManager.PlaySound("ButtonTap"); //calls sound from SoundManager Script - hs
                     potatoType = hit.collider.gameObject.name;
 
                     StartCoroutine(wait());
@@ -90,6 +93,7 @@ public class Farming : MonoBehaviour
                 if (hit.collider.gameObject == spade)
                 {
                     Selector(selectable.spade);
+                    SoundManager.PlaySound("Shovel"); //calls sound from SoundManager Script - hs
                 }
 
                 if (hit.collider.gameObject == soil)

@@ -28,32 +28,38 @@ public class Menu : MonoBehaviour
     public void enterGame() //show screen to enter farming or cooking -hh
     {
         switchState(States.closed);
+        SoundManager.PlaySound("ButtonTap"); //calls sound from SoundManager Script - hs
     }
 
     public void openProfile() //show profile screen -hh
     {
         switchState(States.profile);
+        SoundManager.PlaySound("ButtonTap"); //calls sound from SoundManager Script - hs
     }
 
     public void openMenu() //show menu screen -hh
     {
         switchState(States.menu);
+        SoundManager.PlaySound("ButtonTap"); //calls sound from SoundManager Script - hs
     }
         
     public void openFarm() //open farm scene -hh
     {
         SceneManager.LoadScene("Farming");
+        SoundManager.PlaySound("ButtonTap"); //calls sound from SoundManager Script - hs
     }
 
 
     public void openCooking() //open cooking scene -hs
     {
         SceneManager.LoadScene("Cooking");
+        SoundManager.PlaySound("ButtonTap"); //calls sound from SoundManager Script - hs
     }
 
     public void openOptions() //open options screen -hh
     {
         switchState(States.options);
+        SoundManager.PlaySound("ButtonTap"); //calls sound from SoundManager Script - hs
 
         PlayerPrefs.SetInt("newScore", 0);
 

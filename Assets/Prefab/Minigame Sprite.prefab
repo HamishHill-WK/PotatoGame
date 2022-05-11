@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8769198578047640323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.0001338, y: 2.3872387, z: -9.767803}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -142,11 +142,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 62d3af78acfa0e84380880d08a6baa1b, type: 3}
   - {fileID: 21300000, guid: bdfc8e4c04d22994594b76cc65dab3c7, type: 3}
   RoastSprites:
-  - {fileID: 21300000, guid: a5f0f96f317531a448a6a6ccae359cbd, type: 3}
-  - {fileID: 21300000, guid: db6556780e516b64aaa0ed4252c61ab0, type: 3}
-  - {fileID: 21300000, guid: 61e98da78e5f576429916d60353d1c2a, type: 3}
-  - {fileID: 21300000, guid: 962b0cd2a5d346c4480c370bb10007bd, type: 3}
-  - {fileID: 21300000, guid: a6ebcb2f932880b41bfb92a6dd5a7e26, type: 3}
+  - {fileID: 21300000, guid: c98cb6e0d01b744439cc2b5f321de6ef, type: 3}
+  - {fileID: 21300000, guid: d8ef493fd1db17441afd682ec4df87b8, type: 3}
+  - {fileID: 21300000, guid: 18edb3e270edd774dbadaef64e597022, type: 3}
+  - {fileID: 21300000, guid: c654db0db211cb8498bd51553a4ec665, type: 3}
+  - {fileID: 21300000, guid: fce1577b26030fa4b821b799c1fe0e55, type: 3}
   SliceSprites:
   - {fileID: 21300000, guid: 16041311f88a10e45aac25f4ec5fd357, type: 3}
   - {fileID: 21300000, guid: 23bd846876bb864419210e51fd53e7c8, type: 3}
@@ -171,3 +171,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b5170e9517c15924ab5a20e0b660c2af, type: 3}
   - {fileID: 21300000, guid: 0e40ca8f633c93749bdfa0fb95ec94b7, type: 3}
   - {fileID: 21300000, guid: 148c3a826c3f3b84385678f138502bf5, type: 3}
+  CompletedRecipeSprites:
+  - {fileID: 21300000, guid: 3fe37fd2212747b4683a3b4262788dc6, type: 3}
+  - {fileID: 21300000, guid: 57e39337a82c3a64fa4403da86315344, type: 3}
+  - {fileID: 21300000, guid: 0f3e3152ebc82a942a28093c14625948, type: 3}
+  - {fileID: 21300000, guid: 4864e5bdc73afa045b64efa967b63e22, type: 3}
+  - {fileID: 21300000, guid: 6056a057d9db65e44a73fbd9bcda6616, type: 3}
+  - {fileID: 21300000, guid: 1994ec95ad9c8ff4bbca0cc2448841d7, type: 3}

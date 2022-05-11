@@ -17,9 +17,14 @@ public class RecipeBook_script : MonoBehaviour
     public Transform MinigamePrefab;
     public int recipeSelection;
 
+    //Misc Variables
+    public bool inMiniGame = false;
+    public int recipeNumberSel;
+
     public Transform potatoPrefab;        //Test prefab
     public Transform boilPrefab;        //Test prefab
 
+    // Recipe References 
     private GameObject recipeBookObject;
     private Button recipe1Button;
     private Button recipe2Button;
@@ -28,26 +33,24 @@ public class RecipeBook_script : MonoBehaviour
     private Button recipe5Button;
     private Button recipe6Button;
 
+    // Recipe Panel buttons
     private Button proceedButton;
     private Button returnToRecipesButton;
     
-
     //Recipe text references
-
     private Text recipeIng, recipeMethod, recipeMiniGames;
 
-
-    //Misc Variables
-    public bool inMiniGame = false;
-    private int recipeNumberSel;
-
+    // Minigame guide references (only used to be turned on)
     public GameObject currentRecipe, currentMinigame, currentGuide;
+
+
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //Get obejct References
+        //Find and get object References for the recipe buttons
         GameObject tempObject = GameObject.Find("Recipebook Canvas");
         recipe1Button = GameObject.Find("Recipe 1 Button").GetComponent<Button>();
         recipe2Button = GameObject.Find("Recipe 2 Button").GetComponent<Button>();
@@ -68,8 +71,7 @@ public class RecipeBook_script : MonoBehaviour
 
 
 
-
-        //Setup for buttons
+        //Setup for recipe buttons
         //Back Button
         Button backBtn = backButton.GetComponent<Button>();
         backBtn.onClick.AddListener(exitRecipeBook);
@@ -99,21 +101,20 @@ public class RecipeBook_script : MonoBehaviour
         rep6Btn.onClick.AddListener(showSixthRecipe);
 
 
-        //In recipe panel Butoons
-
+        //In recipe panel Butons
         proceedButton = GameObject.Find("Proceed Button").GetComponent<Button>();
-        proceedButton.onClick.AddListener(selectRecipeMethod);
+        proceedButton.onClick.AddListener(selectRecipeMethod);      //When clicked run this method
 
         //returnToRecipesButton = GameObject.Find("Return to Recipes Button").GetComponent<Button>();
         //returnToRecipesButton.onClick.AddListener(returnToRecipesMethod);
 
 
-        recipeBook.enabled = false;
+        recipeBook.enabled = false;     // Make sure that the recipebook is not showing at the start when loading in
     }
 
     void exitRecipeBook()
     {
-        // this object was clicked - do something
+        // Close the recipebook canvas and stop showing the minigame guides 
 
         if (recipeBook.enabled == true)
         {
@@ -121,37 +122,17 @@ public class RecipeBook_script : MonoBehaviour
         }
 
         if (currentRecipe.activeInHierarchy == true)
-            currentRecipe.SetActive(false);
+            currentRecipe.SetActive(false);     //Hide the current recipe label
 
         if (currentMinigame.activeInHierarchy == true)
-            currentMinigame.SetActive(false);
+            currentMinigame.SetActive(false);   //Hide the current minigame label
 
         if (currentGuide.activeInHierarchy == true)
-            currentGuide.SetActive(false);
+            currentGuide.SetActive(false);      //Hide the current input guide label
     }
 
 
-    //Text Set Up
-    void showFirstRecipeProto()
-    {
-        GameObject RecipeButton = GameObject.Find("Recipe 1 Button");
-
-
-        GameObject newGO = new GameObject("myTextGo");
-        newGO.transform.SetParent(RecipeButton.transform);
-        //newGO.transform.position = RecipeButton.transform.position;
-        newGO.layer = 5;
-
-        Text myText = newGO.AddComponent<Text>();
-        myText.text = "Ta-dah!";
-        myText.alignment = TextAnchor.MiddleCenter;
-
-        Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-        myText.font = ArialFont;
-        myText.material = ArialFont.material;
-        myText.fontSize = 25;
-    }
-
+    //Text set up for the recipes
     void textSetup()
     {
         if (recipePanel.activeInHierarchy == false)
@@ -190,14 +171,14 @@ public class RecipeBook_script : MonoBehaviour
 
         recipeIng.text = "1.5kg floury potato, 125ml Semi Skimmed Milk, 1tbsp butter, 4tbsp Creme Fraiche";
 
-        recipeMethod.text = "A deliciious creamy mash with reduced fat calories";
+        recipeMethod.text = "A delicious creamy mash with reduced fat calories";
 
         recipeMiniGames.text = "Boil - Add - Stir - Drain - Add - Mash - Add";
     }
 
     void showThirdRecipe()
     {
-        recipeNumberSel = 3;
+        recipeNumberSel = 3;        //used for the switch statement on the proceed button (avoids loads of button finds)
 
         textSetup();
 
@@ -210,7 +191,7 @@ public class RecipeBook_script : MonoBehaviour
 
     void showFourthRecipe()
     {
-        recipeNumberSel = 4;
+        recipeNumberSel = 4;        //used for the switch statement on the proceed button (avoids loads of button finds)
 
         textSetup();
 
@@ -223,7 +204,7 @@ public class RecipeBook_script : MonoBehaviour
 
     void showFifthRecipe()
     {
-        recipeNumberSel = 5;
+        recipeNumberSel = 5;        //used for the switch statement on the proceed button (avoids loads of button finds)
 
         textSetup();
 
@@ -236,7 +217,7 @@ public class RecipeBook_script : MonoBehaviour
 
     void showSixthRecipe()
     {
-        recipeNumberSel = 6;
+        recipeNumberSel = 6;        //used for the switch statement on the proceed button (avoids loads of button finds)
 
         textSetup();
 
@@ -250,34 +231,9 @@ public class RecipeBook_script : MonoBehaviour
 
     void selectRecipeMethod()
     {
-        inMiniGame = true;
+        inMiniGame = true;      //var true so we cant re open the recipebook until finished
 
-        switch (recipeNumberSel)
-        {
-            case 1:
-                firstRecipe();
-                break;
-
-            case 2:
-                secondRecipe();
-                break;
-
-            case 3:
-                thirdRecipe();
-                break;
-
-            case 4:
-                fourthRecipe();
-                break;
-            
-            case 5:
-                fifthRecipe();
-                break;
-
-            case 6:
-                sixthRecipe();
-                break;
-        }
+        changeRecipeSetUp();
     }
 
     //Changing recipes
@@ -296,63 +252,9 @@ public class RecipeBook_script : MonoBehaviour
 
         if (currentGuide.activeInHierarchy == false)
             currentGuide.SetActive(true);
+
+        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);      //Create the minigame prefab
     }
-
-    void firstRecipe()
-    {
-        changeRecipeSetUp();
-
-        recipeSelection = 1;
-
-        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
-    }
-
-    void secondRecipe()
-    {
-        changeRecipeSetUp();
-
-        recipeSelection = 2;
-
-        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
-    }
-
-    void thirdRecipe()
-    {
-        changeRecipeSetUp();
-
-        recipeSelection = 3;
-
-        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
-    }
-
-    void fourthRecipe()
-    {
-        changeRecipeSetUp();
-
-        recipeSelection = 4;
-
-        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
-    }
-
-    void fifthRecipe()
-    {
-        changeRecipeSetUp();
-
-        recipeSelection = 5;
-
-        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
-    }
-
-    void sixthRecipe()
-    {
-        changeRecipeSetUp();
-
-        recipeSelection = 6;
-
-        Instantiate(MinigamePrefab, new Vector3(0.20f, 2.0f, -3.1f), Quaternion.identity);
-    }
-
-
 
     //End of code written by Blair McCartan
 }

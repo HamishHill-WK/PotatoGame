@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RecipeBookObject_script : MonoBehaviour
 {
@@ -29,7 +31,8 @@ public class RecipeBookObject_script : MonoBehaviour
             }
         }
 
-        
+        Button btn = this.GetComponent<Button>();
+        btn.onClick.AddListener(TaskOnClicked);
     }
 
     // Update is called once per frame
@@ -40,10 +43,7 @@ public class RecipeBookObject_script : MonoBehaviour
 
     void OnMouseDown()
     {
-        //Debug.Log("Hello world this click was detected");
-        // this object was clicked - do something
-
-        //Debug.Log(totalScore);
+        Debug.Log("Panel button doesnt work");
 
         v_recipeBook_script = v_gameController.GetComponent<RecipeBook_script>();
 
@@ -61,7 +61,28 @@ public class RecipeBookObject_script : MonoBehaviour
         {
             Debug.Log("In a minigame");
         }
+    }
 
+    void TaskOnClicked()
+    {
+        Debug.Log("Panel button works");
+
+        v_recipeBook_script = v_gameController.GetComponent<RecipeBook_script>();
+
+        if (v_recipeBook_script.inMiniGame == false)
+        {
+            if (recipeBook.enabled == false)
+            {
+                recipeBook.enabled = true;
+
+                if (recipePanel.activeInHierarchy == true)
+                    recipePanel.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log("In a minigame");
+        }
     }
 
     //End of Code Written By Blair McCartan

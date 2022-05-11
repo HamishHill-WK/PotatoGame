@@ -15,20 +15,34 @@ public class MiniGameSprite_script : MonoBehaviour
 
     private Text currentRecipe, currentMinigame, currentGuide;
 
+    public Sprite[] backgroundSprites;
+
     //Prefabs 
 
-        //Add minigame prefabs
-        public Transform AddMinigamePrefab;
-        private Transform AddMinigameGameObject;
+    //Add minigame prefabs
+    public Transform AddMinigamePrefab;
+    private Transform AddMinigameGameObject;
 
     //References for the sprites in the game
     public Sprite[] recipe1Sprites;
-    public Sprite[] recipe2Sprites;
+    public Sprite[] PeelSprites;
+    public Sprite[] BoilSprites;
+    public Sprite[] AddSprites;
+    public Sprite[] DrainSprites;
+    public Sprite[] RoastSprites;
+    public Sprite[] SliceSprites;
+    public Sprite[] StirSprites;
+    public Sprite[] MashSprites;
+    
+    public Sprite[] CompletedRecipeSprites;
+
 
     private Sprite[] referencedSprites;     //use the reference for the publically loaded sprites
 
 
     //Variables for the touch and swipe mechanics
+    bool inputEnabled = false;      // This val is used in a short wait between inputs so the player doesnt instatnly finish a minigame
+
     Vector2 firstPressPos;
     Vector2 secondPressPos;
     Vector2 currentSwipe;
@@ -51,19 +65,18 @@ public class MiniGameSprite_script : MonoBehaviour
     void Start()
     {
         gameController = GameObject.Find("Game Controller");
-
-        recipeSel = gameController.GetComponent<RecipeBook_script>().recipeSelection;       //Get the selected recipe
-
         currentRecipe = GameObject.Find("Current Recipe Text - Text").GetComponent<Text>();
         currentMinigame = GameObject.Find("Current Recipe Minigame - Text").GetComponent<Text>();
         currentGuide = GameObject.Find("Current Recipe Guide - Text").GetComponent<Text>();
+
+        recipeSel = gameController.GetComponent<RecipeBook_script>().recipeNumberSel;       //Get the selected recipe that the player has chosen 
 
         SwitchMiniGame();       //To start the minigames
     }
 
 
 
-    void SwitchMiniGame()
+    void SwitchMiniGame()       //Here we call the start function for each minigame 
     {
         this.GetComponent<SpriteRenderer>().sprite = null;      //Hide the sprite during the changing of the minigame so it doesnt flash or show both
         onMiniGame++;       //change what minigame we are on 
@@ -75,9 +88,6 @@ public class MiniGameSprite_script : MonoBehaviour
         //Depending on what recipe we are doing 
         switch (recipeSel)
         {
-            default:
-                break;
-
             //First Recipe minigame set - Wedges 
             case 1:
                 currentRecipe.text = "Potato Wedges";
@@ -85,7 +95,7 @@ public class MiniGameSprite_script : MonoBehaviour
                 switch (onMiniGame)     // Switch based on the minigame we are on
                 {
                     case 1:
-                        BoilMiniGameStart();      // Start the potato cutting minigame
+                        BoilMiniGameStart();
                         break;
 
                     case 2:
@@ -113,10 +123,14 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 8:
-                        RecipeComplete();
+                        FinishedRecipe();
+                        break;
+
+                    case 9:
+                        EndRecipe();
                         break;
                 }
-                break;
+                break; 
 
 
             //Second Recipe minigame set - Mashed potatoes
@@ -127,7 +141,7 @@ public class MiniGameSprite_script : MonoBehaviour
                 switch (onMiniGame)
                 {
                     case 1:
-                        BoilMiniGameStart();        // Start the potato cutting minigame
+                        BoilMiniGameStart();        
                         break;
 
                     case 2:
@@ -154,9 +168,12 @@ public class MiniGameSprite_script : MonoBehaviour
                         AddMiniGameStart();
                         break;
 
-
                     case 8:
-                        RecipeComplete();
+                        FinishedRecipe();
+                        break;
+
+                    case 9:
+                        EndRecipe();
                         break;
 
                 }
@@ -201,14 +218,28 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 9:
-                        RecipeComplete();
+                        this.GetComponent<SpriteRenderer>().sprite = CompletedRecipeSprites[3];
+
+                        currentRecipe.text = "Complete";
+                        currentMinigame.text = "";
+                        currentGuide.text = "";
+
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            SwitchMiniGame();
+                        }
+                        break;
+
+                    case 10:
+                        EndRecipe();
                         break;
 
                 }
                 break;
 
-            case 4:     // - Dauphioise
-                currentRecipe.text = "Dauphioise";
+
+            case 4:     // - Potato Salad
+                currentRecipe.text = "Potato Salad";
 
                 switch (onMiniGame)
                 {
@@ -221,15 +252,15 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 3:
-                        AddMiniGameStart();
-                        break;
-
-                    case 4:
                         BoilMiniGameStart();
                         break;
 
+                    case 4:
+                        DrainMiniGameStart();
+                        break;
+
                     case 5:
-                        SliceMiniGameStart();
+                        AddMiniGameStart();
                         break;
 
                     case 6:
@@ -237,7 +268,97 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 7:
-                        StirMiniGameStart();
+                        AddMiniGameStart();
+                        break;
+
+                    case 8:
+                        FinishedRecipe();
+                        break;
+
+                    case 9:
+                        EndRecipe();
+                        break;
+
+                }
+                break;
+
+
+            case 5:     // - Baked Potatoes
+                currentRecipe.text = "Baked Potatoes";
+
+                switch (onMiniGame)
+                {
+                    case 1:
+                        PeelMiniGameStart();
+                        break;
+
+                    case 2:
+                        AddMiniGameStart();
+                        break;
+
+                    case 3:
+                        BoilMiniGameStart();
+                        break;
+
+                    case 4:
+                        DrainMiniGameStart();
+                        break;
+
+                    case 5:
+                        RoastMiniGameStart();
+                        break;
+
+                    case 6:
+                        AddMiniGameStart();
+                        break;
+
+                    case 7:
+                        AddMiniGameStart();
+                        break;
+
+                    case 8:
+                        FinishedRecipe();
+                        break;  
+
+                    case 9:
+                        EndRecipe();
+                        break;
+
+                }
+                break;
+
+
+            case 6:     // - Chips
+                currentRecipe.text = "Chips";
+
+                switch (onMiniGame)
+                {
+                    case 1:
+                        SliceMiniGameStart();
+                        break;
+
+                    case 2:
+                        AddMiniGameStart();
+                        break;
+
+                    case 3:
+                        BoilMiniGameStart();
+                        break;
+
+                    case 4:
+                        DrainMiniGameStart();
+                        break;
+
+                    case 5:
+                        AddMiniGameStart();
+                        break;
+
+                    case 6:
+                        AddMiniGameStart();
+                        break;
+
+                    case 7:
+                        RoastMiniGameStart();
                         break;
 
                     case 8:
@@ -245,19 +366,7 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 9:
-                        AddMiniGameStart();
-                        break;
-
-                    case 10:
-                        AddMiniGameStart();
-                        break;
-
-                    case 11:
-                        RoastMiniGameStart();
-                        break;
-
-                    case 12:
-                        RecipeComplete();
+                        EndRecipe();
                         break;
 
                 }
@@ -265,12 +374,35 @@ public class MiniGameSprite_script : MonoBehaviour
         }
     }
 
+    void FinishedRecipe()
+    {
+        this.GetComponent<SpriteRenderer>().sprite = CompletedRecipeSprites[recipeSel];
 
-    void RecipeComplete()
+        currentRecipe.text = "Complete";
+        currentMinigame.text = "";
+        currentGuide.text = "";
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            SwitchMiniGame();
+        }
+    }
+
+    void EndRecipe()       //When a recipe is complete hide the guides and detroy the minigame object prefab
     {
         currentRecipe.text = "";
         currentMinigame.text = "";
         currentGuide.text = "";
+
+        if (gameController.GetComponent<RecipeBook_script>().currentRecipe.activeInHierarchy == true)
+            gameController.GetComponent<RecipeBook_script>().currentRecipe.SetActive(false);
+
+        if (gameController.GetComponent<RecipeBook_script>().currentMinigame.activeInHierarchy == true)
+            gameController.GetComponent<RecipeBook_script>().currentMinigame.SetActive(false);
+
+        if (gameController.GetComponent<RecipeBook_script>().currentGuide.activeInHierarchy == true)
+            gameController.GetComponent<RecipeBook_script>().currentGuide.SetActive(false);
+
 
         gameController.GetComponent<RecipeBook_script>().inMiniGame = false;
         Destroy(this.gameObject);
@@ -278,180 +410,301 @@ public class MiniGameSprite_script : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void Update()       //Switch the minigame based upon the recipe and current sequence
     {
-        // Only the neccessary methds are called for each minigame
-        switch (recipeSel)
+        if (inputEnabled)
         {
-            default:
-                break;
+            // Only the neccessary methods are called for each minigame
+            switch (recipeSel)
+            {
 
-            case 1:     // - Potato Wedges 
-                switch (onMiniGame)
-                {
-                    case 1:
-                        BoilMiniGameUpdate();      // Start the potato cutting minigame
-                        break;
+                case 1:     // - Potato Wedges 
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            BoilMiniGameUpdate();      // Start the potato cutting minigame
+                            break;
 
-                    case 2:
-                        SliceMiniGameUpdate();
-                        break;
+                        case 2:
+                            SliceMiniGameUpdate();
+                            break;
 
-                    case 3:
-                        AddMiniGameUpdate();
-                        break;
+                        case 3:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 4:
-                        DrainMiniGameUpdate();
-                        break;
+                        case 4:
+                            DrainMiniGameUpdate();
+                            break;
 
-                    case 5:
-                        AddMiniGameUpdate();
-                        break;
+                        case 5:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 6:
-                        AddMiniGameUpdate();
-                        break;
+                        case 6:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 7:
-                        RoastMiniGameUpdate();
-                        break;
+                        case 7:
+                            RoastMiniGameUpdate();
+                            break;
 
-                }
-                break;
+                        case 8:
+                            FinishedRecipe();
+                            break;
 
+                        case 9:
+                            EndRecipe();
+                            break;
 
-            case 2:     // - Mashed Potatoes
-                switch (onMiniGame)
-                {
-                    case 1:
-                        BoilMiniGameUpdate();
-                        break;
-
-                    case 2:
-                        AddMiniGameUpdate();
-                        break;
-
-                    case 3:
-                        StirMiniGameUpdate();
-                        break;
-
-                    case 4:
-                        DrainMiniGameUpdate();
-                        break;
-
-                    case 5:
-                        AddMiniGameUpdate();
-                        break;
-
-                    case 6:
-                        MashMiniGameUpdate();
-                        break;
-
-                    case 7:
-                        AddMiniGameUpdate();
-                        break;
-                }
-                break;
+                    }
+                    break;
 
 
-            case 3:    // - Crispy Roast 
-                switch (onMiniGame)
-                {
-                    case 1:
-                        PeelMiniGameUpdate();
-                        break;
+                case 2:     // - Mashed Potatoes
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            BoilMiniGameUpdate();
+                            break;
 
-                    case 2:
-                        BoilMiniGameUpdate();
-                        break;
+                        case 2:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 3:
-                        AddMiniGameUpdate();
-                        break;
+                        case 3:
+                            StirMiniGameUpdate();
+                            break;
 
-                    case 4:
-                        AddMiniGameUpdate();
-                        break;
+                        case 4:
+                            DrainMiniGameUpdate();
+                            break;
 
-                    case 5:
-                        DrainMiniGameUpdate();
-                        break;
+                        case 5:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 6:
-                        AddMiniGameUpdate();
-                        break;
+                        case 6:
+                            MashMiniGameUpdate();
+                            break;
 
-                    case 7:
-                        AddMiniGameUpdate();
-                        break;
+                        case 7:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 8:
-                        RoastMiniGameUpdate();
-                        break;
-                }
-                break;
+                        case 8:
+                            FinishedRecipe();
+                            break;
 
-            case 4:    // - Dauphioise
-                switch (onMiniGame)
-                {
-                    case 1:
-                        AddMiniGameUpdate();
-                        break;
+                        case 9:
+                            EndRecipe();
+                            break;
+                    }
+                    break;
 
-                    case 2:
-                        AddMiniGameUpdate();
-                        break;
 
-                    case 3:
-                        AddMiniGameUpdate();
-                        break;
+                case 3:    // - Crispy Roast 
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            PeelMiniGameUpdate();
+                            break;
 
-                    case 4:
-                        BoilMiniGameUpdate();
-                        break;
+                        case 2:
+                            BoilMiniGameUpdate();
+                            break;
 
-                    case 5:
-                        SliceMiniGameUpdate();
-                        break;
+                        case 3:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 6:
-                        AddMiniGameUpdate();
-                        break;
+                        case 4:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 7:
-                        StirMiniGameUpdate();
-                        break;
+                        case 5:
+                            DrainMiniGameUpdate();
+                            break;
 
-                    case 8:
-                        AddMiniGameUpdate();
-                        break;
+                        case 6:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 9:
-                        AddMiniGameUpdate();
-                        break;
+                        case 7:
+                            AddMiniGameUpdate();
+                            break;
 
-                    case 10:
-                        AddMiniGameUpdate();
-                        break;
+                        case 8:
+                            RoastMiniGameUpdate();
+                            break;
 
-                    case 11:
-                        RoastMiniGameUpdate();
-                        break;
-                }
-                break;
+                        case 9:
+                            FinishedRecipe();
+                            break;
+
+                        case 10:
+                            EndRecipe();
+                            break;
+                    }
+                    break;
+
+
+                case 4:     // - Potato Salad
+                    currentRecipe.text = "Potato Salad";
+
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 2:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 3:
+                            BoilMiniGameUpdate();
+                            break;
+
+                        case 4:
+                            DrainMiniGameUpdate();
+                            break;
+
+                        case 5:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 6:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 7:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 8:
+                            FinishedRecipe();
+                            break;
+
+                        case 9:
+                            EndRecipe();
+                            break;
+
+                    }
+                    break;
+
+
+                case 5:     // - Baked Potatoes
+                    currentRecipe.text = "Baked Potatoes";
+
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            PeelMiniGameUpdate();
+                            break;
+
+                        case 2:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 3:
+                            BoilMiniGameUpdate();
+                            break;
+
+                        case 4:
+                            DrainMiniGameUpdate();
+                            break;
+
+                        case 5:
+                            RoastMiniGameUpdate();
+                            break;
+
+                        case 6:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 7:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 8:
+                            FinishedRecipe();
+                            break;
+
+                        case 9:
+                            EndRecipe();
+                            break;
+
+                    }
+                    break;
+
+
+                case 6:     // - Chips
+                    currentRecipe.text = "Chips";
+
+                    switch (onMiniGame)
+                    {
+                        case 1:
+                            SliceMiniGameUpdate();
+                            break;
+
+                        case 2:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 3:
+                            BoilMiniGameUpdate();
+                            break;
+
+                        case 4:
+                            DrainMiniGameUpdate();
+                            break;
+
+                        case 5:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 6:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 7:
+                            RoastMiniGameUpdate();
+                            break;
+
+                        case 8:
+                            AddMiniGameUpdate();
+                            break;
+
+                        case 9:
+                            FinishedRecipe();
+                            break;
+
+                        case 10:
+                            EndRecipe();
+                            break;
+                    }
+                    break;
+            }
         }
+
+        inputEnabled = false;
+
+        StartCoroutine(ResumeInputMethod());
     }
 
 
-   
+    IEnumerator ResumeInputMethod()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        inputEnabled = true;
+    }
 
 
     /// <summary>
     /// Start of Minigame Functions ///////
     /// </summary>
 
-    
 
     int ReturnSwipeControlsVertical()
     {
@@ -485,7 +738,7 @@ public class MiniGameSprite_script : MonoBehaviour
             }
                         
         }
-        return 0;
+        return 0;       //No swipe detected
     }
     
     int ReturnSwipeControlsHorizontal()
@@ -521,169 +774,15 @@ public class MiniGameSprite_script : MonoBehaviour
                 return 2;
             }     
         }
-        return 0;
+        return 0;       //No swipe detected
     }
 
     //Minigame Methods
-    void PotatoCuttingMiniGameStart()
-    {
-        //Debug.Log("Potato Cutting");
-
-        referencedSprites = recipe1Sprites;
-
-        this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
-
-        // Above Testing  
-    }
-
-    public void cuttingTouchSwipeMethod()
-    {
-        if (Input.touches.Length > 0)
-        {
-            Touch t = Input.GetTouch(0);
-            if (t.phase == TouchPhase.Began)
-            {
-                // Save began touch 2d print 
-                firstPressPos = new Vector2(t.position.x, t.position.y);
-            }
-
-            if (t.phase == TouchPhase.Ended)
-            {
-                // Save ended touch 2d point
-                secondPressPos = new Vector2(t.position.x, t.position.y);
-
-                // Create vector from the two points
-                currentSwipe = new Vector3(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
-
-                // Normalize the 2d Vector 
-                currentSwipe.Normalize();
-
-
-                //Swie Actions 
-
-                // Swipe upwards
-                if (currentSwipe.y > 0 & (currentSwipe.x > -0.5f || currentSwipe.x < 0.5f))
-                {
-                    Debug.Log("Up Swipe");
-
-                    noOfCuts++;
-                }
-
-                //Swipe down 
-                if (currentSwipe.y < 0 & (currentSwipe.x > -0.5f || currentSwipe.x < 0.5f))
-                {
-                    Debug.Log("Down Swipe");
-
-                    noOfCuts++;
-                }
-            }
-        }
-    }
-
-    public void cuttingMouseSwipeMethod()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            //save began touch 2d point
-            firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            //save ended touch 2d point
-            secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-
-            //create vector from the two points
-            currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
-
-            //normalize the 2d vector
-            currentSwipe.Normalize();
-
-            //swipe upwards
-            if (currentSwipe.y > 0 & (currentSwipe.x > -0.5f || currentSwipe.x < 0.5f))
-            {
-                Debug.Log("up swipe");
-
-                noOfCuts++;
-            }
-            //swipe down
-            if (currentSwipe.y < 0 & (currentSwipe.x > -0.5f || currentSwipe.x < 0.5f))
-            {
-                Debug.Log("down swipe");
-
-                noOfCuts++;
-            }
-        }
-    }
-
-    public void PotatoCuttingUpdate()
-    {
-        cuttingMouseSwipeMethod();
-        cuttingTouchSwipeMethod();
-
-        switch (noOfCuts)
-        {
-            case 1:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
-                break;
-
-            case 2:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[1];
-                break;
-
-            case 3:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[2];
-                break;
-
-            case 4:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[3];
-                break;
-
-            case 5:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[4];
-                break;
-
-            case 6:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[5];
-                break;
-
-            case 7:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[6];
-                break;
-
-            case 8:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[7];
-                break;
-
-            case 9:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[8];
-                break;
-
-            case 10:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[9];
-                break;
-
-            case 11:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[10];
-                break;
-        }
-
-        if (noOfCuts >= 12)
-        {
-            this.transform.position += new Vector3(0, 0.005f, 0.005f);
-        }
-
-        if (this.transform.position.y > 2.5f)
-        {
-            SwitchMiniGame();
-        }
-    }
-
-
 
     void PeelMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = PeelSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[0];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
@@ -696,7 +795,7 @@ public class MiniGameSprite_script : MonoBehaviour
         if (ReturnSwipeControlsVertical() == 1)
             noOfCuts++;
 
-        switch (noOfCuts)
+        switch (noOfCuts)       //As the player cuts update the image of the sprite too
         {
             case 1:
                 this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
@@ -751,11 +850,11 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void BoilMiniGameStart()
     {
-        //Debug.Log("Potato Boiling");
+        referencedSprites = BoilSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[2];
+
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
-
-        // Above Testing  
 
         currentMinigame.text = "Boil";
     }
@@ -819,7 +918,8 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void AddMiniGameStart()
     {
-        referencedSprites = recipe2Sprites;
+        referencedSprites = AddSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[0];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
         this.transform.position = new Vector3(-1.5f, 0.5f, -3.5f);
@@ -852,8 +952,6 @@ public class MiniGameSprite_script : MonoBehaviour
             //swipe left
             if (currentSwipe.x < 0 & (currentSwipe.y > -0.5f || currentSwipe.y < 0.5f))
             {
-                Debug.Log("Salted Potato");
-
                 Destroy(AddMinigameGameObject.gameObject);
 
                 this.transform.position = new Vector3(0.20f, 2.0f, -3.1f); 
@@ -867,7 +965,8 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void DrainMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = DrainSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[1];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
@@ -893,7 +992,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -904,7 +1002,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -915,7 +1012,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -926,7 +1022,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -937,7 +1032,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -948,7 +1042,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
-                    Debug.Log("Left Swipe Detected");
                     noOfDrain++;
                 }
                 break;
@@ -977,7 +1070,8 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void RoastMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = RoastSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[2];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
@@ -1003,7 +1097,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsVertical() == 1)
                 {
-                    Debug.Log("Up Swipe Detected");
                     noOfRoast++;
                 }
                 break;
@@ -1022,7 +1115,6 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsVertical() == 2)
                 {
-                    Debug.Log("Down Swipe Detected");
                     noOfRoast++;
                 }
                 break;
@@ -1039,11 +1131,12 @@ public class MiniGameSprite_script : MonoBehaviour
                 SwitchMiniGame();
                 break;
         }
-    }
+    } 
 
     void SliceMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = SliceSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[0];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
@@ -1121,6 +1214,9 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void StirMiniGameStart()
     {
+        referencedSprites = StirSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[1];
+
         currentMinigame.text = "Stir";
     }
 
@@ -1230,7 +1326,8 @@ public class MiniGameSprite_script : MonoBehaviour
     //Mash and add are the same in the reference sheet
     void MashMiniGameStart()
     {
-        referencedSprites = recipe1Sprites;
+        referencedSprites = MashSprites;
+        GameObject.Find("Background").GetComponent<Image>().sprite = backgroundSprites[0];
 
         this.GetComponent<SpriteRenderer>().sprite = referencedSprites[0];
 
@@ -1266,42 +1363,12 @@ public class MiniGameSprite_script : MonoBehaviour
                 break;
 
             case 6:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[5];
-                break;
-
-            case 7:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[6];
-                break;
-
-            case 8:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[7];
-                break;
-
-            case 9:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[8];
-                break;
-
-            case 10:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[9];
-                break;
-
-            case 11:
-                this.GetComponent<SpriteRenderer>().sprite = referencedSprites[10];
-                break;
-
-            case 12:
                 SwitchMiniGame();
                 break;
         }
 
         //Do something else to switch the minigame 
     }
-
-    //void RoastMiniGameUpdate()
-    //{
-    //    "You bi but you still alone? " +
-    //    "Damn. You really putting the L in LGBTQ"
-    //}
 
 
     /////////////////End of script written by Blair McCartan

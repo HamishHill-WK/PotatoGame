@@ -25,27 +25,27 @@ public class potatoTypes : MonoBehaviour
             switch (j)      //BM
             {
                 case 0:
-                    assetLocation = new Vector3(-190, 50, -63);
+                    assetLocation = new Vector3(-190, 100, -63);
                     break;
 
                 case 1:
-                    assetLocation = new Vector3(32, 50, -63);
+                    assetLocation = new Vector3(32, 100, -63);
                     break;
 
                 case 2:
-                    assetLocation = new Vector3(254, 50, -63);
+                    assetLocation = new Vector3(254, 100, -63);
                     break;
 
                 case 3:
-                    assetLocation = new Vector3(-190, -50, -63);
+                    assetLocation = new Vector3(-190, -100, -63);
                     break;
 
                 case 4:
-                    assetLocation = new Vector3(32, -50, -63);
+                    assetLocation = new Vector3(32, -100, -63);
                     break;
 
                 case 5:
-                    assetLocation = new Vector3(254, -50, -63);
+                    assetLocation = new Vector3(254, -100, -63);
                     break;
             }
 

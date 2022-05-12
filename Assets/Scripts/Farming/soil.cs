@@ -148,6 +148,8 @@ public class soil : MonoBehaviour
                 break;
 
             case growthStage.sprout:
+
+                //meshFilter.GetComponent<Transform>().localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 meshFilter.mesh = sproutMesh;
                 break;
 

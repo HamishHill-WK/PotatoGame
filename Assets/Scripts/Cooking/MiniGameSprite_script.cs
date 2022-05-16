@@ -357,6 +357,10 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 9:
+                        FinishedRecipe();
+                        break;
+
+                    case 10:
                         EndRecipe();
                         break;
 

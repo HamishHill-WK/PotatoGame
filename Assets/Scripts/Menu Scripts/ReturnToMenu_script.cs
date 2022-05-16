@@ -10,7 +10,7 @@ public class ReturnToMenu_script : MonoBehaviour
     void Start()
     {
         Button btn = this.GetComponent<Button>();
-        btn.onClick.AddListener(TaskOnClicked);
+        btn.onClick.AddListener(TaskOnClicked);     //When clicking the button do the chosen method
     }
 
     // Update is called once per frame
@@ -22,6 +22,6 @@ public class ReturnToMenu_script : MonoBehaviour
     void TaskOnClicked()
     {
         Debug.Log("Hello world this back button click was detected");
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Menu");     //Go back to the menu
     }
 }

@@ -31,17 +31,11 @@ public class RecipeBookObject_script : MonoBehaviour
             }
         }
 
-        Button btn = this.GetComponent<Button>();
+        Button btn = this.GetComponent<Button>();       //When clicking the button carry out he following method
         btn.onClick.AddListener(TaskOnClicked);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnMouseDown()
+    void OnMouseDown()      //For Unity legacy ver - same as method below
     {
         Debug.Log("Panel button doesnt work");
 
@@ -65,23 +59,23 @@ public class RecipeBookObject_script : MonoBehaviour
 
     void TaskOnClicked()
     {
-        Debug.Log("Panel button works");
+        //Debug.Log("Panel button works");
 
         v_recipeBook_script = v_gameController.GetComponent<RecipeBook_script>();
 
-        if (v_recipeBook_script.inMiniGame == false)
+        if (v_recipeBook_script.inMiniGame == false)        //if not in a minigame
         {
             if (recipeBook.enabled == false)
             {
                 recipeBook.enabled = true;
 
-                if (recipePanel.activeInHierarchy == true)
+                if (recipePanel.activeInHierarchy == true)      //activate it in the heirarchy
                     recipePanel.SetActive(false);
             }
         }
         else
         {
-            Debug.Log("In a minigame");
+            Debug.Log("In a minigame");     //Prevent the player from starting another recipe
         }
     }
 

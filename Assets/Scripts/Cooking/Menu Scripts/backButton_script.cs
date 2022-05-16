@@ -9,7 +9,6 @@ public class backButton_script : MonoBehaviour
     public Button myButton;
 
    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -31,17 +30,9 @@ public class backButton_script : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void TaskOnClicked()
     {
-        Debug.Log("Hello world this back button click was detected");
-        // this object was clicked - do something
-
+        //When clicked hide the recipe book
         if (recipeBook.enabled == true)
         {
             recipeBook.enabled = false;

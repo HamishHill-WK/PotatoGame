@@ -82,7 +82,7 @@ public class MiniGameSprite_script : MonoBehaviour
         onMiniGame++;       //change what minigame we are on 
 
 
-        referencedSprites = recipe1Sprites;     //!!!!!!!!!!! - Delete this when you have more sprites - !!!!!!!!!!! 
+        referencedSprites = recipe1Sprites;
 
 
         //Depending on what recipe we are doing 
@@ -218,16 +218,7 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 9:
-                        this.GetComponent<SpriteRenderer>().sprite = CompletedRecipeSprites[3];
-
-                        currentRecipe.text = "Complete";
-                        currentMinigame.text = "";
-                        currentGuide.text = "";
-
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                            SwitchMiniGame();
-                        }
+                        FinishedRecipe();
                         break;
 
                     case 10:
@@ -390,10 +381,12 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void EndRecipe()       //When a recipe is complete hide the guides and detroy the minigame object prefab
     {
+        //Set all the guide boxes to be empty
         currentRecipe.text = "";
         currentMinigame.text = "";
         currentGuide.text = "";
 
+        //Hide the guide boxes
         if (gameController.GetComponent<RecipeBook_script>().currentRecipe.activeInHierarchy == true)
             gameController.GetComponent<RecipeBook_script>().currentRecipe.SetActive(false);
 
@@ -403,7 +396,7 @@ public class MiniGameSprite_script : MonoBehaviour
         if (gameController.GetComponent<RecipeBook_script>().currentGuide.activeInHierarchy == true)
             gameController.GetComponent<RecipeBook_script>().currentGuide.SetActive(false);
 
-
+        //Allow the player to start a new recipe and delete the minigame sprite
         gameController.GetComponent<RecipeBook_script>().inMiniGame = false;
         Destroy(this.gameObject);
     }

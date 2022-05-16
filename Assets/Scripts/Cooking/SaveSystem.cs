@@ -13,13 +13,13 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = Application.persistentDataPath + "/player.data";
+        string path = Application.persistentDataPath + "/player.data";      //make sure that the file path stays with the application as opposed to being put in c:: drive 
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(playerPotato, playerSoil, playerTime);
+        PlayerData data = new PlayerData(playerPotato, playerSoil, playerTime);     //create a new data stream
 
-        formatter.Serialize(stream, data);
-        stream.Close();
+        formatter.Serialize(stream, data);      //convert the data to be put in
+        stream.Close();     //Close to prevent memory leak
     }
 
     public static void clearBinaryFile()
@@ -46,14 +46,14 @@ public static class SaveSystem
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
+            PlayerData data = formatter.Deserialize(stream) as PlayerData;      //convert the data in the file back
             stream.Close();
 
             return data;
 
         } else
         {
-            Debug.LogError("Save File not found in " + path);
+            Debug.LogError("Save File not found in " + path);       //if data file not found
 
             return null;
         }

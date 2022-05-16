@@ -10,12 +10,6 @@ public class SpinSprite_script : MonoBehaviour
     Vector2 secondPressPos;
     Vector2 currentSwipe;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

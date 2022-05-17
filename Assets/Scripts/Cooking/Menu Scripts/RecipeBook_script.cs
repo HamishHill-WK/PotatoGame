@@ -160,7 +160,7 @@ public class RecipeBook_script : MonoBehaviour
         
         recipeMethod.text = "Simple Potato Wedges enjoyable as a snack or as a side dish";
 
-        recipeMiniGames.text = "Boil - Slice - add - drain - add - add - Roast";
+        recipeMiniGames.text = "Boil - Slice - Add - drain - Add - Add - Roast";
     }
 
     void showSecondRecipe()
@@ -225,7 +225,7 @@ public class RecipeBook_script : MonoBehaviour
 
         recipeMethod.text = "Delicious Chips seasoned to taste";
 
-        recipeMiniGames.text = "Slice - Add - Boil - Drain - Add - Ad - Roast - Add";
+        recipeMiniGames.text = "Slice - Add - Boil - Drain - Add - Add - Roast - Add";
     }
 
 

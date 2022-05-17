@@ -82,7 +82,7 @@ public class MiniGameSprite_script : MonoBehaviour
         onMiniGame++;       //change what minigame we are on 
 
 
-        referencedSprites = recipe1Sprites;     //!!!!!!!!!!! - Delete this when you have more sprites - !!!!!!!!!!! 
+        referencedSprites = recipe1Sprites;
 
 
         //Depending on what recipe we are doing 
@@ -218,16 +218,7 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 9:
-                        this.GetComponent<SpriteRenderer>().sprite = CompletedRecipeSprites[3];
-
-                        currentRecipe.text = "Complete";
-                        currentMinigame.text = "";
-                        currentGuide.text = "";
-
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                            SwitchMiniGame();
-                        }
+                        FinishedRecipe();
                         break;
 
                     case 10:
@@ -366,6 +357,10 @@ public class MiniGameSprite_script : MonoBehaviour
                         break;
 
                     case 9:
+                        FinishedRecipe();
+                        break;
+
+                    case 10:
                         EndRecipe();
                         break;
 
@@ -390,10 +385,12 @@ public class MiniGameSprite_script : MonoBehaviour
 
     void EndRecipe()       //When a recipe is complete hide the guides and detroy the minigame object prefab
     {
+        //Set all the guide boxes to be empty
         currentRecipe.text = "";
         currentMinigame.text = "";
         currentGuide.text = "";
 
+        //Hide the guide boxes
         if (gameController.GetComponent<RecipeBook_script>().currentRecipe.activeInHierarchy == true)
             gameController.GetComponent<RecipeBook_script>().currentRecipe.SetActive(false);
 
@@ -403,7 +400,7 @@ public class MiniGameSprite_script : MonoBehaviour
         if (gameController.GetComponent<RecipeBook_script>().currentGuide.activeInHierarchy == true)
             gameController.GetComponent<RecipeBook_script>().currentGuide.SetActive(false);
 
-
+        //Allow the player to start a new recipe and delete the minigame sprite
         gameController.GetComponent<RecipeBook_script>().inMiniGame = false;
         Destroy(this.gameObject);
     }
@@ -793,7 +790,11 @@ public class MiniGameSprite_script : MonoBehaviour
     void PeelMiniGameUpdate()
     {
         if (ReturnSwipeControlsVertical() == 1)
+        {
             noOfCuts++;
+            SoundManager.PlaySound("Peel"); //calls sound from SoundManager Script - hs
+        }
+            
 
         switch (noOfCuts)       //As the player cuts update the image of the sprite too
         {
@@ -868,7 +869,11 @@ public class MiniGameSprite_script : MonoBehaviour
                 currentGuide.text = "Tap";
 
                 if (Input.GetMouseButtonDown(0))
+                {
                     noOfBoil++;
+                    SoundManager.PlaySound("Boil"); //calls sound from SoundManager Script - hs
+                }
+                    
                     
                 break;
 
@@ -952,6 +957,7 @@ public class MiniGameSprite_script : MonoBehaviour
             //swipe left
             if (currentSwipe.x < 0 & (currentSwipe.y > -0.5f || currentSwipe.y < 0.5f))
             {
+                SoundManager.PlaySound("Add"); //calls sound from SoundManager Script - hs
                 Destroy(AddMinigameGameObject.gameObject);
 
                 this.transform.position = new Vector3(0.20f, 2.0f, -3.1f); 
@@ -982,7 +988,10 @@ public class MiniGameSprite_script : MonoBehaviour
                 currentGuide.text = "Tap";
 
                 if (Input.GetMouseButtonDown(0))
+                {
+                    SoundManager.PlaySound("Watering"); //calls sound from SoundManager Script - hs
                     noOfDrain++;
+                }
 
                 break;
 
@@ -992,6 +1001,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
+                    SoundManager.PlaySound("Watering"); //calls sound from SoundManager Script - hs
                     noOfDrain++;
                 }
                 break;
@@ -1002,6 +1012,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
+                    SoundManager.PlaySound("Watering"); //calls sound from SoundManager Script - hs
                     noOfDrain++;
                 }
                 break;
@@ -1012,6 +1023,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
+                    SoundManager.PlaySound("Watering"); //calls sound from SoundManager Script - hs
                     noOfDrain++;
                 }
                 break;
@@ -1022,6 +1034,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
+                    SoundManager.PlaySound("Watering"); //calls sound from SoundManager Script - hs
                     noOfDrain++;
                 }
                 break;
@@ -1032,6 +1045,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 1)
                 {
+                    SoundManager.PlaySound("Watering"); //calls sound from SoundManager Script - hs
                     noOfDrain++;
                 }
                 break;
@@ -1042,6 +1056,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() == 2)
                 {
+                    SoundManager.PlaySound("Watering"); //calls sound from SoundManager Script - hs
                     noOfDrain++;
                 }
                 break;
@@ -1051,7 +1066,10 @@ public class MiniGameSprite_script : MonoBehaviour
                 currentGuide.text = "Tap";
 
                 if (Input.GetMouseButtonDown(0))
+                {
+                    SoundManager.PlaySound("Watering"); //calls sound from SoundManager Script - hs
                     noOfDrain++;
+                }
                 break;
 
             case 9:
@@ -1147,7 +1165,11 @@ public class MiniGameSprite_script : MonoBehaviour
     void SliceMiniGameUpdate()
     {
         if (ReturnSwipeControlsVertical() == 2)
+        {
             noOfCuts++;
+            SoundManager.PlaySound("Slice"); //calls sound from SoundManager Script - hs
+        }
+            
 
 
         switch (noOfCuts)
@@ -1230,6 +1252,7 @@ public class MiniGameSprite_script : MonoBehaviour
 
                 if (ReturnSwipeControlsHorizontal() != 0 || ReturnSwipeControlsVertical() != 0)
                 {
+                    SoundManager.PlaySound("Stir"); //calls sound from SoundManager Script - hs
                     noOfStir++;
                 }
                 break;
@@ -1338,7 +1361,9 @@ public class MiniGameSprite_script : MonoBehaviour
     void MashMiniGameUpdate()
     {
         if (Input.GetMouseButtonDown(0))
+        {
             noOfMash++;
+        }
 
         switch (noOfMash)
         {

@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class PotatoCutting_script : MonoBehaviour
 {
-    // The Following Code was written by Blair McCartan
+    // The Following Code was written by Blair McCartan - Old Scripts - cannibalise
 
     Vector2 firstPressPos;
     Vector2 secondPressPos;
     Vector2 currentSwipe;
 
     public GameObject recipeBookScript;
-
 
     int noOfCuts = 1;
 
@@ -118,12 +117,6 @@ public class PotatoCutting_script : MonoBehaviour
 
     public void updatePotato()
     {
-        //if (Input.GetKeyDown("space"))
-        //{
-        //    print("space key was pressed - setting cuts to final");
-
-        //    noOfCuts = 10;
-        //}
 
         switch (noOfCuts)
         {
@@ -185,8 +178,6 @@ public class PotatoCutting_script : MonoBehaviour
 
             recipeBookScript.GetComponent<RecipeBook_script>().inMiniGame = false;
         }
-
-        //Debug.Log("" + noOfCuts);
     }
 
 

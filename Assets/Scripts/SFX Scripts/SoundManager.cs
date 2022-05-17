@@ -6,7 +6,8 @@ using UnityEngine.Audio;
 public class SoundManager : MonoBehaviour
 {
 
-    public static AudioClip ButtonSnd, PlantSnd, ShovelSnd, WateringSnd, SparkleOneSnd, SparkleTwoSnd;
+    public static AudioClip ButtonSnd, PlantSnd, ShovelSnd, WateringSnd, SparkleOneSnd, SparkleTwoSnd,
+        PeelSnd, BoilSnd, AddSnd, SliceSnd, StirSnd;
     static AudioSource audioScr;
         
     // Start is called before the first frame update
@@ -18,6 +19,11 @@ public class SoundManager : MonoBehaviour
         WateringSnd = Resources.Load<AudioClip>("Watering");
         SparkleOneSnd = Resources.Load<AudioClip>("Sparkle");
         SparkleTwoSnd = Resources.Load<AudioClip>("Sparkle2");
+        PeelSnd = Resources.Load<AudioClip>("Peel");
+        BoilSnd = Resources.Load<AudioClip>("Boil");
+        AddSnd = Resources.Load<AudioClip>("Add");
+        SliceSnd = Resources.Load<AudioClip>("Slice");
+        StirSnd = Resources.Load<AudioClip>("Stir");
 
         audioScr = GetComponent<AudioSource>();
     }
@@ -45,6 +51,22 @@ public class SoundManager : MonoBehaviour
             case "Sparkle2":
                 audioScr.PlayOneShot(SparkleTwoSnd);
                 break;
+            case "Peel":
+                audioScr.PlayOneShot(PeelSnd);
+                break;
+            case "Boil":
+                audioScr.PlayOneShot(BoilSnd);
+                break;
+            case "Add":
+                audioScr.PlayOneShot(AddSnd);
+                break;
+            case "Slice":
+                audioScr.PlayOneShot(SliceSnd);
+                break;
+            case "Stir":
+                audioScr.PlayOneShot(StirSnd);
+                break;
+
         }
     }
 }

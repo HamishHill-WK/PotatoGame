@@ -172,6 +172,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0e40ca8f633c93749bdfa0fb95ec94b7, type: 3}
   - {fileID: 21300000, guid: 148c3a826c3f3b84385678f138502bf5, type: 3}
   CompletedRecipeSprites:
+  - {fileID: 0}
   - {fileID: 21300000, guid: 3fe37fd2212747b4683a3b4262788dc6, type: 3}
   - {fileID: 21300000, guid: 57e39337a82c3a64fa4403da86315344, type: 3}
   - {fileID: 21300000, guid: 0f3e3152ebc82a942a28093c14625948, type: 3}

@@ -230,7 +230,6 @@ public class soil : MonoBehaviour
 
     void Start()
     {
-
         PlayerData data = SaveSystem.LoadPlayer();
 
         lastDay = data.day;

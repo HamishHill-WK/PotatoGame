@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //this script was written by Hamish Hill github: @HamishHill-WK
+//this scipt is a base class for potato objects
 
 public class potato : MonoBehaviour
 {

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //this script was written by Hamish Hill github: @HamishHill-wk
+//this script tracks the passage of in game time.
+
 public class timeTracking : MonoBehaviour
 {
     public struct timeData
@@ -18,12 +20,11 @@ public class timeTracking : MonoBehaviour
     private int year = 0;
     private int day = 0;
     private int hour = 0;
-    private int minute = 0; // time minutes counts up every frame. -hh
+    private int minute = 0; // time minutes counts up every frame. 
     public int speedFactor = 1; 
                 //^^^
     //the rate at which time passes.
-    //Scale goes from 1 to 60.
-    //Maximum  frame rate of the application is locked at 30 in the build settings. -hh
+    //Scale goes from 1 to 10.
 
     enum month { January = 0, February, March, April, May, June, July, August, September, October, November, December };
     month currentMonth = month.January;
@@ -68,9 +69,7 @@ public class timeTracking : MonoBehaviour
 
     void Start()
     {
-        //SaveSystem.clearBinaryFile();
-
-        PlayerData data = SaveSystem.LoadPlayer();  //load time data from binary file and update variables - hh
+        PlayerData data = SaveSystem.LoadPlayer();  //load time data from binary file and update variables 
 
         year = data.currentYear;
         currentMonth = (month)data.currentMonth;

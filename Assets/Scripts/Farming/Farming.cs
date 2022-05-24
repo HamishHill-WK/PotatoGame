@@ -48,11 +48,9 @@ public class Farming : MonoBehaviour
 
     private void userInput()
     {
-        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        if (Input.GetMouseButtonDown(0))
         {
-            ray = camera1.ScreenPointToRay(Input.touches[0].position);
-
-
+            ray = camera1.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit))
             {
